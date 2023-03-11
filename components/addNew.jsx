@@ -6,9 +6,12 @@ import {
   Image,
   TextInput,
 } from "react-native";
+import { useSelector } from "react-redux";
 
 function AddNew(props) {
-  return props.trigger === true ? (
+  const { newAddPageTrigger } = useSelector((state) => state.myReducer);
+
+  return newAddPageTrigger === true ? (
     <>
       <ScrollView>
         <View>

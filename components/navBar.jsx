@@ -1,6 +1,10 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewAddPage } from "../redux/actions";
 
 function NavBar(props) {
+  const { newAddPageTrigger } = useSelector((state) => state.myReducer);
+  const dispatch = useDispatch();
   function homeHandler() {
     console.log("home");
   }
@@ -9,6 +13,8 @@ function NavBar(props) {
   }
   function addNewHandler() {
     console.log("new");
+    dispatch(setNewAddPage(!newAddPageTrigger));
+    console.log(newAddPageTrigger);
   }
   function calenderHandler() {
     console.log("calender");

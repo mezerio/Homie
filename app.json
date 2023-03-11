@@ -4,10 +4,10 @@
     "slug": "homie",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png",
+    "icon": "",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png",
+      "image": "",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,12 +17,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png",
+        "foregroundImage": "",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png"
+      "favicon": ""
     }
   }
 }

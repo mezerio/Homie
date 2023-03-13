@@ -7,7 +7,7 @@ import { Store } from "./redux/store.jsx";
 export default function App() {
   return (
     <Provider style={styles.prov} store={Store}>
-      <View style={styles.container}></View>
+      {/* <View style={styles.container}></View> */}
       <AddNew style={styles.container} trigger={true}></AddNew>
       <NavBar style={styles.nav}></NavBar>
     </Provider>
@@ -16,7 +16,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 7,
+    flex: 9,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",

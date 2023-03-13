@@ -7,14 +7,14 @@ function NavBar(props) {
   const dispatch = useDispatch();
   function homeHandler() {
     console.log("home");
+    dispatch(setNewAddPage(false));
   }
   function peopleHandler() {
     console.log("peeps");
   }
   function addNewHandler() {
     console.log("new");
-    dispatch(setNewAddPage(!newAddPageTrigger));
-    console.log(newAddPageTrigger);
+    dispatch(setNewAddPage(true));
   }
   function calenderHandler() {
     console.log("calender");

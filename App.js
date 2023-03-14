@@ -1,14 +1,15 @@
 import { StyleSheet, View } from "react-native";
 import NavBar from "./components/navBar.jsx";
 import AddNew from "./components/addNew.jsx";
+import HomePage from "./components/homePage.jsx";
 import { Provider } from "react-redux";
 import { Store } from "./redux/store.jsx";
 
 export default function App() {
   return (
     <Provider style={styles.prov} store={Store}>
-      {/* <View style={styles.container}></View> */}
-      <AddNew style={styles.container} trigger={true}></AddNew>
+      <AddNew style={styles.container}></AddNew>
+      <HomePage style={styles.container}></HomePage>
       <NavBar style={styles.nav}></NavBar>
     </Provider>
   );

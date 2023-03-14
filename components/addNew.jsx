@@ -7,11 +7,26 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import FieldModal from "./fieldModal";
+import { setFieldModalVisible, setApplianceList } from "../redux/actions";
 
-function AddNew(props) {
+function AddNew() {
   const { newAddPageTrigger } = useSelector((state) => state.myReducer);
+  const { fieldModalTrigger } = useSelector((state) => state.myReducer);
+  const { fieldHeaders } = useSelector((state) => state.myReducer);
+  const dispatch = useDispatch();
 
+  function handleAddField() {
+    dispatch(setFieldModalVisible(true));
+  }
+  function handleSaveAppliance() {
+    var newAppliance = {};
+    fieldHeaders.map((field) => {
+      newAppliance[field] = "input";
+    });
+    dispatch(setApplianceList(newAppliance));
+  }
   return newAddPageTrigger === true ? (
     <>
       <ScrollView>
@@ -22,34 +37,22 @@ function AddNew(props) {
               source={require("../assets/img/addPhotoImg.png")}
             />
           </Pressable>
-          <Text>Product Name/Title:</Text>
-          <TextInput
-            style={styles.input}
-            placeholder=" e.g. echo bubble washing machine"
-          />
-          <Text>Vender:</Text>
-          <TextInput style={styles.input} placeholder=" e.g. Samsung" />
-          <Text>Product Type</Text>
-          <TextInput style={styles.input} placeholder=" e.g. washing machine" />
-          <Text>Model Number:</Text>
-          <TextInput style={styles.input} placeholder=" e.g. ED73928DGUK" />
-          <Text>Serial Number:</Text>
-          <TextInput style={styles.input} placeholder=" e.g. 19836792S" />
-          <Text>Date Purchased:</Text>
-          <TextInput style={styles.input} placeholder=" e.g. 01/01/2001" />
-          <Text>Warrenty Length</Text>
-          <TextInput style={styles.input} placeholder=" e.g. 2 years" />
-          <Text>Bought By:</Text>
-          <TextInput style={styles.input} placeholder=" e.g. John" />
-          <Text>Add Receipt:</Text>
-          <TextInput style={styles.input} placeholder="insert pic here" />
-          <Text>Color:</Text>
-          <TextInput style={styles.input} placeholder=" e.g. grey" />
+          <FieldModal trigger={fieldModalTrigger}></FieldModal>
+          {fieldHeaders.map((field) => (
+            <View key={field}>
+              <Text>{field}</Text>
+              <TextInput style={styles.input} placeholder=" e.g. text" />
+            </View>
+          ))}
           <Pressable>
-            <Text style={styles.btn}>+ ADD NEW FIELD</Text>
+            <Text style={styles.btn} onPress={handleAddField}>
+              + ADD NEW FIELD
+            </Text>
           </Pressable>
           <Pressable>
-            <Text style={styles.btn2}>SAVE</Text>
+            <Text style={styles.btn2} onPress={handleSaveAppliance}>
+              SAVE
+            </Text>
           </Pressable>
         </View>
       </ScrollView>
@@ -63,8 +66,6 @@ export default AddNew;
 
 const styles = StyleSheet.create({
   form: {
-    // display: "grid",
-    // backgroundColor: "lightgreen",
     height: "100%",
     width: "80%",
     margin: "10%",
@@ -85,8 +86,6 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "lightblue",
-    border: "none",
-    outline: "none",
     height: 40,
     marginTop: 7,
     marginBottom: 5,

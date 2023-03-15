@@ -2,13 +2,18 @@ import {
   StyleSheet,
   Text,
   View,
+  Modal,
   ScrollView,
+  Pressable,
   Image,
   TextInput,
-  Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewAddPage, setHomePage } from "../redux/actions";
+import {
+  setNewAddPage,
+  setHomePage,
+  setViewApplianceVisible,
+} from "../redux/actions";
 
 import FieldModal from "./fieldModal";
 import {
@@ -17,11 +22,12 @@ import {
   setUpdatedInputs,
 } from "../redux/actions";
 
-function AddNew() {
-  const { newAddPageTrigger } = useSelector((state) => state.myReducer);
+function ViewAppliance({ trigger }) {
+  const { applianceList } = useSelector((state) => state.myReducer);
   const { fieldModalTrigger } = useSelector((state) => state.myReducer);
   const { fieldHeaders } = useSelector((state) => state.myReducer);
   const { updatedInputs } = useSelector((state) => state.myReducer);
+  const { indexOfViewedAppliance } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
   function handleAddField() {
@@ -46,46 +52,53 @@ function AddNew() {
     dispatch(setUpdatedInputs(newUpdatedInputs));
   }
 
-  return newAddPageTrigger === true ? (
+  function handleCancel() {
+    dispatch(setViewApplianceVisible(false));
+  }
+  return trigger == true ? (
     <>
-      <ScrollView>
-        <View style={styles.form}>
-          <Pressable style={styles.addImg}>
-            <Image
-              style={styles.addImgIcon}
-              source={require("../assets/img/addPhotoImg.png")}
-            />
-          </Pressable>
-          <FieldModal trigger={fieldModalTrigger} />
-          {fieldHeaders.map((field, index) => (
-            <View key={index}>
-              <Text>{field.title}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder=" e.g. text"
-                onChangeText={(text) => handleTextInputUpdate(text, index)}
-              ></TextInput>
-            </View>
-          ))}
-          <Pressable>
-            <Text style={styles.btn} onPress={handleAddField}>
-              + ADD NEW FIELD
-            </Text>
-          </Pressable>
-          <Pressable>
-            <Text style={styles.btn2} onPress={handleSaveAppliance}>
-              SAVE
-            </Text>
-          </Pressable>
-        </View>
-      </ScrollView>
+      <Modal animationType="fade">
+        <ScrollView>
+          <View style={styles.form}>
+            <Pressable style={styles.addImg}>
+              <Image
+                style={styles.addImgIcon}
+                source={require("../assets/img/addPhotoImg.png")}
+              />
+            </Pressable>
+            <FieldModal trigger={fieldModalTrigger} />
+            {fieldHeaders.map((field, index) => (
+              <View key={index}>
+                <Text>{field.title}</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder=" e.g. text"
+                  onChangeText={(text) => handleTextInputUpdate(text, index)}
+                >
+                  {applianceList[indexOfViewedAppliance][field.title]}
+                </TextInput>
+              </View>
+            ))}
+            <Pressable>
+              {/* <Text style={styles.btn} onPress={handleAddField}>
+                + ADD NEW FIELD
+              </Text> */}
+            </Pressable>
+            <Pressable>
+              <Text style={styles.btn2} onPress={handleCancel}>
+                CANCEL
+              </Text>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </Modal>
     </>
   ) : (
     ""
   );
 }
 
-export default AddNew;
+export default ViewAppliance;
 
 const styles = StyleSheet.create({
   form: {

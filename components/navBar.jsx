@@ -9,7 +9,6 @@ function NavBar(props) {
     console.log("home");
     dispatch(setNewAddPage(false));
     dispatch(setHomePage(true));
-    console.log(applianceList);
   }
   function peopleHandler() {
     console.log("peeps");

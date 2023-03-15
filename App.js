@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text, StatusBar } from "react-native";
 import NavBar from "./components/navBar.jsx";
 import AddNew from "./components/addNew.jsx";
 import HomePage from "./components/homePage.jsx";
@@ -7,26 +7,23 @@ import { Store } from "./redux/store.jsx";
 
 export default function App() {
   return (
-    <Provider style={styles.prov} store={Store}>
-      <AddNew style={styles.container}></AddNew>
-      <HomePage style={styles.container}></HomePage>
-      <NavBar style={styles.nav}></NavBar>
-    </Provider>
+    <>
+      <Provider store={Store}>
+        <View style={styles.full}>
+          <StatusBar barStyle="dark-content" backgroundColor={"white"} />
+          <AddNew></AddNew>
+          <HomePage></HomePage>
+          <NavBar></NavBar>
+        </View>
+      </Provider>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 9,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  nav: {
+  full: {
     flex: 1,
-    bottom: 0,
-  },
-  prov: {
-    flex: 1,
+    backgroundColor: "lightgrey",
+    paddingTop: 20,
   },
 });

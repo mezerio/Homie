@@ -8,17 +8,13 @@ function FieldModal(props) {
   const dispatch = useDispatch();
   var enteredText = "";
   function handleAddField() {
-    console.log(enteredText);
-    console.log("shutup mehdi");
-    //hide modal
     dispatch(setFieldModalVisible(false));
-    //add input as field
-    dispatch(setFieldHeaders(enteredText));
-    console.log(fieldHeaders);
+    //here
+    dispatch(setFieldHeaders({ title: enteredText, input: "" }));
   }
   return props.trigger == true ? (
     <>
-      <Modal transparent={true} visible={true}>
+      <Modal transparent={true} visible={true} animationType="slide">
         <View style={styles.view2}>
           <View style={styles.view1}>
             <TextInput

@@ -10,8 +10,8 @@ function HomePage() {
 
   return homePageTrigger === true ? (
     <>
-      <ScrollView contentContainerStyle={styles.outer}>
-        <View style={styles.view1}>
+      <ScrollView>
+        <View style={styles.view}>
           {applianceList.map((appliance, index) => (
             <View key={index}>
               <ApplianceCard appliance={appliance} index={index} />
@@ -29,7 +29,7 @@ function HomePage() {
 export default HomePage;
 
 const styles = StyleSheet.create({
-  view1: {
+  view: {
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",

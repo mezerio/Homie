@@ -1,28 +1,57 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewAddPage, setHomePage } from "../redux/actions";
+import {
+  setNewAddPage,
+  setHomePage,
+  setPeople,
+  setUpdatedInputs,
+  setCalender,
+  setSettings,
+} from "../redux/actions";
 
 function NavBar(props) {
-  const { applianceList } = useSelector((state) => state.myReducer);
+  const { peopleList } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
   function homeHandler() {
     console.log("home");
     dispatch(setNewAddPage(false));
+    dispatch(setPeople(false));
     dispatch(setHomePage(true));
+    dispatch(setCalender(false));
+    dispatch(setSettings(false));
   }
   function peopleHandler() {
     console.log("peeps");
+    dispatch(setNewAddPage(false));
+    dispatch(setHomePage(false));
+    dispatch(setPeople(true));
+    dispatch(setCalender(false));
+    dispatch(setSettings(false));
   }
   function addNewHandler() {
     console.log("new");
+    dispatch(setUpdatedInputs([]));
+    dispatch(setPeople(false));
     dispatch(setNewAddPage(true));
     dispatch(setHomePage(false));
+    dispatch(setCalender(false));
+    dispatch(setSettings(false));
   }
   function calenderHandler() {
     console.log("calender");
+    dispatch(setPeople(false));
+    dispatch(setNewAddPage(false));
+    dispatch(setHomePage(false));
+    dispatch(setCalender(true));
+    dispatch(setSettings(false));
   }
   function settingsHandler() {
     console.log("settings");
+    dispatch(setPeople(false));
+    dispatch(setNewAddPage(false));
+    dispatch(setHomePage(false));
+    dispatch(setCalender(false));
+    dispatch(setSettings(true));
   }
   return (
     <>
@@ -89,7 +118,7 @@ const styles = StyleSheet.create({
 
   nav: {
     width: "100%",
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
     bottom: 0,
     flexDirection: "row",
     justifyContent: "center",

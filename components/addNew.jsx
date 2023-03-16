@@ -8,20 +8,25 @@ import {
   Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewAddPage, setHomePage } from "../redux/actions";
-
+import { setNewAddPage, setHomePage, setAppTabChosen } from "../redux/actions";
 import FieldModal from "./fieldModal";
+import AddNewTab from "./addNewTab";
 import {
   setFieldModalVisible,
   setApplianceList,
   setUpdatedInputs,
+  setPeopleList,
+  setPeople,
 } from "../redux/actions";
 
 function AddNew() {
   const { newAddPageTrigger } = useSelector((state) => state.myReducer);
   const { fieldModalTrigger } = useSelector((state) => state.myReducer);
   const { fieldHeaders } = useSelector((state) => state.myReducer);
+  const { fieldHeadersPerson } = useSelector((state) => state.myReducer);
   const { updatedInputs } = useSelector((state) => state.myReducer);
+  const { appTabChosen } = useSelector((state) => state.myReducer);
+
   const dispatch = useDispatch();
 
   function handleAddField() {
@@ -29,27 +34,43 @@ function AddNew() {
   }
 
   function handleSaveAppliance() {
-    var newAppliance = {};
-    fieldHeaders.map((field, index) => {
-      if (updatedInputs[index] !== undefined) {
-        newAppliance[field.title] = updatedInputs[index];
-      }
-    });
-    dispatch(setApplianceList(newAppliance));
-    dispatch(setNewAddPage(false));
-    dispatch(setHomePage(true));
+    if (appTabChosen == true) {
+      var newAppliance = {};
+      fieldHeaders.map((field, index) => {
+        if (updatedInputs[index] !== undefined) {
+          newAppliance[field.title] = updatedInputs[index];
+        }
+      });
+      dispatch(setApplianceList(newAppliance));
+      dispatch(setNewAddPage(false));
+      dispatch(setHomePage(true));
+    } else {
+      var newPerson = {};
+      fieldHeadersPerson.map((person, index) => {
+        if (updatedInputs[index] !== undefined) {
+          newPerson[person.title] = updatedInputs[index];
+        }
+      });
+      console.log(updatedInputs, "pp");
+      console.log(newPerson, "ppp");
+      dispatch(setPeopleList(newPerson));
+      dispatch(setNewAddPage(false));
+      dispatch(setPeople(true));
+    }
   }
 
   function handleTextInputUpdate(text, index) {
     var newUpdatedInputs = [...updatedInputs];
     newUpdatedInputs[index] = text;
     dispatch(setUpdatedInputs(newUpdatedInputs));
+    console.log(updatedInputs, 1);
   }
 
   return newAddPageTrigger === true ? (
     <>
       <ScrollView>
         <View style={styles.form}>
+          <AddNewTab style={styles.tab} />
           <Pressable style={styles.addImg}>
             <Image
               style={styles.addImgIcon}
@@ -57,16 +78,27 @@ function AddNew() {
             />
           </Pressable>
           <FieldModal trigger={fieldModalTrigger} />
-          {fieldHeaders.map((field, index) => (
-            <View key={index}>
-              <Text>{field.title}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder=" e.g. text"
-                onChangeText={(text) => handleTextInputUpdate(text, index)}
-              ></TextInput>
-            </View>
-          ))}
+          {appTabChosen
+            ? fieldHeaders.map((field, index) => (
+                <View key={index}>
+                  <Text>{field.title}</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder=" e.g. text"
+                    onChangeText={(text) => handleTextInputUpdate(text, index)}
+                  ></TextInput>
+                </View>
+              ))
+            : fieldHeadersPerson.map((field, index) => (
+                <View key={index}>
+                  <Text>{field.title}</Text>
+                  <TextInput
+                    style={styles.input}
+                    placeholder=" e.g. text"
+                    onChangeText={(text) => handleTextInputUpdate(text, index)}
+                  ></TextInput>
+                </View>
+              ))}
           <Pressable>
             <Text style={styles.btn} onPress={handleAddField}>
               + ADD NEW FIELD
@@ -97,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
     width: "75%",
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -108,7 +140,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
     height: 40,
     marginTop: 7,
     marginBottom: 5,

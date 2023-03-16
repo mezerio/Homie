@@ -14,6 +14,7 @@ export const SET_INDEX_OF_VIEWED_APPLIANCE = "SET_INDEX_OF_VIEWED_APPLIANCE";
 export const SET_APP_TAB_CHOSEN = "SET_APP_TAB_CHOSEN";
 export const SET_SOUND_TOGGLE = "SET_SOUND_TOGGLE";
 export const SET_NOTIF_TOGGLE = "SET_NOTIF_TOGGLE";
+export const SET_DATES_WITH_EVENTS = "SET_DATES_WITH_EVENTS";
 
 export const setNewAddPage = (newAddPageTrigger) => (dispatch) => {
   dispatch({
@@ -67,6 +68,13 @@ export const setFieldHeaders = (fieldHeaders) => (dispatch) => {
   dispatch({
     type: SET_FEILD_HEADERS,
     payload: fieldHeaders,
+  });
+};
+
+export const setDatesWithEvents = (datesWithEvents) => (dispatch) => {
+  dispatch({
+    type: SET_DATES_WITH_EVENTS,
+    payload: datesWithEvents,
   });
 };
 

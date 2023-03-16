@@ -15,6 +15,7 @@ import {
   SET_SETTINGS,
   SET_NOTIF_TOGGLE,
   SET_SOUND_TOGGLE,
+  SET_DATES_WITH_EVENTS,
 } from "./actions";
 
 const initialState = {
@@ -29,6 +30,7 @@ const initialState = {
   indexOfViewedAppliance: 0,
   soundToggle: true,
   notifToggle: false,
+  datesWithEvents: {},
   applianceList: [
     { "Vender:": "Samsung" },
     { "Vender:": "Echo" },
@@ -108,6 +110,12 @@ function myReducer(state = initialState, action) {
       return {
         ...state,
         fieldHeaders: [...state.fieldHeadersPerson, action.payload],
+      };
+    }
+    case SET_DATES_WITH_EVENTS: {
+      return {
+        ...state,
+        datesWithEvents: action.payload,
       };
     }
     case SET_UPDATED_INPUTS: {

@@ -1,17 +1,37 @@
 import { ScrollView, StyleSheet, Text, Image, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Calendar } from "react-native-calendars";
+import { setDatesWithEvents } from "../redux/actions";
 
 function Calender(props) {
   const { calenderTrigger } = useSelector((state) => state.myReducer);
+  const { datesWithEvents } = useSelector((state) => state.myReducer);
+  const dispatch = useDispatch();
 
+  function handleDayPress(date) {
+    console.log(date);
+
+    var newDatesWithEvents = { ...datesWithEvents };
+
+    // (newDatesWithEvents[date["dateString"]] = {
+    //   marked: true,
+    //   selected: true,
+    //   dotColor: "white",
+    //   selectedColor: "lightblue",
+    //   selectedTextColor: "black",
+    // }),
+    newDatesWithEvents[date["dateString"]]["marked"] = false;
+    dispatch(setDatesWithEvents(newDatesWithEvents));
+  }
   return calenderTrigger === true ? (
     <>
-      <ScrollView>
-        <View style={styles.view}>
-          <Calendar />
-        </View>
-      </ScrollView>
+      <View style={styles.view}>
+        <Calendar
+          style={styles.cal}
+          onDayPress={(date) => handleDayPress(date)}
+          markedDates={datesWithEvents}
+        />
+      </View>
     </>
   ) : (
     ""
@@ -21,14 +41,14 @@ function Calender(props) {
 export default Calender;
 
 const styles = StyleSheet.create({
-  img: {
-    height: "50%",
-    aspectRatio: 1,
-  },
   view: {
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
+    flex: 1,
     alignItems: "center",
+  },
+  cal: {
+    width: 300,
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
   },
 });

@@ -1,13 +1,12 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { StyleSheet, View, ScrollView } from "react-native";
+import { useSelector } from "react-redux";
 import ViewAppliance from "./viewAppliance";
-import ApplianceCard from "./applianceCard";
-import PeopleCard from "./poepleCard";
+import PeopleCard from "./peopleCard";
 
 function People() {
-  const { peopleTrigger } = useSelector((state) => state.myReducer);
-  const { peopleList } = useSelector((state) => state.myReducer);
-  const { viewApplianceTrigger } = useSelector((state) => state.myReducer);
+  const { peopleTrigger, peopleList, viewApplianceTrigger } = useSelector(
+    (state) => state.myReducer
+  );
 
   return peopleTrigger === true ? (
     <>

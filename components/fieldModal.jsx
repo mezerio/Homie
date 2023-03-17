@@ -4,7 +4,6 @@ import { setFieldModalVisible, setFieldHeaders } from "../redux/actions";
 
 function FieldModal(props) {
   const { fieldHeaders } = useSelector((state) => state.myReducer);
-
   const dispatch = useDispatch();
   var enteredText = "";
   function handleAddField() {
@@ -13,20 +12,18 @@ function FieldModal(props) {
     dispatch(setFieldHeaders({ title: enteredText, input: "" }));
   }
   return props.trigger == true ? (
-    <>
-      <Modal transparent={true} visible={true} animationType="slide">
-        <View style={styles.view2}>
-          <View style={styles.view1}>
-            <TextInput
-              onChangeText={(text) => (enteredText = text)}
-              onSubmitEditing={handleAddField}
-              style={styles.input}
-              placeholder="shutup mehdi"
-            ></TextInput>
-          </View>
+    <Modal transparent={true} visible={true} animationType="slide">
+      <View style={styles.view2}>
+        <View style={styles.view1}>
+          <TextInput
+            onChangeText={(text) => (enteredText = text)}
+            onSubmitEditing={handleAddField}
+            style={styles.input}
+            placeholder="shutup mehdi"
+          />
         </View>
-      </Modal>
-    </>
+      </View>
+    </Modal>
   ) : (
     ""
   );

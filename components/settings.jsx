@@ -10,10 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { setNotifToggle, setSoundToggle } from "../redux/actions";
 import settings from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/settingsImg.png";
 
-function Settings(props) {
-  const { settingsTrigger } = useSelector((state) => state.myReducer);
-  const { soundToggle } = useSelector((state) => state.myReducer);
-  const { notifToggle } = useSelector((state) => state.myReducer);
+function Settings() {
+  const { settingsTrigger, soundToggle, notifToggle } = useSelector(
+    (state) => state.myReducer
+  );
   const dispatch = useDispatch();
 
   function handleSoundToggle() {

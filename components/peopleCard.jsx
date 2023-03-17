@@ -4,11 +4,12 @@ import {
   setIndexOfViewedAppliance,
   setViewApplianceVisible,
 } from "../redux/actions";
-import home from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png";
+import people from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/peopleImg.png";
 
-function ApplianceCard({ appliance, index }) {
-  const { viewApplianceTrigger } = useSelector((state) => state.myReducer);
+function PeopleCard({ person, index }) {
   const dispatch = useDispatch();
+  const { viewApplianceTrigger } = useSelector((state) => state.myReducer);
+
   function handleOpenApplianceDetails() {
     dispatch(setViewApplianceVisible(!viewApplianceTrigger));
     dispatch(setIndexOfViewedAppliance(index));
@@ -16,19 +17,17 @@ function ApplianceCard({ appliance, index }) {
   return (
     <Pressable onPress={handleOpenApplianceDetails}>
       <View style={styles.card}>
-        <Image style={styles.img} source={home} />
+        <Image style={styles.img} source={people} />
         <View style={styles.col}>
-          <Text>Vender: {appliance["Vender:"]}</Text>
-          <Text>Product Name/Title: {appliance["Product Name/Title:"]}</Text>
-          <Text>Model Number: {appliance["Model Number:"]}</Text>
-          <Text>Serial Number: {appliance["Serial Number:"]}</Text>
+          <Text>Name: {person["Name:"]}</Text>
+          <Text>D.O.B: {person["D.O.B:"]}</Text>
         </View>
       </View>
     </Pressable>
   );
 }
 
-export default ApplianceCard;
+export default PeopleCard;
 
 const styles = StyleSheet.create({
   card: {

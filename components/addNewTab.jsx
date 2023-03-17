@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setAppTabChosen } from "../redux/actions";
 

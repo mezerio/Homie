@@ -16,6 +16,8 @@ import {
   SET_NOTIF_TOGGLE,
   SET_SOUND_TOGGLE,
   SET_DATES_WITH_EVENTS,
+  SET_EVENT_LIST,
+  SET_DATE_SELECTED,
 } from "./actions";
 
 const initialState = {
@@ -30,7 +32,30 @@ const initialState = {
   indexOfViewedAppliance: 0,
   soundToggle: true,
   notifToggle: false,
-  datesWithEvents: {},
+  dateSelected: "2023-03-03",
+  datesWithEvents: {
+    "2023-03-03": {
+      marked: true,
+      selected: false,
+      dotColor: "lightblue",
+      selectedColor: "lightblue",
+      selectedTextColor: "black",
+    },
+    "2023-03-11": {
+      marked: true,
+      selected: false,
+      dotColor: "lightblue",
+      selectedColor: "lightblue",
+      selectedTextColor: "black",
+    },
+    "2023-03-21": {
+      marked: true,
+      selected: false,
+      dotColor: "lightblue",
+      selectedColor: "lightblue",
+      selectedTextColor: "black",
+    },
+  },
   applianceList: [
     { "Vender:": "Samsung" },
     { "Vender:": "Echo" },
@@ -57,6 +82,17 @@ const initialState = {
     { title: "Name:", input: "" },
     { title: "D.O.B:", input: "" },
   ],
+  eventList: {
+    "2023-03-03": [
+      { Title: "Samsung Fridge" },
+      { Title: "Echo Bubble Washing Machine" },
+    ],
+    "2023-03-11": [
+      { Title: "Neff Extractor Hood" },
+      { Title: "Bosch Freezer" },
+    ],
+    "2023-03-21": [{ Title: "John Lewis Hob" }],
+  },
 };
 
 function myReducer(state = initialState, action) {
@@ -87,6 +123,9 @@ function myReducer(state = initialState, action) {
     }
     case SET_VIEW_APPLIANCE_VISIBLE: {
       return { ...state, viewApplianceTrigger: action.payload };
+    }
+    case SET_DATE_SELECTED: {
+      return { ...state, dateSelected: action.payload };
     }
     case SET_APPLIANCE_LIST: {
       return {
@@ -122,6 +161,12 @@ function myReducer(state = initialState, action) {
       return {
         ...state,
         updatedInputs: action.payload,
+      };
+    }
+    case SET_EVENT_LIST: {
+      return {
+        ...state,
+        eventList: action.payload,
       };
     }
     case SET_SOUND_TOGGLE: {

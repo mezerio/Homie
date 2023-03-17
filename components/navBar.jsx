@@ -1,5 +1,11 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import addImg from "../assets/img/addImg.png";
+import calenderImg from "../assets/img/calenderImg.png";
+import homeImg from "../assets/img/homeImg.png";
+import peopleImg from "../assets/img/peopleImg.png";
+import settngsImg from "../assets/img/settingsImg.png";
+
 import {
   setNewAddPage,
   setHomePage,
@@ -57,34 +63,19 @@ function NavBar(props) {
     <>
       <View style={styles.nav}>
         <Pressable style={styles.navBtns} onPress={homeHandler}>
-          <Image
-            style={styles.icon}
-            source={require("../assets/img/homeImg.png")}
-          />
+          <Image style={styles.icon} source={homeImg} />
         </Pressable>
         <Pressable style={styles.navBtns} onPress={peopleHandler}>
-          <Image
-            style={styles.icon}
-            source={require("../assets/img/peopleImg.png")}
-          />
+          <Image style={styles.icon} source={peopleImg} />
         </Pressable>
         <Pressable style={styles.addBtn} onPress={addNewHandler}>
-          <Image
-            style={styles.icon}
-            source={require("../assets/img/addImg.png")}
-          />
+          <Image style={styles.icon} source={addImg} />
         </Pressable>
         <Pressable style={styles.navBtns} onPress={calenderHandler}>
-          <Image
-            style={styles.icon}
-            source={require("../assets/img/calenderImg.png")}
-          />
+          <Image style={styles.icon} source={calenderImg} />
         </Pressable>
         <Pressable style={styles.navBtns} onPress={settingsHandler}>
-          <Image
-            style={styles.icon}
-            source={require("../assets/img/settingsImg.png")}
-          />
+          <Image style={styles.icon} source={settngsImg} />
         </Pressable>
       </View>
     </>

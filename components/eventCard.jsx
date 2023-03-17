@@ -1,44 +1,38 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import ViewAppliance from "./viewAppliance";
 import {
   setIndexOfViewedAppliance,
   setViewApplianceVisible,
 } from "../redux/actions";
-import people from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/peopleImg.png";
+import home from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png";
 
-function PeopleCard({ person, index }) {
-  const dispatch = useDispatch();
+function EventCard({ event, index }) {
   const { viewApplianceTrigger } = useSelector((state) => state.myReducer);
-  const { applianceList } = useSelector((state) => state.myReducer);
-  const { fieldHeaders } = useSelector((state) => state.myReducer);
-
+  const dispatch = useDispatch();
   function handleOpenApplianceDetails() {
     dispatch(setViewApplianceVisible(!viewApplianceTrigger));
     dispatch(setIndexOfViewedAppliance(index));
   }
   return (
-    <>
-      <Pressable onPress={handleOpenApplianceDetails}>
-        <View style={styles.card}>
-          <Image style={styles.img} source={people} />
-          <View style={styles.col}>
-            <Text>Name: {person["Name:"]}</Text>
-            <Text>D.O.B: {person["D.O.B:"]}</Text>
-          </View>
+    <Pressable onPress={handleOpenApplianceDetails}>
+      <View style={styles.card}>
+        <Image style={styles.img} source={home} />
+        <View style={styles.col}>
+          <Text style={styles.bb}>{event["Title"]}</Text>
+          <Text>service appointment</Text>
         </View>
-      </Pressable>
-    </>
+      </View>
+    </Pressable>
   );
 }
 
-export default PeopleCard;
+export default EventCard;
 
 const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "white",
+    backgroundColor: "lightblue",
     width: 300,
     padding: 10,
     margin: 5,
@@ -51,5 +45,10 @@ const styles = StyleSheet.create({
   },
   col: {
     flex: 5,
+  },
+  bb: {
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    borderStyle: "solid",
   },
 });

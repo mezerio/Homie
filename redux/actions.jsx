@@ -15,11 +15,19 @@ export const SET_APP_TAB_CHOSEN = "SET_APP_TAB_CHOSEN";
 export const SET_SOUND_TOGGLE = "SET_SOUND_TOGGLE";
 export const SET_NOTIF_TOGGLE = "SET_NOTIF_TOGGLE";
 export const SET_DATES_WITH_EVENTS = "SET_DATES_WITH_EVENTS";
+export const SET_EVENT_LIST = "SET_EVENT_LIST";
+export const SET_DATE_SELECTED = "SET_DATE_SELECTED";
 
 export const setNewAddPage = (newAddPageTrigger) => (dispatch) => {
   dispatch({
     type: SET_NEW_ADD_MODAL,
     payload: newAddPageTrigger,
+  });
+};
+export const setDateSelected = (dateSelected) => (dispatch) => {
+  dispatch({
+    type: SET_DATE_SELECTED,
+    payload: dateSelected,
   });
 };
 export const setHomePage = (homePageTrigger) => (dispatch) => {
@@ -95,6 +103,13 @@ export const setPeopleList = (peopleList) => (dispatch) => {
   dispatch({
     type: SET_PEOPLE_LIST,
     payload: peopleList,
+  });
+};
+
+export const setEventList = (eventList) => (dispatch) => {
+  dispatch({
+    type: SET_EVENT_LIST,
+    payload: eventList,
   });
 };
 

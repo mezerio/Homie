@@ -8,9 +8,10 @@ import {
   Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewAddPage, setHomePage, setAppTabChosen } from "../redux/actions";
+import { setNewAddPage, setHomePage } from "../redux/actions";
 import FieldModal from "./fieldModal";
 import AddNewTab from "./addNewTab";
+import addPhotoImg from "../assets/img/addPhotoImg.png";
 import {
   setFieldModalVisible,
   setApplianceList,
@@ -20,12 +21,14 @@ import {
 } from "../redux/actions";
 
 function AddNew() {
-  const { newAddPageTrigger } = useSelector((state) => state.myReducer);
-  const { fieldModalTrigger } = useSelector((state) => state.myReducer);
-  const { fieldHeaders } = useSelector((state) => state.myReducer);
-  const { fieldHeadersPerson } = useSelector((state) => state.myReducer);
-  const { updatedInputs } = useSelector((state) => state.myReducer);
-  const { appTabChosen } = useSelector((state) => state.myReducer);
+  const {
+    newAddPageTrigger,
+    fieldModalTrigger,
+    fieldHeaders,
+    fieldHeadersPerson,
+    updatedInputs,
+    appTabChosen,
+  } = useSelector((state) => state.myReducer);
 
   const dispatch = useDispatch();
 
@@ -67,51 +70,46 @@ function AddNew() {
   }
 
   return newAddPageTrigger === true ? (
-    <>
-      <ScrollView>
-        <View style={styles.form}>
-          <AddNewTab style={styles.tab} />
-          <Pressable style={styles.addImg}>
-            <Image
-              style={styles.addImgIcon}
-              source={require("../assets/img/addPhotoImg.png")}
-            />
-          </Pressable>
-          <FieldModal trigger={fieldModalTrigger} />
-          {appTabChosen
-            ? fieldHeaders.map((field, index) => (
-                <View key={index}>
-                  <Text>{field.title}</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder=" e.g. text"
-                    onChangeText={(text) => handleTextInputUpdate(text, index)}
-                  ></TextInput>
-                </View>
-              ))
-            : fieldHeadersPerson.map((field, index) => (
-                <View key={index}>
-                  <Text>{field.title}</Text>
-                  <TextInput
-                    style={styles.input}
-                    placeholder=" e.g. text"
-                    onChangeText={(text) => handleTextInputUpdate(text, index)}
-                  ></TextInput>
-                </View>
-              ))}
-          <Pressable>
-            <Text style={styles.btn} onPress={handleAddField}>
-              + ADD NEW FIELD
-            </Text>
-          </Pressable>
-          <Pressable>
-            <Text style={styles.btn2} onPress={handleSaveAppliance}>
-              SAVE
-            </Text>
-          </Pressable>
-        </View>
-      </ScrollView>
-    </>
+    <ScrollView>
+      <View style={styles.form}>
+        <AddNewTab style={styles.tab} />
+        <Pressable style={styles.addImg}>
+          <Image style={styles.addImgIcon} source={addPhotoImg} />
+        </Pressable>
+        <FieldModal trigger={fieldModalTrigger} />
+        {appTabChosen
+          ? fieldHeaders.map((field, index) => (
+              <View key={index}>
+                <Text>{field.title}</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder=" e.g. text"
+                  onChangeText={(text) => handleTextInputUpdate(text, index)}
+                ></TextInput>
+              </View>
+            ))
+          : fieldHeadersPerson.map((field, index) => (
+              <View key={index}>
+                <Text>{field.title}</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder=" e.g. text"
+                  onChangeText={(text) => handleTextInputUpdate(text, index)}
+                ></TextInput>
+              </View>
+            ))}
+        <Pressable>
+          <Text style={styles.btn} onPress={handleAddField}>
+            + ADD NEW FIELD
+          </Text>
+        </Pressable>
+        <Pressable>
+          <Text style={styles.btn2} onPress={handleSaveAppliance}>
+            SAVE
+          </Text>
+        </Pressable>
+      </View>
+    </ScrollView>
   ) : (
     ""
   );

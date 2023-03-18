@@ -68,8 +68,8 @@ function NavBar(props) {
         <Pressable style={styles.navBtns} onPress={peopleHandler}>
           <Image style={styles.icon} source={peopleImg} />
         </Pressable>
-        <Pressable style={styles.addBtn} onPress={addNewHandler}>
-          <Image style={styles.icon} source={addImg} />
+        <Pressable style={styles.navBtns} onPress={addNewHandler}>
+          <Image style={styles.addIcon} source={addImg} />
         </Pressable>
         <Pressable style={styles.navBtns} onPress={calenderHandler}>
           <Image style={styles.icon} source={calenderImg} />
@@ -87,24 +87,17 @@ export default NavBar;
 const styles = StyleSheet.create({
   navBtns: {
     aspectRatio: 1,
-    width: "7.5%",
-    marginRight: "5.5%",
-    marginLeft: "5.5%",
-    marginTop: "3%",
-    marginBottom: "3%",
-  },
-
-  addBtn: {
-    aspectRatio: 1,
-    width: "15%",
-    marginTop: "3%",
-    marginBottom: "3%",
-    marginRight: "5.5%",
-    marginLeft: "5.5%",
+    width: "20%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   icon: {
     aspectRatio: 1,
-    height: "100%",
+    height: "60%",
+  },
+  addIcon: {
+    aspectRatio: 1,
+    height: "90%",
   },
 
   nav: {

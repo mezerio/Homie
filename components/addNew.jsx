@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
   form: {
     height: "100%",
     width: "80%",
-    margin: "10%",
+    marginHorizontal: "10%",
   },
   addImg: {
     flex: 1,

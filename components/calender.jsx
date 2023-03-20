@@ -1,30 +1,56 @@
 import { ScrollView, StyleSheet, Text, Image, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Calendar } from "react-native-calendars";
-import { setDatesWithEvents, setDateSelected } from "../redux/actions";
+import {
+  setDatesWithEvents,
+  setDateSelected,
+  setNewEventDate,
+} from "../redux/actions";
 import EventCard from "./eventCard";
+import AddEventModal from "./addEventModal";
 
 function Calender() {
-  const { calenderTrigger, datesWithEvents, eventList, dateSelected } =
-    useSelector((state) => state.myReducer);
+  const monthArray = [
+    "",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const {
+    currentPage,
+    datesWithEvents,
+    eventList,
+    dateSelected,
+    eventModalTrigger,
+  } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
   function handleDayPress(date) {
     console.log(date["dateString"]);
     dispatch(setDateSelected(date["dateString"]));
+    dispatch(setNewEventDate(date["dateString"]));
     var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
     for (const date in newDatesWithEvents) {
       newDatesWithEvents[date].selected = false;
     }
     if (newDatesWithEvents[date["dateString"]] === undefined) {
       newDatesWithEvents[date["dateString"]] = {
-        selectedColor: "lightblue",
+        selectedColor: "orange",
       };
     }
     newDatesWithEvents[date["dateString"]]["selected"] = true;
     dispatch(setDatesWithEvents(newDatesWithEvents));
   }
-  return calenderTrigger === true ? (
+  return currentPage === "Calender" ? (
     <>
       <View style={styles.view}>
         <Calendar
@@ -33,7 +59,15 @@ function Calender() {
           markedDates={datesWithEvents}
         />
         <View style={styles.eventView}>
-          <Text style={styles.bb}> Friday 3rd Mar 2023</Text>
+          <Text style={styles.bb}>
+            {String(
+              dateSelected.split("-")[2] +
+                " " +
+                monthArray[Number(dateSelected.split("-")[1])] +
+                " " +
+                dateSelected.split("-")[0]
+            )}
+          </Text>
         </View>
         {eventList[dateSelected] == undefined ? (
           <Text style={styles.sv}>No Scheduled Events</Text>
@@ -45,6 +79,7 @@ function Calender() {
           </ScrollView>
         )}
       </View>
+      <AddEventModal trigger={eventModalTrigger} />
     </>
   ) : (
     ""
@@ -65,7 +100,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   eventView: {
-    backgroundColor: "lightblue",
+    backgroundColor: "orange",
     width: "90%",
     padding: 10,
     borderTopLeftRadius: 10,

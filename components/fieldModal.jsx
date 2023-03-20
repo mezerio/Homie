@@ -33,7 +33,7 @@ export default FieldModal;
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "lightblue",
+    backgroundColor: "orange",
     width: "70%",
     borderRadius: 5,
     paddingLeft: 5,

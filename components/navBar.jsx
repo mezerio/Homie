@@ -13,51 +13,60 @@ import {
   setUpdatedInputs,
   setCalender,
   setSettings,
+  setCurrentPage,
 } from "../redux/actions";
 
 function NavBar(props) {
   const { peopleList } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
   function homeHandler() {
-    console.log("home");
-    dispatch(setNewAddPage(false));
-    dispatch(setPeople(false));
-    dispatch(setHomePage(true));
-    dispatch(setCalender(false));
-    dispatch(setSettings(false));
+    console.log("Home");
+    dispatch(setCurrentPage("Home"));
+    // dispatch(setNewAddPage(false));
+    // dispatch(setPeople(false));
+    // dispatch(setHomePage(true));
+    // dispatch(setCalender(false));
+    // dispatch(setSettings(false));
   }
   function peopleHandler() {
     console.log("peeps");
-    dispatch(setNewAddPage(false));
-    dispatch(setHomePage(false));
-    dispatch(setPeople(true));
-    dispatch(setCalender(false));
-    dispatch(setSettings(false));
+    dispatch(setCurrentPage("People"));
+
+    // dispatch(setNewAddPage(false));
+    // dispatch(setHomePage(false));
+    // dispatch(setPeople(true));
+    // dispatch(setCalender(false));
+    // dispatch(setSettings(false));
   }
   function addNewHandler() {
     console.log("new");
+    dispatch(setCurrentPage("New"));
     dispatch(setUpdatedInputs([]));
-    dispatch(setPeople(false));
-    dispatch(setNewAddPage(true));
-    dispatch(setHomePage(false));
-    dispatch(setCalender(false));
-    dispatch(setSettings(false));
+    // dispatch(setPeople(false));
+    // dispatch(setNewAddPage(true));
+    // dispatch(setHomePage(false));
+    // dispatch(setCalender(false));
+    // dispatch(setSettings(false));
   }
   function calenderHandler() {
-    console.log("calender");
-    dispatch(setPeople(false));
-    dispatch(setNewAddPage(false));
-    dispatch(setHomePage(false));
-    dispatch(setCalender(true));
-    dispatch(setSettings(false));
+    console.log("Calender");
+    dispatch(setCurrentPage("Calender"));
+
+    // dispatch(setPeople(false));
+    // dispatch(setNewAddPage(false));
+    // dispatch(setHomePage(false));
+    // dispatch(setCalender(true));
+    // dispatch(setSettings(false));
   }
   function settingsHandler() {
-    console.log("settings");
-    dispatch(setPeople(false));
-    dispatch(setNewAddPage(false));
-    dispatch(setHomePage(false));
-    dispatch(setCalender(false));
-    dispatch(setSettings(true));
+    console.log("Settings");
+    dispatch(setCurrentPage("Settings"));
+
+    // dispatch(setPeople(false));
+    // dispatch(setNewAddPage(false));
+    // dispatch(setHomePage(false));
+    // dispatch(setCalender(false));
+    // dispatch(setSettings(true));
   }
   return (
     <>

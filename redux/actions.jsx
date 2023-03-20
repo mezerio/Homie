@@ -3,6 +3,7 @@ export const SET_HOME_PAGE = "SET_HOME_PAGE";
 export const SET_PEOPLE = "SET_PEOPLE";
 export const SET_CALENDER = "SET_CALENDER";
 export const SET_SETTINGS = "SET_SETTINGS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_FIELD_MODAL_VISIBLE = "SET_FIELD_MODAL_VISIBLE";
 export const SET_VIEW_APPLIANCE_VISIBLE = "SET_VIEW_APPLIANCE_VISIBLE";
 export const SET_FEILD_HEADERS = "SET_FEILD_HEADERS";
@@ -17,7 +18,59 @@ export const SET_NOTIF_TOGGLE = "SET_NOTIF_TOGGLE";
 export const SET_DATES_WITH_EVENTS = "SET_DATES_WITH_EVENTS";
 export const SET_EVENT_LIST = "SET_EVENT_LIST";
 export const SET_DATE_SELECTED = "SET_DATE_SELECTED";
+export const SET_IMG_SOURCE = "SET_IMG_SOURCE";
+export const SET_DATE_PICKER_TOGGLE = "SET_DATE_PICKER_TOGGLE";
+export const SET_TIME_PICKER_TOGGLE = "SET_TIME_PICKER_TOGGLE";
+export const SET_EVENT_MODAL_TRIGGER = "SET_EVENT_MODAL_TRIGGER";
+export const SET_NEW_EVENT_DATE = "SET_NEW_EVENT_DATE";
+export const SET_NEW_EVENT_TIME = "SET_NEW_EVENT_TIME";
+export const SET_NEW_EVENT_ITEM = "SET_NEW_EVENT_ITEM";
+export const SET_NEW_EVENT_DESC = "SET_NEW_EVENT_DESC";
 
+export const setCurrentPage = (currentPage) => (dispatch) => {
+  dispatch({
+    type: SET_CURRENT_PAGE,
+    payload: currentPage,
+  });
+};
+
+export const setNewEventDate = (eventDate) => (dispatch) => {
+  dispatch({
+    type: SET_NEW_EVENT_DATE,
+    payload: eventDate,
+  });
+};
+export const setNewEventTime = (newEventTime) => (dispatch) => {
+  dispatch({
+    type: SET_NEW_EVENT_TIME,
+    payload: newEventTime,
+  });
+};
+export const setNewEventItem = (newEventItem) => (dispatch) => {
+  dispatch({
+    type: SET_NEW_EVENT_ITEM,
+    payload: newEventItem,
+  });
+};
+export const setNewEventDesc = (newEventDesc) => (dispatch) => {
+  dispatch({
+    type: SET_NEW_EVENT_DESC,
+    payload: newEventDesc,
+  });
+};
+
+export const setEventModalTrigger = (eventModalTrigger) => (dispatch) => {
+  dispatch({
+    type: SET_EVENT_MODAL_TRIGGER,
+    payload: eventModalTrigger,
+  });
+};
+export const setImgSource = (imgSource) => (dispatch) => {
+  dispatch({
+    type: SET_IMG_SOURCE,
+    payload: imgSource,
+  });
+};
 export const setNewAddPage = (newAddPageTrigger) => (dispatch) => {
   dispatch({
     type: SET_NEW_ADD_MODAL,
@@ -144,5 +197,18 @@ export const setNotifToggle = (notifToggle) => (dispatch) => {
   dispatch({
     type: SET_NOTIF_TOGGLE,
     payload: notifToggle,
+  });
+};
+
+export const setTimePickerToggle = (timePickerToggle) => (dispatch) => {
+  dispatch({
+    type: SET_TIME_PICKER_TOGGLE,
+    payload: timePickerToggle,
+  });
+};
+export const setDatePickerToggle = (datePickerToggle) => (dispatch) => {
+  dispatch({
+    type: SET_DATE_PICKER_TOGGLE,
+    payload: datePickerToggle,
   });
 };

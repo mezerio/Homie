@@ -16,11 +16,14 @@ import { setUpdatedInputs } from "../redux/actions";
 
 function ViewAppliance({ trigger }) {
   const {
+    peopleList,
+    currentPage,
     applianceList,
     fieldModalTrigger,
     fieldHeaders,
     updatedInputs,
     indexOfViewedAppliance,
+    fieldHeadersPerson,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
@@ -36,24 +39,44 @@ function ViewAppliance({ trigger }) {
   return trigger == true ? (
     <>
       <Modal animationType="fade">
+        <Pressable onPress={handleCancel}>
+          <Text style={styles.back}>{"<"}</Text>
+        </Pressable>
         <ScrollView>
           <View style={styles.form}>
             <Pressable style={styles.addImg}>
               <Image style={styles.addImgIcon} source={addPhotoImg} />
             </Pressable>
             <FieldModal trigger={fieldModalTrigger} />
-            {fieldHeaders.map((field, index) => (
-              <View key={index}>
-                <Text>{field.title}</Text>
-                <TextInput
-                  style={styles.input}
-                  placeholder=" e.g. text"
-                  onChangeText={(text) => handleTextInputUpdate(text, index)}
-                >
-                  {applianceList[indexOfViewedAppliance][field.title]}
-                </TextInput>
-              </View>
-            ))}
+            {currentPage === "Home"
+              ? fieldHeaders.map((field, index) => (
+                  <View key={index}>
+                    <Text>{field.title}</Text>
+                    <TextInput
+                      style={styles.input}
+                      placeholder=" e.g. text"
+                      onChangeText={(text) =>
+                        handleTextInputUpdate(text, index)
+                      }
+                    >
+                      {applianceList[indexOfViewedAppliance][field.title]}
+                    </TextInput>
+                  </View>
+                ))
+              : fieldHeadersPerson.map((field, index) => (
+                  <View key={index}>
+                    <Text>{field.title}</Text>
+                    <TextInput
+                      style={styles.input}
+                      placeholder=" e.g. text"
+                      onChangeText={(text) =>
+                        handleTextInputUpdate(text, index)
+                      }
+                    >
+                      {peopleList[indexOfViewedAppliance][field.title]}
+                    </TextInput>
+                  </View>
+                ))}
             <Pressable>
               <Text style={styles.btn2} onPress={handleCancel}>
                 CANCEL
@@ -71,6 +94,11 @@ function ViewAppliance({ trigger }) {
 export default ViewAppliance;
 
 const styles = StyleSheet.create({
+  back: {
+    fontSize: 30,
+    color: "orange",
+    paddingHorizontal: 30,
+  },
   form: {
     height: "100%",
     width: "80%",
@@ -80,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
     width: "75%",
-    backgroundColor: "lightblue",
+    backgroundColor: "lightgrey",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -91,7 +119,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "lightblue",
+    backgroundColor: "lightgrey",
     height: 40,
     marginTop: 7,
     marginBottom: 5,
@@ -110,7 +138,7 @@ const styles = StyleSheet.create({
   btn2: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "navy",
+    backgroundColor: "orange",
     padding: 3,
     borderRadius: 5,
     width: "100%",

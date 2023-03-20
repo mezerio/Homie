@@ -19,8 +19,9 @@ function EventCard({ event, index }) {
         <Image style={styles.img} source={home} />
         <View style={styles.col}>
           <Text style={styles.bb}>{event["Title"]}</Text>
-          <Text>service appointment</Text>
+          <Text style={styles.tex}>service appointment</Text>
         </View>
+        <Text style={styles.time}>11:30</Text>
       </View>
     </Pressable>
   );
@@ -29,10 +30,14 @@ function EventCard({ event, index }) {
 export default EventCard;
 
 const styles = StyleSheet.create({
+  tex: {
+    color: "white",
+  },
   card: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "lightblue",
+    backgroundColor: "black",
+
     width: 300,
     padding: 10,
     margin: 5,
@@ -47,8 +52,14 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   bb: {
-    borderBottomColor: "black",
+    color: "white",
+    borderBottomColor: "white",
     borderBottomWidth: 1,
     borderStyle: "solid",
+  },
+  time: {
+    color: "white",
+    textAlignVertical: "top",
+    margin: 5,
   },
 });

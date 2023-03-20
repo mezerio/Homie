@@ -4,11 +4,11 @@ import ViewAppliance from "./viewAppliance";
 import PeopleCard from "./peopleCard";
 
 function People() {
-  const { peopleTrigger, peopleList, viewApplianceTrigger } = useSelector(
+  const { currentPage, peopleList, viewApplianceTrigger } = useSelector(
     (state) => state.myReducer
   );
 
-  return peopleTrigger === true ? (
+  return currentPage === "People" ? (
     <>
       <ScrollView>
         <View style={styles.view}>

@@ -11,7 +11,7 @@ import { setNotifToggle, setSoundToggle } from "../redux/actions";
 import settings from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/settingsImg.png";
 
 function Settings() {
-  const { settingsTrigger, soundToggle, notifToggle } = useSelector(
+  const { currentPage, soundToggle, notifToggle } = useSelector(
     (state) => state.myReducer
   );
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Settings() {
     dispatch(setNotifToggle(!notifToggle));
   }
 
-  return settingsTrigger === true ? (
+  return currentPage === "Settings" ? (
     <>
       <ScrollView>
         <View style={styles.view}>
@@ -37,7 +37,7 @@ function Settings() {
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
-              thumbColor={soundToggle ? "lightblue" : "lightgrey"}
+              thumbColor={soundToggle ? "orange" : "lightgrey"}
               onValueChange={handleSoundToggle}
               value={soundToggle}
             />
@@ -51,7 +51,7 @@ function Settings() {
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
-              thumbColor={notifToggle ? "lightblue" : "lightgrey"}
+              thumbColor={notifToggle ? "orange" : "lightgrey"}
               onValueChange={handleNotifToggle}
               value={notifToggle}
             />
@@ -82,7 +82,7 @@ export default Settings;
 
 const styles = StyleSheet.create({
   img: {
-    height: "20%",
+    height: "10%",
     aspectRatio: 1,
     marginBottom: 20,
   },
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "80%",
     borderRadius: 5,
-    margin: 10,
-    height: "6%",
+    margin: 5,
+    height: 50,
   },
 });

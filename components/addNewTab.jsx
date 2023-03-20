@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   chosenTab: {
     color: "white",
     padding: 8,
-    backgroundColor: "grey",
+    backgroundColor: "orange",
     borderRadius: 25,
   },
   otherTab: {

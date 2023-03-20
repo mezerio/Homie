@@ -8,26 +8,31 @@ import {
   Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setNewAddPage, setHomePage } from "../redux/actions";
-import FieldModal from "./fieldModal";
-import AddNewTab from "./addNewTab";
-import addPhotoImg from "../assets/img/addPhotoImg.png";
 import {
+  setNewAddPage,
+  setHomePage,
+  setCurrentPage,
+  setImgSource,
   setFieldModalVisible,
   setApplianceList,
   setUpdatedInputs,
   setPeopleList,
   setPeople,
 } from "../redux/actions";
+import FieldModal from "./fieldModal";
+import AddNewTab from "./addNewTab";
+import addPhotoImg from "../assets/img/addPhotoImg.png";
+import * as ImagePicker from "expo-image-picker";
 
 function AddNew() {
   const {
-    newAddPageTrigger,
+    currentPage,
     fieldModalTrigger,
     fieldHeaders,
     fieldHeadersPerson,
     updatedInputs,
     appTabChosen,
+    imgSource,
   } = useSelector((state) => state.myReducer);
 
   const dispatch = useDispatch();
@@ -45,8 +50,7 @@ function AddNew() {
         }
       });
       dispatch(setApplianceList(newAppliance));
-      dispatch(setNewAddPage(false));
-      dispatch(setHomePage(true));
+      dispatch(setCurrentPage("Home"));
     } else {
       var newPerson = {};
       fieldHeadersPerson.map((person, index) => {
@@ -57,8 +61,7 @@ function AddNew() {
       console.log(updatedInputs, "pp");
       console.log(newPerson, "ppp");
       dispatch(setPeopleList(newPerson));
-      dispatch(setNewAddPage(false));
-      dispatch(setPeople(true));
+      dispatch(setCurrentPage("People"));
     }
   }
 
@@ -68,13 +71,30 @@ function AddNew() {
     dispatch(setUpdatedInputs(newUpdatedInputs));
     console.log(updatedInputs, 1);
   }
+  const handlePickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    dispatch(setImgSource(result.uri));
+    console.log(result.uri);
 
-  return newAddPageTrigger === true ? (
+    if (!result.canceled) {
+      dispatch(setImgSource(result.assets[0].uri));
+    }
+  };
+
+  return currentPage === "New" ? (
     <ScrollView>
       <View style={styles.form}>
         <AddNewTab style={styles.tab} />
-        <Pressable style={styles.addImg}>
-          <Image style={styles.addImgIcon} source={addPhotoImg} />
+        <Pressable onPress={handlePickImage} style={styles.addImg}>
+          <Image
+            style={styles.addImgIcon}
+            source={imgSource ? { uri: imgSource } : addPhotoImg}
+          />
         </Pressable>
         <FieldModal trigger={fieldModalTrigger} />
         {appTabChosen
@@ -157,7 +177,7 @@ const styles = StyleSheet.create({
   btn2: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "navy",
+    backgroundColor: "orange",
     padding: 3,
     borderRadius: 5,
     width: "100%",

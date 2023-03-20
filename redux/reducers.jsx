@@ -5,6 +5,7 @@ import {
   SET_FEILD_HEADERS_PERSON,
   SET_HOME_PAGE,
   SET_PEOPLE,
+  SET_CURRENT_PAGE,
   SET_APPLIANCE_LIST,
   SET_UPDATED_INPUTS,
   SET_VIEW_APPLIANCE_VISIBLE,
@@ -18,9 +19,35 @@ import {
   SET_DATES_WITH_EVENTS,
   SET_EVENT_LIST,
   SET_DATE_SELECTED,
+  SET_IMG_SOURCE,
+  SET_DATE_PICKER_TOGGLE,
+  SET_TIME_PICKER_TOGGLE,
+  SET_EVENT_MODAL_TRIGGER,
+  SET_NEW_EVENT_DATE,
+  SET_NEW_EVENT_TIME,
+  SET_NEW_EVENT_ITEM,
+  SET_NEW_EVENT_DESC,
 } from "./actions";
 
 const initialState = {
+  currentPage: "Home",
+  newEventItem: "",
+  newEventDesc: "",
+  newEventDate: String(
+    new Date().getFullYear() +
+      "-" +
+      (new Date().getMonth() < 10 ? "0" : "") +
+      Number(new Date().getMonth() + 1) +
+      "-" +
+      (new Date().getDate() < 10 ? "0" : "") +
+      new Date().getDate()
+  ),
+  newEventTime: String(
+    new Date().getHours() +
+      ":" +
+      (new Date().getMinutes() < 10 ? "0" : "") +
+      new Date().getMinutes()
+  ),
   newAddPageTrigger: false,
   homePageTrigger: true,
   calenderTrigger: false,
@@ -32,27 +59,31 @@ const initialState = {
   indexOfViewedAppliance: 0,
   soundToggle: true,
   notifToggle: false,
+  timePickerToggle: false,
+  datePickerToggle: false,
+  eventModalTrigger: false,
+  imgSource: "",
   dateSelected: "2023-03-03",
   datesWithEvents: {
     "2023-03-03": {
       marked: true,
       selected: false,
-      dotColor: "lightblue",
-      selectedColor: "lightblue",
+      dotColor: "orange",
+      selectedColor: "orange",
       selectedTextColor: "black",
     },
     "2023-03-11": {
       marked: true,
       selected: false,
-      dotColor: "lightblue",
-      selectedColor: "lightblue",
+      dotColor: "orange",
+      selectedColor: "orange",
       selectedTextColor: "black",
     },
     "2023-03-21": {
       marked: true,
       selected: false,
-      dotColor: "lightblue",
-      selectedColor: "lightblue",
+      dotColor: "orange",
+      selectedColor: "orange",
       selectedTextColor: "black",
     },
   },
@@ -100,6 +131,27 @@ function myReducer(state = initialState, action) {
     case SET_NEW_ADD_MODAL: {
       return { ...state, newAddPageTrigger: action.payload };
     }
+    case SET_NEW_EVENT_TIME: {
+      return { ...state, newEventTime: action.payload };
+    }
+    case SET_NEW_EVENT_DATE: {
+      return { ...state, newEventDate: action.payload };
+    }
+    case SET_NEW_EVENT_ITEM: {
+      return { ...state, newEventItem: action.payload };
+    }
+    case SET_NEW_EVENT_DESC: {
+      return { ...state, newEventDesc: action.payload };
+    }
+    case SET_EVENT_MODAL_TRIGGER: {
+      return { ...state, eventModalTrigger: action.payload };
+    }
+    case SET_IMG_SOURCE: {
+      return { ...state, imgSource: action.payload };
+    }
+    case SET_CURRENT_PAGE: {
+      return { ...state, currentPage: action.payload };
+    }
     case SET_HOME_PAGE: {
       return { ...state, homePageTrigger: action.payload };
     }
@@ -126,6 +178,12 @@ function myReducer(state = initialState, action) {
     }
     case SET_DATE_SELECTED: {
       return { ...state, dateSelected: action.payload };
+    }
+    case SET_TIME_PICKER_TOGGLE: {
+      return { ...state, timePickerToggle: action.payload };
+    }
+    case SET_DATE_PICKER_TOGGLE: {
+      return { ...state, datePickerToggle: action.payload };
     }
     case SET_APPLIANCE_LIST: {
       return {

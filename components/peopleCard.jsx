@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
   img: {
     flex: 1,
     aspectRatio: 1,
+    margin: 10,
   },
   col: {
     flex: 5,

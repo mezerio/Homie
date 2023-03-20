@@ -18,6 +18,8 @@ import {
   setNewEventDate,
   setNewEventTime,
   setDatesWithEvents,
+  setEventList,
+  setNewEventDesc,
 } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import FieldModal from "./fieldModal";
@@ -25,6 +27,8 @@ import { setUpdatedInputs } from "../redux/actions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 function AddEventModal({ trigger }) {
+  var enteredText = "";
+
   const {
     peopleList,
     currentPage,
@@ -38,6 +42,10 @@ function AddEventModal({ trigger }) {
     timePickerToggle,
     newEventDate,
     newEventTime,
+    newEventDesc,
+    newEventItem,
+    datesWithEvents,
+    eventList,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
@@ -94,7 +102,60 @@ function AddEventModal({ trigger }) {
   function handleSave() {
     console.log("saved new event");
     dispatch(setEventModalTrigger(false));
-    dispatch(setDatesWithEvents(false));
+    var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
+    newDatesWithEvents = {
+      ...newDatesWithEvents,
+      [newEventDate]: {
+        marked: true,
+        selected: false,
+        dotColor: "orange",
+        selectedColor: "orange",
+        selectedTextColor: "black",
+      },
+    };
+    dispatch(setDatesWithEvents(newDatesWithEvents));
+    var newEventList = JSON.parse(JSON.stringify(eventList));
+
+    // newEventList = {
+    //   ...newEventList,
+    //   [newEventDate]: [
+    //     ...newEventList[newEventDate],
+    //     {
+    //       Title: "shutup mehdi",
+    //       Time: newEventTime,
+    //       Desc: newEventDesc,
+    //     },
+    //   ],
+    // };
+    if (newEventDate in newEventList) {
+      newEventList = {
+        ...newEventList,
+        [newEventDate]: [
+          ...newEventList[newEventDate],
+          {
+            Title: "shutup mehdi",
+            Time: newEventTime,
+            Desc: newEventDesc,
+          },
+        ],
+      };
+    } else {
+      newEventList = {
+        ...newEventList,
+        [newEventDate]: [
+          {
+            Title: "shutup mehdi",
+            Time: newEventTime,
+            Desc: newEventDesc,
+          },
+        ],
+      };
+    }
+
+    console.log(newEventList, "event list");
+    console.log(eventList, "event list");
+    dispatch(setEventList(newEventList));
+    console.log(eventList, "event list 2");
   }
   return trigger == true ? (
     <>
@@ -142,6 +203,7 @@ function AddEventModal({ trigger }) {
             </View>
             <Text style={styles.bb}>notes</Text>
             <TextInput
+              onChangeText={(text) => dispatch(setNewEventDesc(text))}
               style={styles.ti}
               placeholder="enter notes..."
               multiline={true}

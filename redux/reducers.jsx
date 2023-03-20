@@ -32,7 +32,7 @@ import {
 const initialState = {
   currentPage: "Home",
   newEventItem: "",
-  newEventDesc: "",
+  newEventDesc: "bleb",
   newEventDate: String(
     new Date().getFullYear() +
       "-" +
@@ -115,14 +115,18 @@ const initialState = {
   ],
   eventList: {
     "2023-03-03": [
-      { Title: "Samsung Fridge" },
-      { Title: "Echo Bubble Washing Machine" },
+      { Title: "Samsung Fridge", Time: "00:00", Desc: "blah blah blah" },
+      {
+        Title: "Echo Bubble Washing Machine",
+        Time: "01:00",
+        Desc: "blah blah ",
+      },
     ],
     "2023-03-11": [
-      { Title: "Neff Extractor Hood" },
-      { Title: "Bosch Freezer" },
+      { Title: "Neff Extractor Hood", Time: "02:00", Desc: "blah  blah" },
+      { Title: "Bosch Freezer", Time: "20:00", Desc: "blah blah blah" },
     ],
-    "2023-03-21": [{ Title: "John Lewis Hob" }],
+    "2023-03-21": [{ Title: "John Lewis Hob", Time: "10:00", Desc: "blah" }],
   },
 };
 

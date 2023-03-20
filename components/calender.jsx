@@ -122,9 +122,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     backgroundColor: "white",
     width: "90%",
-    padding: 10,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    marginBottom: 5,
+    marginBottom: 10,
   },
 });

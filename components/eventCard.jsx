@@ -19,9 +19,9 @@ function EventCard({ event, index }) {
         <Image style={styles.img} source={home} />
         <View style={styles.col}>
           <Text style={styles.bb}>{event["Title"]}</Text>
-          <Text style={styles.tex}>service appointment</Text>
+          <Text style={styles.tex}>{event["Desc"]}</Text>
         </View>
-        <Text style={styles.time}>11:30</Text>
+        <Text style={styles.time}>{event["Time"]}</Text>
       </View>
     </Pressable>
   );
@@ -38,15 +38,17 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "black",
 
-    width: 300,
+    width: "90%",
     padding: 10,
-    margin: 5,
+    marginHorizontal: 15,
     borderRadius: 5,
     alignItems: "center",
+    marginVertical: 5,
   },
   img: {
     flex: 1,
     aspectRatio: 1,
+    margin: 5,
   },
   col: {
     flex: 5,

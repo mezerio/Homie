@@ -5,7 +5,6 @@ import { setFieldModalVisible, setFieldHeaders } from "../redux/actions";
 function FieldModal(props) {
   const { fieldHeaders } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
-  var enteredText = "";
   function handleAddField() {
     dispatch(setFieldModalVisible(false));
     //here

@@ -8,6 +8,7 @@ import {
 } from "../redux/actions";
 import EventCard from "./eventCard";
 import AddEventModal from "./addEventModal";
+import SearchModal from "./searchModal";
 
 function Calender() {
   const monthArray = [

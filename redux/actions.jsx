@@ -26,11 +26,25 @@ export const SET_NEW_EVENT_DATE = "SET_NEW_EVENT_DATE";
 export const SET_NEW_EVENT_TIME = "SET_NEW_EVENT_TIME";
 export const SET_NEW_EVENT_ITEM = "SET_NEW_EVENT_ITEM";
 export const SET_NEW_EVENT_DESC = "SET_NEW_EVENT_DESC";
+export const SET_SEARCH_TOGGLE = "SET_SEARCH_TOGGLE";
+export const SET_SEARCH_INPUT = "SET_SEARCH_INPUT";
 
 export const setCurrentPage = (currentPage) => (dispatch) => {
   dispatch({
     type: SET_CURRENT_PAGE,
     payload: currentPage,
+  });
+};
+export const setSearchInput = (searchInput) => (dispatch) => {
+  dispatch({
+    type: SET_SEARCH_INPUT,
+    payload: searchInput,
+  });
+};
+export const setSearchToggle = (searchToggle) => (dispatch) => {
+  dispatch({
+    type: SET_SEARCH_TOGGLE,
+    payload: searchToggle,
   });
 };
 

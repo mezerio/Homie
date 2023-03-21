@@ -20,11 +20,13 @@ import {
   setDatesWithEvents,
   setEventList,
   setNewEventDesc,
+  setSearchToggle,
 } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import FieldModal from "./fieldModal";
 import { setUpdatedInputs } from "../redux/actions";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import SearchModal from "./searchModal";
 
 function AddEventModal({ trigger }) {
   var enteredText = "";
@@ -157,12 +159,18 @@ function AddEventModal({ trigger }) {
     dispatch(setEventList(newEventList));
     console.log(eventList, "event list 2");
   }
+
+  function handleSelectAP() {
+    dispatch(setSearchToggle(true));
+  }
   return trigger == true ? (
     <>
       <Modal transparent={true} visible={true} animationType="fade">
         <View style={styles.card}>
           <View style={styles.card2}>
-            <Text style={styles.btn}>select appliance/person</Text>
+            <Pressable onPress={handleSelectAP}>
+              <Text style={styles.btn}>select appliance/person</Text>
+            </Pressable>
             <View>
               <TouchableWithoutFeedback onPress={handleDatePickerToggle}>
                 <View>
@@ -218,6 +226,7 @@ function AddEventModal({ trigger }) {
           </View>
         </View>
       </Modal>
+      <SearchModal />
     </>
   ) : (
     ""

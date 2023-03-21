@@ -27,9 +27,13 @@ import {
   SET_NEW_EVENT_TIME,
   SET_NEW_EVENT_ITEM,
   SET_NEW_EVENT_DESC,
+  SET_SEARCH_TOGGLE,
+  SET_SEARCH_INPUT,
 } from "./actions";
 
 const initialState = {
+  searchInput: "",
+  searchToggle: false,
   currentPage: "Home",
   newEventItem: "",
   newEventDesc: "bleb",
@@ -141,6 +145,9 @@ function myReducer(state = initialState, action) {
     case SET_NEW_EVENT_DATE: {
       return { ...state, newEventDate: action.payload };
     }
+    case SET_SEARCH_TOGGLE: {
+      return { ...state, searchToggle: action.payload };
+    }
     case SET_NEW_EVENT_ITEM: {
       return { ...state, newEventItem: action.payload };
     }
@@ -158,6 +165,9 @@ function myReducer(state = initialState, action) {
     }
     case SET_HOME_PAGE: {
       return { ...state, homePageTrigger: action.payload };
+    }
+    case SET_SEARCH_INPUT: {
+      return { ...state, searchInput: action.payload };
     }
     case SET_PEOPLE: {
       return { ...state, peopleTrigger: action.payload };

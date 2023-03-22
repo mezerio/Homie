@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "./colors";
 import {
   setIndexOfViewedAppliance,
   setViewApplianceTrigger,
@@ -26,10 +27,16 @@ function ApplianceCard({ appliance, index }) {
       <View style={styles.card}>
         <Image style={styles.img} source={home} />
         <View style={styles.col}>
-          <Text>Vender: {appliance["Vender:"]}</Text>
-          <Text>Product Name/Title: {appliance["Product Name/Title:"]}</Text>
-          <Text>Model Number: {appliance["Model Number:"]}</Text>
-          <Text>Serial Number: {appliance["Serial Number:"]}</Text>
+          <Text style={styles.text}>Vender: {appliance["Vender:"]}</Text>
+          <Text style={styles.text}>
+            Product Name/Title: {appliance["Product Name/Title:"]}
+          </Text>
+          <Text style={styles.text}>
+            Model Number: {appliance["Model Number:"]}
+          </Text>
+          <Text style={styles.text}>
+            Serial Number: {appliance["Serial Number:"]}
+          </Text>
         </View>
       </View>
     </Pressable>
@@ -42,12 +49,15 @@ const styles = StyleSheet.create({
   card: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "white",
+    backgroundColor: colorScheme.secondary,
     width: 300,
     padding: 10,
     margin: 5,
     borderRadius: 5,
     alignItems: "center",
+  },
+  text: {
+    color: colorScheme.primaryFont,
   },
   img: {
     flex: 1,

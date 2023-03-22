@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet, Text, Image, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Calendar } from "react-native-calendars";
+import colorScheme from "./colors";
 import {
   setDatesWithEvents,
   setDateSelected,
@@ -58,7 +59,7 @@ function Calender() {
     }
     if (newDatesWithEvents[date["dateString"]] === undefined) {
       newDatesWithEvents[date["dateString"]] = {
-        selectedColor: "orange",
+        selectedColor: colorScheme.primaryAccent,
       };
     }
     newDatesWithEvents[date["dateString"]]["selected"] = true;
@@ -116,16 +117,17 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   eventView: {
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.secondary,
     width: "90%",
     padding: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   bb: {
-    borderBottomColor: "black",
+    borderBottomColor: colorScheme.primaryFont,
     borderBottomWidth: 1,
     borderStyle: "solid",
+    color: colorScheme.primaryFont,
   },
   na: {
     backgroundColor: "white",
@@ -136,10 +138,12 @@ const styles = StyleSheet.create({
   },
   sv: {
     textAlign: "center",
-    backgroundColor: "white",
+    backgroundColor: colorScheme.tertiary,
     width: "90%",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     marginBottom: 10,
+    color: colorScheme.primaryFont,
+    padding: 5,
   },
 });

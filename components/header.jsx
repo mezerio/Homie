@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "./colors";
 import {
   setAppTabChosen,
   setCurrentPage,
@@ -54,7 +55,6 @@ export default Header;
 const styles = StyleSheet.create({
   col: {
     flexDirection: "row",
-    backgroundColor: "white",
     padding: 10,
     alignItems: "center",
     marginBottom: 10,
@@ -62,12 +62,12 @@ const styles = StyleSheet.create({
   cp: {
     fontSize: 20,
     width: "80%",
-    color: "orange",
+    color: colorScheme.secondaryAccent,
     marginLeft: 30,
     height: 40,
   },
   plusBtn: {
     fontSize: 30,
-    color: "orange",
+    color: colorScheme.secondaryAccent,
   },
 });

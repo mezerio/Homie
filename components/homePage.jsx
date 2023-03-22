@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import ViewAppliance from "./viewAppliance";
 import ApplianceCard from "./applianceCard";
+import colorScheme from "./colors";
 
 function HomePage() {
   const { currentPage, applianceList, viewApplianceTrigger } = useSelector(
@@ -33,6 +34,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
-    backgroundColor: "lightgrey",
   },
 });

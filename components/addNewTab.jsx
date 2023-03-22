@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setAppTabChosen } from "../redux/actions";
+import colorScheme from "./colors";
 
 function AddNewTab() {
   const { appTabChosen } = useSelector((state) => state.myReducer);
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   chosenTab: {
     color: "white",
     padding: 8,
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.primaryAccent,
     borderRadius: 25,
   },
   otherTab: {

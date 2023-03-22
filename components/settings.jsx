@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setNotifToggle, setSoundToggle } from "../redux/actions";
+import colorScheme from "./colors";
 import settings from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/settingsImg.png";
 
 function Settings() {
@@ -29,46 +30,30 @@ function Settings() {
         <View style={styles.view}>
           <Image style={styles.img} source={settings} />
           <View style={styles.set}>
-            <Text
-              style={{ alignSelf: "center", marginLeft: "5%", width: "75%" }}
-            >
-              Sound
-            </Text>
+            <Text style={styles.text}>Sound</Text>
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
-              thumbColor={soundToggle ? "orange" : "lightgrey"}
+              thumbColor={soundToggle ? colorScheme.primaryAccent : "lightgrey"}
               onValueChange={handleSoundToggle}
               value={soundToggle}
             />
           </View>
           <View style={styles.set}>
-            <Text
-              style={{ alignSelf: "center", marginLeft: "5%", width: "75%" }}
-            >
-              Notification
-            </Text>
+            <Text style={styles.text}>Notification</Text>
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
-              thumbColor={notifToggle ? "orange" : "lightgrey"}
+              thumbColor={notifToggle ? colorScheme.primaryAccent : "lightgrey"}
               onValueChange={handleNotifToggle}
               value={notifToggle}
             />
           </View>
           <View style={styles.set}>
-            <Text
-              style={{ alignSelf: "center", marginLeft: "5%", width: "75%" }}
-            >
-              Help
-            </Text>
+            <Text style={styles.text}>Help</Text>
           </View>
           <View style={styles.set}>
-            <Text
-              style={{ alignSelf: "center", marginLeft: "5%", width: "75%" }}
-            >
-              Feedback
-            </Text>
+            <Text style={styles.text}>Feedback</Text>
           </View>
         </View>
       </ScrollView>
@@ -81,6 +66,12 @@ function Settings() {
 export default Settings;
 
 const styles = StyleSheet.create({
+  text: {
+    alignSelf: "center",
+    marginLeft: "5%",
+    width: "75%",
+    color: colorScheme.primaryFont,
+  },
   img: {
     height: "10%",
     aspectRatio: 1,
@@ -93,7 +84,7 @@ const styles = StyleSheet.create({
   },
   set: {
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: colorScheme.secondary,
     width: "80%",
     borderRadius: 5,
     margin: 5,

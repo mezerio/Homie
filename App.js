@@ -8,12 +8,16 @@ import { Store } from "./redux/store.jsx";
 import Calender from "./components/calender.jsx";
 import Settings from "./components/settings.jsx";
 import Header from "./components/header.jsx";
+import colorScheme from "./components/colors.jsx";
 
 export default function App() {
   return (
     <Provider store={Store}>
       <View style={styles.full}>
-        <StatusBar barStyle="dark-content" backgroundColor={"white"} />
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor={colorScheme.primary}
+        />
         <Header />
         <HomePage />
         <People />
@@ -29,6 +33,6 @@ export default function App() {
 const styles = StyleSheet.create({
   full: {
     flex: 1,
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.primary,
   },
 });

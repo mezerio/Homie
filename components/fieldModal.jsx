@@ -1,5 +1,6 @@
 import { StyleSheet, TextInput, View, Modal } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "./colors";
 import {
   setFieldModalVisible,
   setFieldHeaders,
@@ -42,7 +43,7 @@ export default FieldModal;
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.primaryAccent,
     width: "70%",
     borderRadius: 5,
     paddingLeft: 5,

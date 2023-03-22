@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "./colors";
 import {
   setViewApplianceTrigger,
   setDatePickerToggle,
@@ -130,7 +131,7 @@ function AddEventModal({ trigger }) {
             ...newDatesWithEvents[newEventDate],
             dots: [
               ...newDatesWithEvents[newEventDate].dots,
-              { color: "orange" },
+              { color: colorScheme.primaryAccent },
             ],
           },
         };
@@ -141,7 +142,7 @@ function AddEventModal({ trigger }) {
           ...newDatesWithEvents,
           [newEventDate]: {
             ...newDatesWithEvents[newEventDate],
-            dots: [{ color: "orange" }],
+            dots: [{ color: colorScheme.primaryAccent }],
           },
         };
       }
@@ -153,8 +154,8 @@ function AddEventModal({ trigger }) {
         [newEventDate]: {
           marked: true,
           selected: false,
-          dots: [{ color: "orange" }],
-          selectedColor: "orange",
+          dots: [{ color: colorScheme.primaryAccent }],
+          selectedColor: colorScheme.primaryAccent,
           selectedTextColor: "black",
         },
       };
@@ -320,6 +321,6 @@ const styles = StyleSheet.create({
   },
   bb2: {
     textAlign: "center",
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.primaryAccent,
   },
 });

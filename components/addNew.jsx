@@ -8,6 +8,7 @@ import {
   Pressable,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "./colors";
 import {
   setNewAddPage,
   setHomePage,
@@ -116,7 +117,7 @@ function AddNew() {
         {appTabChosen
           ? fieldHeaders.map((field, index) => (
               <View key={index}>
-                <Text>{field.title}</Text>
+                <Text style={styles.textTitle}>{field.title}</Text>
                 <TextInput
                   style={styles.input}
                   placeholder=" e.g. text"
@@ -126,7 +127,7 @@ function AddNew() {
             ))
           : fieldHeadersPerson.map((field, index) => (
               <View key={index}>
-                <Text>{field.title}</Text>
+                <Text style={styles.textTitle}>{field.title}</Text>
                 <TextInput
                   style={styles.input}
                   placeholder=" e.g. text"
@@ -154,6 +155,9 @@ function AddNew() {
 export default AddNew;
 
 const styles = StyleSheet.create({
+  textTitle: {
+    color: colorScheme.primaryFont,
+  },
   form: {
     height: "100%",
     width: "80%",
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
     width: "75%",
-    backgroundColor: "white",
+    backgroundColor: colorScheme.tertiary,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -174,26 +178,28 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: colorScheme.tertiary,
     height: 40,
     marginTop: 7,
     marginBottom: 5,
     padding: 5,
     borderRadius: 10,
+    color: colorScheme.primaryFont,
   },
   btn: {
-    color: "white",
+    color: colorScheme.primaryAccent,
     fontWeight: "bold",
-    backgroundColor: "lightgreen",
     padding: 3,
     borderRadius: 5,
-    width: "41%",
-    margin: 10,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 15,
   },
   btn2: {
-    color: "white",
+    color: colorScheme.secondaryFont,
     fontWeight: "bold",
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.primaryAccent,
     padding: 3,
     borderRadius: 5,
     width: "100%",

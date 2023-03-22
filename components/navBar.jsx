@@ -5,6 +5,7 @@ import calenderImg from "../assets/img/calenderImg.png";
 import homeImg from "../assets/img/homeImg.png";
 import peopleImg from "../assets/img/peopleImg.png";
 import settngsImg from "../assets/img/settingsImg.png";
+import colorScheme from "./colors";
 
 import {
   setNewAddPage,
@@ -102,16 +103,16 @@ const styles = StyleSheet.create({
   },
   icon: {
     aspectRatio: 1,
-    height: "60%",
+    height: "35%",
   },
   addIcon: {
     aspectRatio: 1,
-    height: "90%",
+    height: "80%",
   },
 
   nav: {
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: colorScheme.secondary,
     bottom: 0,
     flexDirection: "row",
     justifyContent: "center",

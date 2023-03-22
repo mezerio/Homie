@@ -15,6 +15,8 @@ import {
   setPeopleList,
 } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
+import colorScheme from "./colors";
+
 import FieldModal from "./fieldModal";
 import { setUpdatedInputs, setCurrentPage } from "../redux/actions";
 
@@ -94,62 +96,64 @@ function ViewAppliance({ trigger }) {
   }
   return trigger == true ? (
     <>
-      <Modal animationType="fade">
-        <Pressable onPress={handleCancel}>
-          <Text style={styles.back}>{"<"}</Text>
-        </Pressable>
-        <ScrollView>
-          <View style={styles.form}>
-            <Pressable style={styles.addImg}>
-              <Image style={styles.addImgIcon} source={addPhotoImg} />
-            </Pressable>
-            <FieldModal trigger={fieldModalTrigger} />
-            {currentPage === "Home"
-              ? fieldHeaders.map((field, index) => (
-                  <View key={index}>
-                    <Text>{field.title}</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder=" e.g. text"
-                      onChangeText={(text) =>
-                        handleTextInputUpdate(text, index)
-                      }
-                    >
-                      {applianceList[indexOfViewedAppliance][field.title]}
-                    </TextInput>
-                  </View>
-                ))
-              : fieldHeadersPerson.map((field, index) => (
-                  <View key={index}>
-                    <Text>{field.title}</Text>
-                    <TextInput
-                      style={styles.input}
-                      placeholder=" e.g. text"
-                      onChangeText={(text) =>
-                        handleTextInputUpdate(text, index)
-                      }
-                    >
-                      {peopleList[indexOfViewedAppliance][field.title]}
-                    </TextInput>
-                  </View>
-                ))}
-            <Pressable>
-              <Text style={styles.btn4} onPress={handleUpdate}>
-                UPDATE
-              </Text>
-            </Pressable>
-            <Pressable>
-              <Text style={styles.btn2} onPress={handleCancel}>
-                CANCEL
-              </Text>
-            </Pressable>
-            <Pressable>
-              <Text style={styles.btn3} onPress={handleDelete}>
-                DELETE
-              </Text>
-            </Pressable>
-          </View>
-        </ScrollView>
+      <Modal animationType="fade" transparent={true}>
+        <View style={styles.cont}>
+          <Pressable onPress={handleCancel}>
+            <Text style={styles.back}>{"<"}</Text>
+          </Pressable>
+          <ScrollView>
+            <View style={styles.form}>
+              <Pressable style={styles.addImg}>
+                <Image style={styles.addImgIcon} source={addPhotoImg} />
+              </Pressable>
+              <FieldModal trigger={fieldModalTrigger} />
+              {currentPage === "Home"
+                ? fieldHeaders.map((field, index) => (
+                    <View key={index}>
+                      <Text style={styles.text}>{field.title}</Text>
+                      <TextInput
+                        style={styles.input}
+                        placeholder=" e.g. text"
+                        onChangeText={(text) =>
+                          handleTextInputUpdate(text, index)
+                        }
+                      >
+                        {applianceList[indexOfViewedAppliance][field.title]}
+                      </TextInput>
+                    </View>
+                  ))
+                : fieldHeadersPerson.map((field, index) => (
+                    <View key={index}>
+                      <Text style={styles.text}>{field.title}</Text>
+                      <TextInput
+                        style={styles.input}
+                        placeholder=" e.g. text"
+                        onChangeText={(text) =>
+                          handleTextInputUpdate(text, index)
+                        }
+                      >
+                        {peopleList[indexOfViewedAppliance][field.title]}
+                      </TextInput>
+                    </View>
+                  ))}
+              <Pressable>
+                <Text style={styles.btn4} onPress={handleUpdate}>
+                  UPDATE
+                </Text>
+              </Pressable>
+              <Pressable>
+                <Text style={styles.btn2} onPress={handleCancel}>
+                  CANCEL
+                </Text>
+              </Pressable>
+              <Pressable>
+                <Text style={styles.btn3} onPress={handleDelete}>
+                  DELETE
+                </Text>
+              </Pressable>
+            </View>
+          </ScrollView>
+        </View>
       </Modal>
     </>
   ) : (
@@ -160,21 +164,28 @@ function ViewAppliance({ trigger }) {
 export default ViewAppliance;
 
 const styles = StyleSheet.create({
+  cont: {
+    backgroundColor: colorScheme.primary,
+    flex: 1,
+  },
+  text: {
+    color: colorScheme.primaryFont,
+  },
   back: {
     fontSize: 30,
-    color: "orange",
+    color: colorScheme.primaryAccent,
     paddingHorizontal: 30,
   },
   form: {
     height: "100%",
-    width: "80%",
-    margin: "10%",
+    width: "100%",
+    padding: "10%",
   },
   addImg: {
     flex: 1,
     aspectRatio: 1,
     width: "75%",
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.tertiary,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -185,12 +196,13 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   input: {
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.tertiary,
     height: 40,
     marginTop: 7,
     marginBottom: 5,
     padding: 5,
     borderRadius: 10,
+    color: colorScheme.primaryFont,
   },
   btn: {
     color: "white",
@@ -204,7 +216,7 @@ const styles = StyleSheet.create({
   btn2: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "grey",
+    backgroundColor: colorScheme.secondary,
     padding: 3,
     borderRadius: 5,
     width: "100%",
@@ -215,7 +227,7 @@ const styles = StyleSheet.create({
   btn3: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "red",
+    backgroundColor: colorScheme.alert,
     padding: 3,
     borderRadius: 5,
     width: "100%",
@@ -224,9 +236,10 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   btn4: {
+    marginTop: 20,
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.primaryAccent,
     padding: 3,
     borderRadius: 5,
     width: "100%",

@@ -1,3 +1,4 @@
+import colorScheme from "../components/colors";
 import {
   SET_FIELD_MODAL_VISIBLE,
   SET_NEW_ADD_MODAL,
@@ -82,22 +83,28 @@ const initialState = {
     "2023-03-03": {
       marked: true,
       selected: false,
-      dots: [{ color: "orange" }, { color: "orange" }],
-      selectedColor: "orange",
+      dots: [
+        { color: colorScheme.primaryAccent },
+        { color: colorScheme.primaryAccent },
+      ],
+      selectedColor: colorScheme.primaryAccent,
       selectedTextColor: "black",
     },
     "2023-03-11": {
       marked: true,
       selected: false,
-      dots: [{ color: "orange" }, { color: "orange" }],
-      selectedColor: "orange",
+      dots: [
+        { color: colorScheme.primaryAccent },
+        { color: colorScheme.primaryAccent },
+      ],
+      selectedColor: colorScheme.primaryAccent,
       selectedTextColor: "black",
     },
     "2023-03-21": {
       marked: true,
       selected: false,
-      dots: [{ color: "orange" }],
-      selectedColor: "orange",
+      dots: [{ color: colorScheme.primaryAccent }],
+      selectedColor: colorScheme.primaryAccent,
       selectedTextColor: "black",
     },
   },

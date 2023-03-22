@@ -21,6 +21,7 @@ import FieldModal from "./fieldModal";
 import searchImg from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img2/searchImg.png";
 import ApplianceCard from "./applianceCard";
 import PeopleCard from "./peopleCard";
+import colorScheme from "./colors";
 
 function ViewAppliance() {
   const { peopleList, applianceList, searchToggle, searchInput } = useSelector(
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   },
   back: {
     fontSize: 30,
-    color: "orange",
+    color: colorScheme.primaryAccent,
     paddingHorizontal: 30,
   },
   searchImg: {

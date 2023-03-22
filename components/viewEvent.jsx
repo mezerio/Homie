@@ -28,6 +28,7 @@ import FieldModal from "./fieldModal";
 import { setUpdatedInputs } from "../redux/actions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import SearchModal from "./searchModal";
+import colorScheme from "./colors";
 
 function ViewEventModal() {
   var enteredText = "";
@@ -112,8 +113,8 @@ function ViewEventModal() {
       [newEventDate]: {
         marked: true,
         selected: false,
-        dotColor: "orange",
-        selectedColor: "orange",
+        dotColor: colorScheme.primaryAccent,
+        selectedColor: colorScheme.primaryAccent,
         selectedTextColor: "black",
       },
     };
@@ -299,7 +300,7 @@ const styles = StyleSheet.create({
   },
   bb2: {
     textAlign: "center",
-    backgroundColor: "orange",
+    backgroundColor: colorScheme.primaryAccent,
   },
   bb3: {
     textAlign: "center",

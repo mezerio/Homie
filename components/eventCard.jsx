@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "./colors";
 import {
   setIndexOfViewedAppliance,
   setViewApplianceTrigger,
@@ -36,13 +37,12 @@ export default EventCard;
 
 const styles = StyleSheet.create({
   tex: {
-    color: "white",
+    color: colorScheme.secondaryFont,
   },
   card: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "black",
-
+    backgroundColor: colorScheme.primaryAccent,
     width: "90%",
     padding: 10,
     marginHorizontal: 15,
@@ -59,13 +59,13 @@ const styles = StyleSheet.create({
     flex: 5,
   },
   bb: {
-    color: "white",
-    borderBottomColor: "white",
+    color: colorScheme.secondaryFont,
+    borderBottomColor: colorScheme.secondaryFont,
     borderBottomWidth: 1,
     borderStyle: "solid",
   },
   time: {
-    color: "white",
+    color: colorScheme.secondaryFont,
     textAlignVertical: "top",
     margin: 5,
   },

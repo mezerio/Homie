@@ -9,7 +9,11 @@ import {
   TextInput,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setViewApplianceTrigger } from "../redux/actions";
+import {
+  setApplianceList,
+  setViewApplianceTrigger,
+  setPeopleList,
+} from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import FieldModal from "./fieldModal";
 import { setUpdatedInputs } from "../redux/actions";
@@ -38,6 +42,15 @@ function ViewAppliance({ trigger }) {
   }
   function handleDelete() {
     console.log("delete");
+    if (currentPage === "Home") {
+      var newApplianceList = JSON.parse(JSON.stringify(applianceList));
+      newApplianceList.splice(indexOfViewedAppliance, 1);
+      dispatch(setApplianceList(newApplianceList));
+    } else if (currentPage === "People") {
+      var newPeopleList = JSON.parse(JSON.stringify(peopleList));
+      newPeopleList.splice(indexOfViewedAppliance, 1);
+      dispatch(setPeopleList(newPeopleList));
+    }
     dispatch(setViewApplianceTrigger(false));
   }
   return trigger == true ? (

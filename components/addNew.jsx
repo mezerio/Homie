@@ -26,6 +26,7 @@ import * as ImagePicker from "expo-image-picker";
 
 function AddNew() {
   const {
+    peopleList,
     currentPage,
     fieldModalTrigger,
     fieldHeaders,
@@ -33,6 +34,7 @@ function AddNew() {
     updatedInputs,
     appTabChosen,
     imgSource,
+    applianceList,
   } = useSelector((state) => state.myReducer);
 
   const dispatch = useDispatch();
@@ -49,7 +51,9 @@ function AddNew() {
           newAppliance[field.title] = updatedInputs[index];
         }
       });
-      dispatch(setApplianceList(newAppliance));
+      var newApplianceList = JSON.parse(JSON.stringify(applianceList));
+      newApplianceList = [...newApplianceList, newAppliance];
+      dispatch(setApplianceList(newApplianceList));
       dispatch(setCurrentPage("Home"));
     } else {
       var newPerson = {};
@@ -58,8 +62,9 @@ function AddNew() {
           newPerson[person.title] = updatedInputs[index];
         }
       });
-
-      dispatch(setPeopleList(newPerson));
+      var newPeopleList = JSON.parse(JSON.stringify(peopleList));
+      newPeopleList = [...newPeopleList, newPerson];
+      dispatch(setPeopleList(newPeopleList));
       dispatch(setCurrentPage("People"));
     }
   }

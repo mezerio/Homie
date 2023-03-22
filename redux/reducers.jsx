@@ -215,13 +215,13 @@ function myReducer(state = initialState, action) {
     case SET_APPLIANCE_LIST: {
       return {
         ...state,
-        applianceList: [...state.applianceList, action.payload],
+        applianceList: action.payload,
       };
     }
     case SET_PEOPLE_LIST: {
       return {
         ...state,
-        peopleList: [...state.peopleList, action.payload],
+        peopleList: action.payload,
       };
     }
     case SET_FIELD_HEADERS: {

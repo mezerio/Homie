@@ -162,6 +162,31 @@ function ViewEventModal() {
   function handleSelectAP() {
     dispatch(setSearchToggle(true));
   }
+  function deepCopy(thingToCopy) {
+    if (Array.isArray(thingToCopy)) {
+      return thingToCopy.map(deepCopy);
+    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
+      return Object.fromEntries(
+        Object.entries(thingToCopy).map(([key, value]) => [
+          key,
+          deepCopy(value),
+        ])
+      );
+    } else {
+      return thingToCopy;
+    }
+  }
+
+  function handleDelete() {
+    dispatch(setViewEventTrigger(false));
+    var newEventList = deepCopy(eventList);
+    newEventList[dateSelected].splice(indexOfViewedAppliance, 1);
+    dispatch(setEventList(newEventList));
+    console.log("delete event");
+    var newDatesWithEvents = deepCopy(datesWithEvents);
+    newDatesWithEvents[dateSelected].dots.splice(0, 1);
+    dispatch(setDatesWithEvents(newDatesWithEvents));
+  }
   return viewEventTrigger == true ? (
     <>
       <Modal transparent={true} visible={true} animationType="fade">
@@ -216,6 +241,9 @@ function ViewEventModal() {
 
             <Pressable onPress={handleCancel}>
               <Text style={[styles.btn, styles.bb2]}>CANCEL</Text>
+            </Pressable>
+            <Pressable onPress={handleDelete}>
+              <Text style={[styles.btn, styles.bb3]}>DELETE</Text>
             </Pressable>
           </View>
         </View>
@@ -272,5 +300,9 @@ const styles = StyleSheet.create({
   bb2: {
     textAlign: "center",
     backgroundColor: "orange",
+  },
+  bb3: {
+    textAlign: "center",
+    backgroundColor: "red",
   },
 });

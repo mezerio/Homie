@@ -1,14 +1,24 @@
 import { StyleSheet, TextInput, View, Modal } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setFieldModalVisible, setFieldHeaders } from "../redux/actions";
+import {
+  setFieldModalVisible,
+  setFieldHeaders,
+  setFieldHeadersPerson,
+  setAppTabChosen,
+} from "../redux/actions";
 
 function FieldModal(props) {
-  const { fieldHeaders } = useSelector((state) => state.myReducer);
+  const { appTabChosen, fieldHeaders, fieldHeadersPerson } = useSelector(
+    (state) => state.myReducer
+  );
   const dispatch = useDispatch();
   function handleAddField() {
     dispatch(setFieldModalVisible(false));
-    //here
-    dispatch(setFieldHeaders({ title: enteredText, input: "" }));
+    if (appTabChosen === true) {
+      dispatch(setFieldHeaders({ title: enteredText, input: "" }));
+    } else {
+      dispatch(setFieldHeadersPerson({ title: enteredText, input: "" }));
+    }
   }
   return props.trigger == true ? (
     <Modal transparent={true} visible={true} animationType="slide">

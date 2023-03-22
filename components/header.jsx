@@ -13,20 +13,16 @@ function Header(props) {
   function handlePlusBtn() {
     switch (currentPage) {
       case "Home": {
-        console.log(currentPage, 1);
         dispatch(setAppTabChosen(true));
         dispatch(setCurrentPage("New"));
         break;
       }
       case "People": {
-        console.log(currentPage, 2);
-
         dispatch(setAppTabChosen(false));
         dispatch(setCurrentPage("New"));
         break;
       }
       case "Calender": {
-        console.log(currentPage, 3);
         dispatch(setEventModalTrigger(true));
 
         // dispatch(setAppTabChosen(false));
@@ -34,8 +30,6 @@ function Header(props) {
         break;
       }
     }
-
-    console.log(appTabChosen, 1, currentPage);
   }
   return (
     <>

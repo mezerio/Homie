@@ -2,19 +2,24 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setIndexOfViewedAppliance,
-  setViewApplianceVisible,
+  setViewApplianceTrigger,
+  setViewEventTrigger,
 } from "../redux/actions";
 import home from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png";
 
 function EventCard({ event, index }) {
-  const { viewApplianceTrigger } = useSelector((state) => state.myReducer);
+  const { viewApplianceTrigger, dateSelected } = useSelector(
+    (state) => state.myReducer
+  );
   const dispatch = useDispatch();
-  function handleOpenApplianceDetails() {
-    dispatch(setViewApplianceVisible(!viewApplianceTrigger));
+  function handleOpenEventDetails() {
+    dispatch(setViewEventTrigger(true));
     dispatch(setIndexOfViewedAppliance(index));
+
+    // view event
   }
   return (
-    <Pressable onPress={handleOpenApplianceDetails}>
+    <Pressable onPress={handleOpenEventDetails}>
       <View style={styles.card}>
         <Image style={styles.img} source={home} />
         <View style={styles.col}>

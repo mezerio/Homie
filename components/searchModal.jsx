@@ -23,45 +23,15 @@ import ApplianceCard from "./applianceCard";
 import PeopleCard from "./peopleCard";
 
 function ViewAppliance() {
-  const {
-    peopleList,
-    currentPage,
-    applianceList,
-    fieldModalTrigger,
-    fieldHeaders,
-    updatedInputs,
-    indexOfViewedAppliance,
-    fieldHeadersPerson,
-    searchToggle,
-    searchInput,
-  } = useSelector((state) => state.myReducer);
+  const { peopleList, applianceList, searchToggle, searchInput } = useSelector(
+    (state) => state.myReducer
+  );
   const dispatch = useDispatch();
-
-  function handleTextInputUpdate(text, index) {
-    var newUpdatedInputs = [...updatedInputs];
-    newUpdatedInputs[index] = text;
-    dispatch(setUpdatedInputs(newUpdatedInputs));
-  }
 
   function handleCancel() {
     dispatch(setSearchToggle(false));
   }
 
-  function handleSearchImgPressed() {
-    console.log("searching...");
-    console.log(applianceList[0]["Vender:"]);
-    console.log(applianceList[0]["Vender:"].toLowerCase(), 6);
-    console.log(
-      applianceList.filter((appliance) =>
-        appliance["Vender:"].toLowerCase().includes(searchInput.toLowerCase())
-      )
-    );
-  }
-
-  function handleSetNewEventItem(item) {
-    console.log(item, 5);
-    // dispatch(setNewEventItem())
-  }
   return searchToggle == true ? (
     <>
       <Modal animationType="fade">
@@ -74,9 +44,7 @@ function ViewAppliance() {
             placeholder="search..."
             onChangeText={(text) => dispatch(setSearchInput(text))}
           />
-          <Pressable onPress={handleSearchImgPressed}>
-            <Image style={styles.searchImg} source={searchImg} />
-          </Pressable>
+          <Image style={styles.searchImg} source={searchImg} />
         </View>
         <ScrollView contentContainerStyle={styles.scroll}>
           {applianceList

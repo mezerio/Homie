@@ -21,6 +21,7 @@ import {
   setEventList,
   setNewEventDesc,
   setSearchToggle,
+  setViewEventTrigger,
 } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import FieldModal from "./fieldModal";
@@ -28,10 +29,11 @@ import { setUpdatedInputs } from "../redux/actions";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import SearchModal from "./searchModal";
 
-function AddEventModal({ trigger }) {
+function ViewEventModal() {
   var enteredText = "";
 
   const {
+    viewEventTrigger,
     peopleList,
     currentPage,
     applianceList,
@@ -46,6 +48,7 @@ function AddEventModal({ trigger }) {
     newEventTime,
     newEventDesc,
     newEventItem,
+    dateSelected,
     datesWithEvents,
     eventList,
   } = useSelector((state) => state.myReducer);
@@ -58,7 +61,7 @@ function AddEventModal({ trigger }) {
   }
 
   function handleCancel() {
-    dispatch(setEventModalTrigger(false));
+    dispatch(setViewEventTrigger(false));
   }
 
   function handleDatePickerToggle() {
@@ -104,32 +107,16 @@ function AddEventModal({ trigger }) {
   function handleSave() {
     dispatch(setEventModalTrigger(false));
     var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
-    if (newDatesWithEvents[newEventDate] !== undefined) {
-      if (newDatesWithEvents[newEventDate].dots !== undefined) {
-        newDatesWithEvents = {
-          ...newDatesWithEvents,
-          [newEventDate]: {
-            ...newDatesWithEvents[newEventDate],
-            dots: [
-              ...newDatesWithEvents[newEventDate].dots,
-              { color: "orange" },
-            ],
-          },
-        };
-      }
-    } else {
-      newDatesWithEvents = {
-        ...newDatesWithEvents,
-        [newEventDate]: {
-          marked: true,
-          selected: false,
-          dots: [{ color: "orange" }],
-          selectedColor: "orange",
-          selectedTextColor: "black",
-        },
-      };
-    }
-    //
+    newDatesWithEvents = {
+      ...newDatesWithEvents,
+      [newEventDate]: {
+        marked: true,
+        selected: false,
+        dotColor: "orange",
+        selectedColor: "orange",
+        selectedTextColor: "black",
+      },
+    };
     dispatch(setDatesWithEvents(newDatesWithEvents));
     var newEventList = JSON.parse(JSON.stringify(eventList));
 
@@ -175,7 +162,7 @@ function AddEventModal({ trigger }) {
   function handleSelectAP() {
     dispatch(setSearchToggle(true));
   }
-  return trigger == true ? (
+  return viewEventTrigger == true ? (
     <>
       <Modal transparent={true} visible={true} animationType="fade">
         <View style={styles.card}>
@@ -186,20 +173,12 @@ function AddEventModal({ trigger }) {
             <View>
               <TouchableWithoutFeedback onPress={handleDatePickerToggle}>
                 <View>
-                  <Text style={styles.btn}>
-                    {String(
-                      newEventDate.split("-")[2] +
-                        "-" +
-                        newEventDate.split("-")[1] +
-                        "-" +
-                        newEventDate.split("-")[0]
-                    )}
-                  </Text>
+                  <Text style={styles.btn}>{dateSelected}</Text>
                 </View>
               </TouchableWithoutFeedback>
               {datePickerToggle && (
                 <DateTimePicker
-                  value={new Date(newEventDate)}
+                  value={dateSelected}
                   mode="date"
                   display="default"
                   onChange={handleDateChange}
@@ -209,12 +188,15 @@ function AddEventModal({ trigger }) {
             <View>
               <TouchableWithoutFeedback onPress={handleTimePickerToggle}>
                 <View>
-                  <Text style={styles.btn}>{newEventTime}</Text>
+                  <Text style={styles.btn}>
+                    {eventList[dateSelected][indexOfViewedAppliance]["Time"]}
+                  </Text>
                 </View>
               </TouchableWithoutFeedback>
               {timePickerToggle && (
                 <DateTimePicker
                   value={new Date()}
+                  //   add selected event time
                   mode="time"
                   display="default"
                   onChange={handleTimeChange}
@@ -225,13 +207,13 @@ function AddEventModal({ trigger }) {
             <TextInput
               onChangeText={(text) => dispatch(setNewEventDesc(text))}
               style={styles.ti}
-              placeholder="enter notes..."
+              placeholder={
+                eventList[dateSelected][indexOfViewedAppliance]["Desc"]
+              }
               multiline={true}
               numberOfLines={4}
             ></TextInput>
-            <Pressable onPress={handleSave}>
-              <Text style={[styles.btn, styles.bb2]}>SAVE</Text>
-            </Pressable>
+
             <Pressable onPress={handleCancel}>
               <Text style={[styles.btn, styles.bb2]}>CANCEL</Text>
             </Pressable>
@@ -245,7 +227,7 @@ function AddEventModal({ trigger }) {
   );
 }
 
-export default AddEventModal;
+export default ViewEventModal;
 
 const styles = StyleSheet.create({
   card: {

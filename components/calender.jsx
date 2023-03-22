@@ -9,6 +9,7 @@ import {
 import EventCard from "./eventCard";
 import AddEventModal from "./addEventModal";
 import SearchModal from "./searchModal";
+import ViewEventModal from "./viewEvent";
 
 function Calender() {
   const monthArray = [
@@ -36,7 +37,6 @@ function Calender() {
   const dispatch = useDispatch();
 
   function handleDayPress(date) {
-    console.log(date["dateString"]);
     dispatch(setDateSelected(date["dateString"]));
     dispatch(setNewEventDate(date["dateString"]));
     var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
@@ -55,6 +55,7 @@ function Calender() {
     <>
       <View style={styles.view}>
         <Calendar
+          markingType="multi-dot"
           style={styles.cal}
           onDayPress={(date) => handleDayPress(date)}
           markedDates={datesWithEvents}
@@ -81,6 +82,7 @@ function Calender() {
         )}
       </View>
       <AddEventModal trigger={eventModalTrigger} />
+      <ViewEventModal />
     </>
   ) : (
     ""

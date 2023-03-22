@@ -58,8 +58,7 @@ function AddNew() {
           newPerson[person.title] = updatedInputs[index];
         }
       });
-      console.log(updatedInputs, "pp");
-      console.log(newPerson, "ppp");
+
       dispatch(setPeopleList(newPerson));
       dispatch(setCurrentPage("People"));
     }
@@ -69,7 +68,6 @@ function AddNew() {
     var newUpdatedInputs = [...updatedInputs];
     newUpdatedInputs[index] = text;
     dispatch(setUpdatedInputs(newUpdatedInputs));
-    console.log(updatedInputs, 1);
   }
   const handlePickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -79,7 +77,6 @@ function AddNew() {
       quality: 1,
     });
     dispatch(setImgSource(result.uri));
-    console.log(result.uri);
 
     if (!result.canceled) {
       dispatch(setImgSource(result.assets[0].uri));

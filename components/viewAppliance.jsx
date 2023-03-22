@@ -9,7 +9,7 @@ import {
   TextInput,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setViewApplianceVisible } from "../redux/actions";
+import { setViewApplianceTrigger } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import FieldModal from "./fieldModal";
 import { setUpdatedInputs } from "../redux/actions";
@@ -34,7 +34,11 @@ function ViewAppliance({ trigger }) {
   }
 
   function handleCancel() {
-    dispatch(setViewApplianceVisible(false));
+    dispatch(setViewApplianceTrigger(false));
+  }
+  function handleDelete() {
+    console.log("delete");
+    dispatch(setViewApplianceTrigger(false));
   }
   return trigger == true ? (
     <>
@@ -77,9 +81,19 @@ function ViewAppliance({ trigger }) {
                     </TextInput>
                   </View>
                 ))}
+            {/* <Pressable>
+              <Text style={styles.btn2} onPress={handleUpdate}>
+                UPDATE
+              </Text>
+            </Pressable> */}
             <Pressable>
               <Text style={styles.btn2} onPress={handleCancel}>
                 CANCEL
+              </Text>
+            </Pressable>
+            <Pressable>
+              <Text style={styles.btn3} onPress={handleDelete}>
+                DELETE
               </Text>
             </Pressable>
           </View>
@@ -139,6 +153,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     backgroundColor: "orange",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 5,
+  },
+  btn3: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "red",
     padding: 3,
     borderRadius: 5,
     width: "100%",

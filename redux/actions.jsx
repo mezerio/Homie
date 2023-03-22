@@ -6,8 +6,8 @@ export const SET_SETTINGS = "SET_SETTINGS";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_FIELD_MODAL_VISIBLE = "SET_FIELD_MODAL_VISIBLE";
 export const SET_VIEW_APPLIANCE_VISIBLE = "SET_VIEW_APPLIANCE_VISIBLE";
-export const SET_FEILD_HEADERS = "SET_FEILD_HEADERS";
-export const SET_FEILD_HEADERS_PERSON = "SET_FEILD_HEADERS_PERSON";
+export const SET_FIELD_HEADERS = "SET_FIELD_HEADERS";
+export const SET_FIELD_HEADERS_PERSON = "SET_FIELD_HEADERS_PERSON";
 export const SET_APPLIANCE_LIST = "SET_APPLIANCE_LIST";
 export const SET_PEOPLE_LIST = "SET_PEOPLE_LIST";
 export const SET_UPDATED_INPUTS = "SET_UPDATED_INPUTS";
@@ -28,11 +28,18 @@ export const SET_NEW_EVENT_ITEM = "SET_NEW_EVENT_ITEM";
 export const SET_NEW_EVENT_DESC = "SET_NEW_EVENT_DESC";
 export const SET_SEARCH_TOGGLE = "SET_SEARCH_TOGGLE";
 export const SET_SEARCH_INPUT = "SET_SEARCH_INPUT";
+export const SET_VIEW_EVENT_TRIGGER = "SET_VIEW_EVENT_TRIGGER";
 
 export const setCurrentPage = (currentPage) => (dispatch) => {
   dispatch({
     type: SET_CURRENT_PAGE,
     payload: currentPage,
+  });
+};
+export const setViewEventTrigger = (viewEventTrigger) => (dispatch) => {
+  dispatch({
+    type: SET_VIEW_EVENT_TRIGGER,
+    payload: viewEventTrigger,
   });
 };
 export const setSearchInput = (searchInput) => (dispatch) => {
@@ -132,7 +139,7 @@ export const setFieldModalVisible = (fieldModalTrigger) => (dispatch) => {
   });
 };
 
-export const setViewApplianceVisible = (viewApplianceTrigger) => (dispatch) => {
+export const setViewApplianceTrigger = (viewApplianceTrigger) => (dispatch) => {
   dispatch({
     type: SET_VIEW_APPLIANCE_VISIBLE,
     payload: viewApplianceTrigger,
@@ -141,7 +148,7 @@ export const setViewApplianceVisible = (viewApplianceTrigger) => (dispatch) => {
 
 export const setFieldHeaders = (fieldHeaders) => (dispatch) => {
   dispatch({
-    type: SET_FEILD_HEADERS,
+    type: SET_FIELD_HEADERS,
     payload: fieldHeaders,
   });
 };
@@ -155,7 +162,7 @@ export const setDatesWithEvents = (datesWithEvents) => (dispatch) => {
 
 export const setFieldHeadersPerson = (fieldHeadersPerson) => (dispatch) => {
   dispatch({
-    type: SET_FEILD_HEADERS,
+    type: SET_FIELD_HEADERS_PERSON,
     payload: fieldHeadersPerson,
   });
 };

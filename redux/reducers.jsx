@@ -1,8 +1,8 @@
 import {
   SET_FIELD_MODAL_VISIBLE,
   SET_NEW_ADD_MODAL,
-  SET_FEILD_HEADERS,
-  SET_FEILD_HEADERS_PERSON,
+  SET_FIELD_HEADERS,
+  SET_FIELD_HEADERS_PERSON,
   SET_HOME_PAGE,
   SET_PEOPLE,
   SET_CURRENT_PAGE,
@@ -29,9 +29,11 @@ import {
   SET_NEW_EVENT_DESC,
   SET_SEARCH_TOGGLE,
   SET_SEARCH_INPUT,
+  SET_VIEW_EVENT_TRIGGER,
 } from "./actions";
 
 const initialState = {
+  viewEventTrigger: false,
   searchInput: "",
   searchToggle: false,
   currentPage: "Home",
@@ -67,26 +69,34 @@ const initialState = {
   datePickerToggle: false,
   eventModalTrigger: false,
   imgSource: "",
-  dateSelected: "2023-03-03",
+  dateSelected: String(
+    new Date().getFullYear() +
+      "-" +
+      (new Date().getMonth() < 10 ? "0" : "") +
+      Number(new Date().getMonth() + 1) +
+      "-" +
+      (new Date().getDate() < 10 ? "0" : "") +
+      new Date().getDate()
+  ),
   datesWithEvents: {
     "2023-03-03": {
       marked: true,
       selected: false,
-      dotColor: "orange",
+      dots: [{ color: "orange" }, { color: "orange" }],
       selectedColor: "orange",
       selectedTextColor: "black",
     },
     "2023-03-11": {
       marked: true,
       selected: false,
-      dotColor: "orange",
+      dots: [{ color: "orange" }, { color: "orange" }],
       selectedColor: "orange",
       selectedTextColor: "black",
     },
     "2023-03-21": {
       marked: true,
       selected: false,
-      dotColor: "orange",
+      dots: [{ color: "orange" }],
       selectedColor: "orange",
       selectedTextColor: "black",
     },
@@ -138,6 +148,9 @@ function myReducer(state = initialState, action) {
   switch (action.type) {
     case SET_NEW_ADD_MODAL: {
       return { ...state, newAddPageTrigger: action.payload };
+    }
+    case SET_VIEW_EVENT_TRIGGER: {
+      return { ...state, viewEventTrigger: action.payload };
     }
     case SET_NEW_EVENT_TIME: {
       return { ...state, newEventTime: action.payload };
@@ -211,16 +224,16 @@ function myReducer(state = initialState, action) {
         peopleList: [...state.peopleList, action.payload],
       };
     }
-    case SET_FEILD_HEADERS: {
+    case SET_FIELD_HEADERS: {
       return {
         ...state,
         fieldHeaders: [...state.fieldHeaders, action.payload],
       };
     }
-    case SET_FEILD_HEADERS_PERSON: {
+    case SET_FIELD_HEADERS_PERSON: {
       return {
         ...state,
-        fieldHeaders: [...state.fieldHeadersPerson, action.payload],
+        fieldHeadersPerson: [...state.fieldHeadersPerson, action.payload],
       };
     }
     case SET_DATES_WITH_EVENTS: {

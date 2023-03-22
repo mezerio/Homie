@@ -2,16 +2,24 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setIndexOfViewedAppliance,
-  setViewApplianceVisible,
+  setViewApplianceTrigger,
+  setNewEventItem,
+  setSearchToggle,
 } from "../redux/actions";
 import home from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png";
 
 function ApplianceCard({ appliance, index }) {
-  const { viewApplianceTrigger } = useSelector((state) => state.myReducer);
+  const { currentPage } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
+
   function handleOpenApplianceDetails() {
-    dispatch(setViewApplianceVisible(!viewApplianceTrigger));
-    dispatch(setIndexOfViewedAppliance(index));
+    if (currentPage == "Home" || currentPage == "People") {
+      dispatch(setViewApplianceTrigger(true));
+      dispatch(setIndexOfViewedAppliance(index));
+    } else {
+      dispatch(setNewEventItem(appliance["Vender:"]));
+      dispatch(setSearchToggle(false));
+    }
   }
   return (
     <Pressable onPress={handleOpenApplianceDetails}>

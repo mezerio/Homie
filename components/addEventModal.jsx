@@ -100,12 +100,30 @@ function AddEventModal({ trigger }) {
       (hour < 10 ? "0" : "") + hour + (min < 10 ? ":0" : ":") + min
     );
   }
-
+  function deepCopy(thingToCopy) {
+    if (Array.isArray(thingToCopy)) {
+      return thingToCopy.map(deepCopy);
+    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
+      return Object.fromEntries(
+        Object.entries(thingToCopy).map(([key, value]) => [
+          key,
+          deepCopy(value),
+        ])
+      );
+    } else {
+      return thingToCopy;
+    }
+  }
   function handleSave() {
+    console.log(datesWithEvents[newEventDate], "f");
+
     dispatch(setEventModalTrigger(false));
-    var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
+    var newDatesWithEvents = deepCopy(datesWithEvents);
     if (newDatesWithEvents[newEventDate] !== undefined) {
+      console.log("1");
       if (newDatesWithEvents[newEventDate].dots !== undefined) {
+        console.log("2");
+
         newDatesWithEvents = {
           ...newDatesWithEvents,
           [newEventDate]: {
@@ -116,8 +134,20 @@ function AddEventModal({ trigger }) {
             ],
           },
         };
+      } else {
+        console.log("4");
+
+        newDatesWithEvents = {
+          ...newDatesWithEvents,
+          [newEventDate]: {
+            ...newDatesWithEvents[newEventDate],
+            dots: [{ color: "orange" }],
+          },
+        };
       }
     } else {
+      console.log("3");
+
       newDatesWithEvents = {
         ...newDatesWithEvents,
         [newEventDate]: {
@@ -131,7 +161,8 @@ function AddEventModal({ trigger }) {
     }
     //
     dispatch(setDatesWithEvents(newDatesWithEvents));
-    var newEventList = JSON.parse(JSON.stringify(eventList));
+    console.log(datesWithEvents[newEventDate], "after");
+    var newEventList = deepCopy(eventList);
 
     // newEventList = {
     //   ...newEventList,

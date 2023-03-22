@@ -42,6 +42,20 @@ function AddNew() {
   function handleAddField() {
     dispatch(setFieldModalVisible(true));
   }
+  function deepCopy(thingToCopy) {
+    if (Array.isArray(thingToCopy)) {
+      return thingToCopy.map(deepCopy);
+    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
+      return Object.fromEntries(
+        Object.entries(thingToCopy).map(([key, value]) => [
+          key,
+          deepCopy(value),
+        ])
+      );
+    } else {
+      return thingToCopy;
+    }
+  }
 
   function handleSaveAppliance() {
     if (appTabChosen == true) {
@@ -51,7 +65,7 @@ function AddNew() {
           newAppliance[field.title] = updatedInputs[index];
         }
       });
-      var newApplianceList = JSON.parse(JSON.stringify(applianceList));
+      var newApplianceList = deepCopy(applianceList);
       newApplianceList = [...newApplianceList, newAppliance];
       dispatch(setApplianceList(newApplianceList));
       dispatch(setCurrentPage("Home"));
@@ -62,7 +76,7 @@ function AddNew() {
           newPerson[person.title] = updatedInputs[index];
         }
       });
-      var newPeopleList = JSON.parse(JSON.stringify(peopleList));
+      var newPeopleList = deepCopy(peopleList);
       newPeopleList = [...newPeopleList, newPerson];
       dispatch(setPeopleList(newPeopleList));
       dispatch(setCurrentPage("People"));

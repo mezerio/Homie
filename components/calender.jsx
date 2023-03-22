@@ -35,11 +35,24 @@ function Calender() {
     eventModalTrigger,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
-
+  function deepCopy(thingToCopy) {
+    if (Array.isArray(thingToCopy)) {
+      return thingToCopy.map(deepCopy);
+    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
+      return Object.fromEntries(
+        Object.entries(thingToCopy).map(([key, value]) => [
+          key,
+          deepCopy(value),
+        ])
+      );
+    } else {
+      return thingToCopy;
+    }
+  }
   function handleDayPress(date) {
     dispatch(setDateSelected(date["dateString"]));
     dispatch(setNewEventDate(date["dateString"]));
-    var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
+    var newDatesWithEvents = deepCopy(datesWithEvents);
     for (const date in newDatesWithEvents) {
       newDatesWithEvents[date].selected = false;
     }

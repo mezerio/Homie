@@ -106,7 +106,7 @@ function ViewEventModal() {
 
   function handleSave() {
     dispatch(setEventModalTrigger(false));
-    var newDatesWithEvents = JSON.parse(JSON.stringify(datesWithEvents));
+    var newDatesWithEvents = deepCopy(datesWithEvents);
     newDatesWithEvents = {
       ...newDatesWithEvents,
       [newEventDate]: {
@@ -118,7 +118,7 @@ function ViewEventModal() {
       },
     };
     dispatch(setDatesWithEvents(newDatesWithEvents));
-    var newEventList = JSON.parse(JSON.stringify(eventList));
+    var newEventList = deepCopy(eventList);
 
     // newEventList = {
     //   ...newEventList,

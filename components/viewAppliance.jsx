@@ -16,7 +16,7 @@ import {
 } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import FieldModal from "./fieldModal";
-import { setUpdatedInputs } from "../redux/actions";
+import { setUpdatedInputs, setCurrentPage } from "../redux/actions";
 
 function ViewAppliance({ trigger }) {
   const {
@@ -36,6 +36,45 @@ function ViewAppliance({ trigger }) {
     newUpdatedInputs[index] = text;
     dispatch(setUpdatedInputs(newUpdatedInputs));
   }
+  function deepCopy(thingToCopy) {
+    if (Array.isArray(thingToCopy)) {
+      return thingToCopy.map(deepCopy);
+    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
+      return Object.fromEntries(
+        Object.entries(thingToCopy).map(([key, value]) => [
+          key,
+          deepCopy(value),
+        ])
+      );
+    } else {
+      return thingToCopy;
+    }
+  }
+
+  function handleUpdate() {
+    console.log("update");
+    if (currentPage === "Home") {
+      var newApplianceList = deepCopy(applianceList);
+      fieldHeaders.map((field, index) => {
+        if (updatedInputs[index] !== undefined) {
+          newApplianceList[indexOfViewedAppliance][field.title] =
+            updatedInputs[index];
+        }
+      });
+      dispatch(setApplianceList(newApplianceList));
+      dispatch(setViewApplianceTrigger(false));
+    } else if (currentPage === "People") {
+      var newPeopleList = deepCopy(peopleList);
+      fieldHeadersPerson.map((person, index) => {
+        if (updatedInputs[index] !== undefined) {
+          newPeopleList[indexOfViewedAppliance][person.title] =
+            updatedInputs[index];
+        }
+      });
+      dispatch(setPeopleList(newPeopleList));
+      dispatch(setViewApplianceTrigger(false));
+    }
+  }
 
   function handleCancel() {
     dispatch(setViewApplianceTrigger(false));
@@ -43,11 +82,11 @@ function ViewAppliance({ trigger }) {
   function handleDelete() {
     console.log("delete");
     if (currentPage === "Home") {
-      var newApplianceList = JSON.parse(JSON.stringify(applianceList));
+      var newApplianceList = deepCopy(applianceList);
       newApplianceList.splice(indexOfViewedAppliance, 1);
       dispatch(setApplianceList(newApplianceList));
     } else if (currentPage === "People") {
-      var newPeopleList = JSON.parse(JSON.stringify(peopleList));
+      var newPeopleList = deepCopy(peopleList);
       newPeopleList.splice(indexOfViewedAppliance, 1);
       dispatch(setPeopleList(newPeopleList));
     }
@@ -94,11 +133,11 @@ function ViewAppliance({ trigger }) {
                     </TextInput>
                   </View>
                 ))}
-            {/* <Pressable>
-              <Text style={styles.btn2} onPress={handleUpdate}>
+            <Pressable>
+              <Text style={styles.btn4} onPress={handleUpdate}>
                 UPDATE
               </Text>
-            </Pressable> */}
+            </Pressable>
             <Pressable>
               <Text style={styles.btn2} onPress={handleCancel}>
                 CANCEL
@@ -165,7 +204,7 @@ const styles = StyleSheet.create({
   btn2: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: "orange",
+    backgroundColor: "grey",
     padding: 3,
     borderRadius: 5,
     width: "100%",
@@ -183,5 +222,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     marginBottom: 50,
+  },
+  btn4: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "orange",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
   },
 });

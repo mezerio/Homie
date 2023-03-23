@@ -1,3 +1,21 @@
+import { useSelector, useDispatch } from "react-redux";
+import deepCopy from "../../assets/functions/deepCopy";
+import addPhotoImg from "../../assets/img/addPhotoImg.png";
+import colorScheme from "../../assets/functions/colors";
+import fridgeIcon from "../../assets/img/fridgeIcon.png";
+import hobIcon from "../../assets/img/hobIcon.png";
+import hoodIcon from "../../assets/img/hoodIcon.png";
+import laptopIcon from "../../assets/img/laptopIcon.png";
+import microwaveIcon from "../../assets/img/microwaveIcon.png";
+import ovenIcon from "../../assets/img/ovenIcon.png";
+import phoneIcon from "../../assets/img/phoneIcon.png";
+import vacuumIcon from "../../assets/img/vacuumIcon.png";
+import WMIcon from "../../assets/img/washingMachineIcon.png";
+import FieldModal from "../AddPage/fieldModal";
+import { setUpdatedInputs } from "../../redux/actions";
+import womenIcon from "../../assets/img/womenIcon.png";
+import manIcon from "../../assets/img/manIcon.png";
+import babyIcon from "../../assets/img/babyIcon.png";
 import {
   StyleSheet,
   Text,
@@ -8,29 +26,12 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 import {
   setApplianceList,
   setViewApplianceTrigger,
   setPeopleList,
   setUpdatedIcon,
-} from "../redux/actions";
-import addPhotoImg from "../assets/img/addPhotoImg.png";
-import colorScheme from "./colors";
-import fridgeIcon from "../assets/img/fridgeIcon.png";
-import hobIcon from "../assets/img/hobIcon.png";
-import hoodIcon from "../assets/img/hoodIcon.png";
-import laptopIcon from "../assets/img/laptopIcon.png";
-import microwaveIcon from "../assets/img/microwaveIcon.png";
-import ovenIcon from "../assets/img/ovenIcon.png";
-import phoneIcon from "../assets/img/phoneIcon.png";
-import vacuumIcon from "../assets/img/vacuumIcon.png";
-import WMIcon from "../assets/img/washingMachineIcon.png";
-import FieldModal from "./fieldModal";
-import { setUpdatedInputs, setCurrentPage } from "../redux/actions";
-import womenIcon from "../assets/img/womenIcon.png";
-import manIcon from "../assets/img/manIcon.png";
-import babyIcon from "../assets/img/babyIcon.png";
+} from "../../redux/actions";
 function ViewAppliance({ trigger }) {
   var appIconList = [
     fridgeIcon,
@@ -64,23 +65,8 @@ function ViewAppliance({ trigger }) {
     newUpdatedInputs[index] = text;
     dispatch(setUpdatedInputs(newUpdatedInputs));
   }
-  function deepCopy(thingToCopy) {
-    if (Array.isArray(thingToCopy)) {
-      return thingToCopy.map(deepCopy);
-    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
-      return Object.fromEntries(
-        Object.entries(thingToCopy).map(([key, value]) => [
-          key,
-          deepCopy(value),
-        ])
-      );
-    } else {
-      return thingToCopy;
-    }
-  }
 
   function handleUpdate() {
-    console.log("update");
     if (currentPage === "Home") {
       var newApplianceList = deepCopy(applianceList);
       fieldHeaders.map((field, index) => {
@@ -110,7 +96,6 @@ function ViewAppliance({ trigger }) {
     dispatch(setViewApplianceTrigger(false));
   }
   function handleDelete() {
-    console.log("delete");
     if (currentPage === "Home") {
       var newApplianceList = deepCopy(applianceList);
       newApplianceList.splice(indexOfViewedAppliance, 1);

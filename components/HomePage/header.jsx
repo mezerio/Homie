@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
+import colorScheme from "../../assets/functions/colors";
 import {
   setAppTabChosen,
   setCurrentPage,
@@ -8,10 +8,10 @@ import {
   setNewEventItem,
   setUpdatedInputs,
   setNewEventDesc,
-} from "../redux/actions";
+} from "../../redux/actions";
 
-function Header(props) {
-  const { currentPage, appTabChosen } = useSelector((state) => state.myReducer);
+function Header() {
+  const { currentPage } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
   function handlePlusBtn() {
@@ -27,13 +27,10 @@ function Header(props) {
         dispatch(setCurrentPage("New"));
         break;
       }
-      case "Calender": {
+      case "Calendar": {
         dispatch(setNewEventItem(""));
         dispatch(setNewEventDesc("Appointment"));
         dispatch(setEventModalTrigger(true));
-
-        // dispatch(setAppTabChosen(false));
-        // add event
         break;
       }
     }
@@ -44,7 +41,7 @@ function Header(props) {
         <Text style={styles.cp}>{currentPage}</Text>
         {currentPage === "Home" ||
         currentPage === "People" ||
-        currentPage === "Calender" ? (
+        currentPage === "Calendar" ? (
           <Pressable onPress={handlePlusBtn}>
             <Text style={styles.plusBtn}>+</Text>
           </Pressable>

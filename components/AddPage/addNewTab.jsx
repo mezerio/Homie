@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setAppTabChosen } from "../redux/actions";
-import colorScheme from "./colors";
+import { setAppTabChosen } from "../../redux/actions";
+import colorScheme from "../../assets/functions/colors";
 
 function AddNewTab() {
   const { appTabChosen } = useSelector((state) => state.myReducer);

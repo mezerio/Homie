@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
+import colorScheme from "../../assets/functions/colors";
 import {
   setIndexOfViewedAppliance,
   setViewApplianceTrigger,
   setNewEventItem,
-  setSearchToggle,
+  setSearchTrigger,
   setUpdatedIcon,
-} from "../redux/actions";
+} from "../../redux/actions";
 
 function ApplianceCard({ appliance, index }) {
   const { currentPage } = useSelector((state) => state.myReducer);
@@ -20,7 +20,7 @@ function ApplianceCard({ appliance, index }) {
       dispatch(setIndexOfViewedAppliance(index));
     } else {
       dispatch(setNewEventItem(appliance));
-      dispatch(setSearchToggle(false));
+      dispatch(setSearchTrigger(false));
     }
   }
   return (
@@ -56,8 +56,6 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 5,
     alignItems: "center",
-    // borderColor: colorScheme.primaryFont,
-    // borderWidth: 1,
   },
   text: {
     color: colorScheme.primaryFont,

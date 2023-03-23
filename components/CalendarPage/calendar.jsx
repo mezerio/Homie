@@ -1,18 +1,18 @@
-import { ScrollView, StyleSheet, Text, Image, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { Calendar } from "react-native-calendars";
-import colorScheme from "./colors";
+import colorScheme from "../../assets/functions/colors";
+import EventCard from "./eventCard";
+import AddEventModal from "./addEventModal";
+import ViewEventModal from "./viewEvent";
+import deepCopy from "../../assets/functions/deepCopy";
 import {
   setDatesWithEvents,
   setDateSelected,
   setNewEventDate,
-} from "../redux/actions";
-import EventCard from "./eventCard";
-import AddEventModal from "./addEventModal";
-import SearchModal from "./searchModal";
-import ViewEventModal from "./viewEvent";
+} from "../../redux/actions";
 
-function Calender() {
+function CalendarPage() {
   const monthArray = [
     "",
     "Jan",
@@ -36,20 +36,7 @@ function Calender() {
     eventModalTrigger,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
-  function deepCopy(thingToCopy) {
-    if (Array.isArray(thingToCopy)) {
-      return thingToCopy.map(deepCopy);
-    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
-      return Object.fromEntries(
-        Object.entries(thingToCopy).map(([key, value]) => [
-          key,
-          deepCopy(value),
-        ])
-      );
-    } else {
-      return thingToCopy;
-    }
-  }
+
   function handleDayPress(date) {
     dispatch(setDateSelected(date["dateString"]));
     dispatch(setNewEventDate(date["dateString"]));
@@ -65,7 +52,7 @@ function Calender() {
     newDatesWithEvents[date["dateString"]]["selected"] = true;
     dispatch(setDatesWithEvents(newDatesWithEvents));
   }
-  return currentPage === "Calender" ? (
+  return currentPage === "Calendar" ? (
     <>
       <View style={styles.view}>
         <Calendar
@@ -111,7 +98,7 @@ function Calender() {
   );
 }
 
-export default Calender;
+export default CalendarPage;
 
 const styles = StyleSheet.create({
   view: {

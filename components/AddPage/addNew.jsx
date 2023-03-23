@@ -1,3 +1,22 @@
+import FieldModal from "./fieldModal";
+import AddNewTab from "./addNewTab";
+import addPhotoImg from "../../assets/img/addPhotoImg.png";
+import * as ImagePicker from "expo-image-picker";
+import fridgeIcon from "../../assets/img/fridgeIcon.png";
+import hobIcon from "../../assets/img/hobIcon.png";
+import hoodIcon from "../../assets/img/hoodIcon.png";
+import laptopIcon from "../../assets/img/laptopIcon.png";
+import microwaveIcon from "../../assets/img/microwaveIcon.png";
+import ovenIcon from "../../assets/img/ovenIcon.png";
+import phoneIcon from "../../assets/img/phoneIcon.png";
+import vacuumIcon from "../../assets/img/vacuumIcon.png";
+import WMIcon from "../../assets/img/washingMachineIcon.png";
+import womenIcon from "../../assets/img/womenIcon.png";
+import manIcon from "../../assets/img/manIcon.png";
+import babyIcon from "../../assets/img/babyIcon.png";
+import { useSelector, useDispatch } from "react-redux";
+import deepCopy from "../../assets/functions/deepCopy";
+import colorScheme from "../../assets/functions/colors";
 import {
   StyleSheet,
   Text,
@@ -7,36 +26,15 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
 import {
-  setNewAddPage,
-  setHomePage,
   setCurrentPage,
   setImgSource,
-  setFieldModalVisible,
+  setFieldModalTrigger,
   setApplianceList,
   setUpdatedInputs,
   setPeopleList,
-  setPeople,
   setUpdatedIcon,
-} from "../redux/actions";
-import FieldModal from "./fieldModal";
-import AddNewTab from "./addNewTab";
-import addPhotoImg from "../assets/img/addPhotoImg.png";
-import * as ImagePicker from "expo-image-picker";
-import fridgeIcon from "../assets/img/fridgeIcon.png";
-import hobIcon from "../assets/img/hobIcon.png";
-import hoodIcon from "../assets/img/hoodIcon.png";
-import laptopIcon from "../assets/img/laptopIcon.png";
-import microwaveIcon from "../assets/img/microwaveIcon.png";
-import ovenIcon from "../assets/img/ovenIcon.png";
-import phoneIcon from "../assets/img/phoneIcon.png";
-import vacuumIcon from "../assets/img/vacuumIcon.png";
-import WMIcon from "../assets/img/washingMachineIcon.png";
-import womenIcon from "../assets/img/womenIcon.png";
-import manIcon from "../assets/img/manIcon.png";
-import babyIcon from "../assets/img/babyIcon.png";
+} from "../../redux/actions";
 
 function AddNew() {
   const {
@@ -69,21 +67,7 @@ function AddNew() {
   var peopleIconList = [womenIcon, manIcon, babyIcon];
 
   function handleAddField() {
-    dispatch(setFieldModalVisible(true));
-  }
-  function deepCopy(thingToCopy) {
-    if (Array.isArray(thingToCopy)) {
-      return thingToCopy.map(deepCopy);
-    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
-      return Object.fromEntries(
-        Object.entries(thingToCopy).map(([key, value]) => [
-          key,
-          deepCopy(value),
-        ])
-      );
-    } else {
-      return thingToCopy;
-    }
+    dispatch(setFieldModalTrigger(true));
   }
 
   function handleSaveAppliance() {

@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
+import colorScheme from "../../assets/functions/colors";
 import {
   setIndexOfViewedAppliance,
   setNewEventItem,
   setViewApplianceTrigger,
-  setSearchToggle,
+  setSearchTrigger,
   setUpdatedIcon,
-} from "../redux/actions";
-import people from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/peopleImg.png";
+} from "../../redux/actions";
 
 function PeopleCard({ person, index }) {
   const dispatch = useDispatch();
@@ -20,8 +19,8 @@ function PeopleCard({ person, index }) {
       dispatch(setViewApplianceTrigger(true));
       dispatch(setIndexOfViewedAppliance(index));
     } else {
-      dispatch(setNewEventItem(person["Name:"]));
-      dispatch(setSearchToggle(false));
+      dispatch(setNewEventItem(person));
+      dispatch(setSearchTrigger(false));
     }
   }
   return (
@@ -73,8 +72,6 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 5,
     alignItems: "center",
-    // borderColor: colorScheme.primaryFont,
-    // borderWidth: 1,
   },
   img: {
     flex: 3,

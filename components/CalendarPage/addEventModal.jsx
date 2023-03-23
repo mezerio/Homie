@@ -1,48 +1,34 @@
+import { useSelector, useDispatch } from "react-redux";
+import colorScheme from "../../assets/functions/colors";
+import deepCopy from "../../assets/functions/deepCopy";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import SearchModal from "./searchModal";
 import {
   StyleSheet,
   Text,
   View,
   Modal,
-  ScrollView,
   Pressable,
   Image,
   TextInput,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
 import {
-  setViewApplianceTrigger,
-  setDatePickerToggle,
-  setTimePickerToggle,
+  setDatePickerTrigger,
+  setTimePickerTrigger,
   setEventModalTrigger,
   setNewEventDate,
   setNewEventTime,
   setDatesWithEvents,
   setEventList,
   setNewEventDesc,
-  setSearchToggle,
-} from "../redux/actions";
-import addPhotoImg from "../assets/img/addPhotoImg.png";
-import FieldModal from "./fieldModal";
-import { setUpdatedInputs } from "../redux/actions";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import SearchModal from "./searchModal";
+  setSearchTrigger,
+} from "../../redux/actions";
 
 function AddEventModal({ trigger }) {
-  var enteredText = "";
-
   const {
-    peopleList,
-    currentPage,
-    applianceList,
-    fieldModalTrigger,
-    fieldHeaders,
-    updatedInputs,
-    indexOfViewedAppliance,
-    fieldHeadersPerson,
-    datePickerToggle,
-    timePickerToggle,
+    datePickerTrigger,
+    timePickerTrigger,
     newEventDate,
     newEventTime,
     newEventDesc,
@@ -52,30 +38,25 @@ function AddEventModal({ trigger }) {
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
-  function handleTextInputUpdate(text, index) {
-    var newUpdatedInputs = [...updatedInputs];
-    newUpdatedInputs[index] = text;
-    dispatch(setUpdatedInputs(newUpdatedInputs));
-  }
-
   function handleCancel() {
     dispatch(setEventModalTrigger(false));
   }
 
-  function handleDatePickerToggle() {
-    dispatch(setDatePickerToggle(true));
+  function handleDatePickerTrigger() {
+    dispatch(setDatePickerTrigger(true));
   }
 
-  function handleTimePickerToggle() {
-    dispatch(setTimePickerToggle(true));
+  function handleTimePickerTrigger() {
+    dispatch(setTimePickerTrigger(true));
   }
+
   function handleDateChange(event, selectedDate) {
-    dispatch(setDatePickerToggle(false));
+    dispatch(setDatePickerTrigger(false));
     dispatch(setNewEventDate(formatDate(selectedDate)));
   }
 
   function handleTimeChange(event, selectedTime) {
-    dispatch(setTimePickerToggle(false));
+    dispatch(setTimePickerTrigger(false));
     dispatch(setNewEventTime(formatTime(selectedTime)));
   }
 
@@ -101,31 +82,21 @@ function AddEventModal({ trigger }) {
       (hour < 10 ? "0" : "") + hour + (min < 10 ? ":0" : ":") + min
     );
   }
-  function deepCopy(thingToCopy) {
-    if (Array.isArray(thingToCopy)) {
-      return thingToCopy.map(deepCopy);
-    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
-      return Object.fromEntries(
-        Object.entries(thingToCopy).map(([key, value]) => [
-          key,
-          deepCopy(value),
-        ])
-      );
-    } else {
-      return thingToCopy;
-    }
-  }
+
   function handleSave() {
     if (newEventItem !== "") {
-      console.log(datesWithEvents[newEventDate], "f");
-
+      var newTitle = "";
+      if (newEventItem["Vender:"] !== undefined) {
+        newTitle = String(
+          newEventItem["Vender:"] + " " + newEventItem["Product Name/Title:"]
+        );
+      } else {
+        newTitle = newEventItem["Name:"];
+      }
       dispatch(setEventModalTrigger(false));
       var newDatesWithEvents = deepCopy(datesWithEvents);
       if (newDatesWithEvents[newEventDate] !== undefined) {
-        console.log("1");
         if (newDatesWithEvents[newEventDate].dots !== undefined) {
-          console.log("2");
-
           newDatesWithEvents = {
             ...newDatesWithEvents,
             [newEventDate]: {
@@ -137,8 +108,6 @@ function AddEventModal({ trigger }) {
             },
           };
         } else {
-          console.log("4");
-
           newDatesWithEvents = {
             ...newDatesWithEvents,
             [newEventDate]: {
@@ -148,8 +117,6 @@ function AddEventModal({ trigger }) {
           };
         }
       } else {
-        console.log("3");
-
         newDatesWithEvents = {
           ...newDatesWithEvents,
           [newEventDate]: {
@@ -161,29 +128,15 @@ function AddEventModal({ trigger }) {
           },
         };
       }
-      //
       dispatch(setDatesWithEvents(newDatesWithEvents));
-      console.log(datesWithEvents[newEventDate], "after");
       var newEventList = deepCopy(eventList);
-
-      // newEventList = {
-      //   ...newEventList,
-      //   [newEventDate]: [
-      //     ...newEventList[newEventDate],
-      //     {
-      //       Title: "shutup mehdi",
-      //       Time: newEventTime,
-      //       Desc: newEventDesc,
-      //     },
-      //   ],
-      // };
       if (newEventDate in newEventList) {
         newEventList = {
           ...newEventList,
           [newEventDate]: [
             ...newEventList[newEventDate],
             {
-              Title: newEventItem["Vender:"],
+              Title: newTitle,
               Time: newEventTime,
               Desc: newEventDesc,
               Item: newEventItem,
@@ -195,11 +148,7 @@ function AddEventModal({ trigger }) {
           ...newEventList,
           [newEventDate]: [
             {
-              Title: String(
-                newEventItem["Vender:"] +
-                  " " +
-                  newEventItem["Product Name/Title:"]
-              ),
+              Title: newTitle,
               Time: newEventTime,
               Desc: newEventDesc,
               Item: newEventItem,
@@ -213,7 +162,7 @@ function AddEventModal({ trigger }) {
   }
 
   function handleSelectAP() {
-    dispatch(setSearchToggle(true));
+    dispatch(setSearchTrigger(true));
   }
   return trigger == true ? (
     <>
@@ -225,11 +174,13 @@ function AddEventModal({ trigger }) {
                 <>
                   <Image style={styles.img} source={newEventItem["Icon"]} />
                   <Text style={styles.btn2}>
-                    {String(
-                      newEventItem["Vender:"] +
-                        " " +
-                        newEventItem["Product Name/Title:"]
-                    )}
+                    {newEventItem["Vender:"] !== undefined
+                      ? String(
+                          newEventItem["Vender:"] +
+                            " " +
+                            newEventItem["Product Name/Title:"]
+                        )
+                      : newEventItem["Name:"]}
                   </Text>
                 </>
               ) : (
@@ -238,7 +189,7 @@ function AddEventModal({ trigger }) {
             </Pressable>
             <View>
               <Text style={styles.fil}>Select Date:</Text>
-              <TouchableWithoutFeedback onPress={handleDatePickerToggle}>
+              <TouchableWithoutFeedback onPress={handleDatePickerTrigger}>
                 <View>
                   <Text style={styles.btn}>
                     {String(
@@ -251,7 +202,7 @@ function AddEventModal({ trigger }) {
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
-              {datePickerToggle && (
+              {datePickerTrigger && (
                 <DateTimePicker
                   value={new Date(newEventDate)}
                   mode="date"
@@ -263,12 +214,12 @@ function AddEventModal({ trigger }) {
             <View>
               <Text style={styles.fil}>Select Time:</Text>
 
-              <TouchableWithoutFeedback onPress={handleTimePickerToggle}>
+              <TouchableWithoutFeedback onPress={handleTimePickerTrigger}>
                 <View>
                   <Text style={styles.btn}>{newEventTime}</Text>
                 </View>
               </TouchableWithoutFeedback>
-              {timePickerToggle && (
+              {timePickerTrigger && (
                 <DateTimePicker
                   value={new Date()}
                   mode="time"

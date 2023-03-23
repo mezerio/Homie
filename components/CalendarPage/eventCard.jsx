@@ -1,23 +1,16 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
+import { useDispatch } from "react-redux";
+import colorScheme from "../../assets/functions/colors";
 import {
   setIndexOfViewedAppliance,
-  setViewApplianceTrigger,
   setViewEventTrigger,
-} from "../redux/actions";
-import home from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png";
+} from "../../redux/actions";
 
 function EventCard({ event, index }) {
-  const { viewApplianceTrigger, dateSelected } = useSelector(
-    (state) => state.myReducer
-  );
   const dispatch = useDispatch();
   function handleOpenEventDetails() {
     dispatch(setViewEventTrigger(true));
     dispatch(setIndexOfViewedAppliance(index));
-
-    // view event
   }
   return (
     <Pressable onPress={handleOpenEventDetails}>

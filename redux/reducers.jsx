@@ -1,12 +1,10 @@
-import colorScheme from "../components/colors";
+import colorScheme from "../assets/functions/colors";
 import homeImg from "../assets/img/homeImg.png";
 import fridgeIcon from "../assets/img/fridgeIcon.png";
 import hobIcon from "../assets/img/hobIcon.png";
 import hoodIcon from "../assets/img/hoodIcon.png";
-import laptopIcon from "../assets/img/laptopIcon.png";
 import microwaveIcon from "../assets/img/microwaveIcon.png";
 import ovenIcon from "../assets/img/ovenIcon.png";
-import phoneIcon from "../assets/img/phoneIcon.png";
 import vacuumIcon from "../assets/img/vacuumIcon.png";
 import WMIcon from "../assets/img/washingMachineIcon.png";
 import womenIcon from "../assets/img/womenIcon.png";
@@ -14,48 +12,58 @@ import manIcon from "../assets/img/manIcon.png";
 import babyIcon from "../assets/img/babyIcon.png";
 
 import {
-  SET_FIELD_MODAL_VISIBLE,
-  SET_NEW_ADD_MODAL,
+  // Triggers
+  SET_SEARCH_TRIGGER,
+  SET_NOTIF_TRIGGER,
+  SET_SOUND_TRIGGER,
+  SET_VIEW_APPLIANCE_TRIGGER,
+  SET_FIELD_MODAL_TRIGGER,
+  SET_DATE_PICKER_TRIGGER,
+  SET_TIME_PICKER_TRIGGER,
+  SET_EVENT_MODAL_TRIGGER,
+  SET_VIEW_EVENT_TRIGGER,
+  // Other
   SET_FIELD_HEADERS,
   SET_FIELD_HEADERS_PERSON,
-  SET_HOME_PAGE,
-  SET_PEOPLE,
   SET_CURRENT_PAGE,
   SET_APPLIANCE_LIST,
   SET_UPDATED_INPUTS,
-  SET_VIEW_APPLIANCE_VISIBLE,
   SET_INDEX_OF_VIEWED_APPLIANCE,
   SET_APP_TAB_CHOSEN,
   SET_PEOPLE_LIST,
-  SET_CALENDER,
-  SET_SETTINGS,
-  SET_NOTIF_TOGGLE,
-  SET_SOUND_TOGGLE,
   SET_DATES_WITH_EVENTS,
   SET_EVENT_LIST,
   SET_DATE_SELECTED,
   SET_IMG_SOURCE,
-  SET_DATE_PICKER_TOGGLE,
-  SET_TIME_PICKER_TOGGLE,
-  SET_EVENT_MODAL_TRIGGER,
   SET_NEW_EVENT_DATE,
   SET_NEW_EVENT_TIME,
   SET_NEW_EVENT_ITEM,
   SET_NEW_EVENT_DESC,
-  SET_SEARCH_TOGGLE,
   SET_SEARCH_INPUT,
-  SET_VIEW_EVENT_TRIGGER,
   SET_UPDATED_ICON,
 } from "./actions";
 
 const initialState = {
-  updatedIcon: homeImg,
+  // Triggers
+  appTabChosen: true,
+  soundTrigger: true,
+  notifTrigger: false,
+  timePickerTrigger: false,
+  datePickerTrigger: false,
+  eventModalTrigger: false,
+  fieldModalTrigger: false,
+  viewApplianceTrigger: false,
   viewEventTrigger: false,
+  searchTrigger: false,
+  // Other
+  imgSource: "",
   searchInput: "",
-  searchToggle: false,
-  currentPage: "Home",
   newEventItem: "",
-  newEventDesc: "appointment",
+  newEventDesc: "Appointment",
+  currentPage: "Home",
+  updatedIcon: homeImg,
+  updatedInputs: [],
+  indexOfViewedAppliance: 0,
   newEventDate: String(
     new Date().getFullYear() +
       "-" +
@@ -71,21 +79,7 @@ const initialState = {
       (new Date().getMinutes() < 10 ? "0" : "") +
       new Date().getMinutes()
   ),
-  newAddPageTrigger: false,
-  homePageTrigger: true,
-  calenderTrigger: false,
-  settingsTrigger: false,
-  peopleTrigger: false,
-  appTabChosen: true,
-  fieldModalTrigger: false,
-  viewApplianceTrigger: false,
-  indexOfViewedAppliance: 0,
-  soundToggle: true,
-  notifToggle: false,
-  timePickerToggle: false,
-  datePickerToggle: false,
-  eventModalTrigger: false,
-  imgSource: "",
+
   dateSelected: String(
     new Date().getFullYear() +
       "-" +
@@ -177,8 +171,6 @@ const initialState = {
     { "Name:": "Latif", "D.O.B:": "17/07/98", Icon: manIcon },
     { "Name:": "Aats", "D.O.B:": "06/08/98", Icon: womenIcon },
   ],
-  // applianceList: [],
-  updatedInputs: [],
   fieldHeaders: [
     { title: "Product Name/Title:", input: "" },
     { title: "Vender:", input: "" },
@@ -266,14 +258,37 @@ const initialState = {
 
 function myReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_NEW_ADD_MODAL: {
-      return { ...state, newAddPageTrigger: action.payload };
-    }
-    case SET_UPDATED_ICON: {
-      return { ...state, updatedIcon: action.payload };
-    }
+    // Trigger
     case SET_VIEW_EVENT_TRIGGER: {
       return { ...state, viewEventTrigger: action.payload };
+    }
+    case SET_SEARCH_TRIGGER: {
+      return { ...state, searchTrigger: action.payload };
+    }
+    case SET_EVENT_MODAL_TRIGGER: {
+      return { ...state, eventModalTrigger: action.payload };
+    }
+    case SET_FIELD_MODAL_TRIGGER: {
+      return { ...state, fieldModalTrigger: action.payload };
+    }
+    case SET_VIEW_APPLIANCE_TRIGGER: {
+      return { ...state, viewApplianceTrigger: action.payload };
+    }
+    case SET_TIME_PICKER_TRIGGER: {
+      return { ...state, timePickerTrigger: action.payload };
+    }
+    case SET_DATE_PICKER_TRIGGER: {
+      return { ...state, datePickerTrigger: action.payload };
+    }
+    case SET_SOUND_TRIGGER: {
+      return { ...state, soundTrigger: action.payload };
+    }
+    case SET_NOTIF_TRIGGER: {
+      return { ...state, notifTrigger: action.payload };
+    }
+    // Other
+    case SET_UPDATED_ICON: {
+      return { ...state, updatedIcon: action.payload };
     }
     case SET_NEW_EVENT_TIME: {
       return { ...state, newEventTime: action.payload };
@@ -281,17 +296,11 @@ function myReducer(state = initialState, action) {
     case SET_NEW_EVENT_DATE: {
       return { ...state, newEventDate: action.payload };
     }
-    case SET_SEARCH_TOGGLE: {
-      return { ...state, searchToggle: action.payload };
-    }
     case SET_NEW_EVENT_ITEM: {
       return { ...state, newEventItem: action.payload };
     }
     case SET_NEW_EVENT_DESC: {
       return { ...state, newEventDesc: action.payload };
-    }
-    case SET_EVENT_MODAL_TRIGGER: {
-      return { ...state, eventModalTrigger: action.payload };
     }
     case SET_IMG_SOURCE: {
       return { ...state, imgSource: action.payload };
@@ -299,53 +308,34 @@ function myReducer(state = initialState, action) {
     case SET_CURRENT_PAGE: {
       return { ...state, currentPage: action.payload };
     }
-    case SET_HOME_PAGE: {
-      return { ...state, homePageTrigger: action.payload };
-    }
+
     case SET_SEARCH_INPUT: {
       return { ...state, searchInput: action.payload };
     }
-    case SET_PEOPLE: {
-      return { ...state, peopleTrigger: action.payload };
-    }
-    case SET_CALENDER: {
-      return { ...state, calenderTrigger: action.payload };
-    }
-    case SET_SETTINGS: {
-      return { ...state, settingsTrigger: action.payload };
-    }
-    case SET_FIELD_MODAL_VISIBLE: {
-      return { ...state, fieldModalTrigger: action.payload };
-    }
+
     case SET_APP_TAB_CHOSEN: {
       return { ...state, appTabChosen: action.payload };
     }
     case SET_INDEX_OF_VIEWED_APPLIANCE: {
       return { ...state, indexOfViewedAppliance: action.payload };
     }
-    case SET_VIEW_APPLIANCE_VISIBLE: {
-      return { ...state, viewApplianceTrigger: action.payload };
-    }
     case SET_DATE_SELECTED: {
       return { ...state, dateSelected: action.payload };
     }
-    case SET_TIME_PICKER_TOGGLE: {
-      return { ...state, timePickerToggle: action.payload };
-    }
-    case SET_DATE_PICKER_TOGGLE: {
-      return { ...state, datePickerToggle: action.payload };
-    }
     case SET_APPLIANCE_LIST: {
-      return {
-        ...state,
-        applianceList: action.payload,
-      };
+      return { ...state, applianceList: action.payload };
     }
     case SET_PEOPLE_LIST: {
-      return {
-        ...state,
-        peopleList: action.payload,
-      };
+      return { ...state, peopleList: action.payload };
+    }
+    case SET_DATES_WITH_EVENTS: {
+      return { ...state, datesWithEvents: action.payload };
+    }
+    case SET_UPDATED_INPUTS: {
+      return { ...state, updatedInputs: action.payload };
+    }
+    case SET_EVENT_LIST: {
+      return { ...state, eventList: action.payload };
     }
     case SET_FIELD_HEADERS: {
       return {
@@ -357,36 +347,6 @@ function myReducer(state = initialState, action) {
       return {
         ...state,
         fieldHeadersPerson: [...state.fieldHeadersPerson, action.payload],
-      };
-    }
-    case SET_DATES_WITH_EVENTS: {
-      return {
-        ...state,
-        datesWithEvents: action.payload,
-      };
-    }
-    case SET_UPDATED_INPUTS: {
-      return {
-        ...state,
-        updatedInputs: action.payload,
-      };
-    }
-    case SET_EVENT_LIST: {
-      return {
-        ...state,
-        eventList: action.payload,
-      };
-    }
-    case SET_SOUND_TOGGLE: {
-      return {
-        ...state,
-        soundToggle: action.payload,
-      };
-    }
-    case SET_NOTIF_TOGGLE: {
-      return {
-        ...state,
-        notifToggle: action.payload,
       };
     }
     default:

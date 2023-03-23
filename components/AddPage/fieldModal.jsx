@@ -1,20 +1,17 @@
 import { StyleSheet, TextInput, View, Modal } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import colorScheme from "./colors";
+import colorScheme from "../../assets/functions/colors";
 import {
-  setFieldModalVisible,
+  setFieldModalTrigger,
   setFieldHeaders,
   setFieldHeadersPerson,
-  setAppTabChosen,
-} from "../redux/actions";
+} from "../../redux/actions";
 
 function FieldModal(props) {
-  const { appTabChosen, fieldHeaders, fieldHeadersPerson } = useSelector(
-    (state) => state.myReducer
-  );
+  const { appTabChosen } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
   function handleAddField() {
-    dispatch(setFieldModalVisible(false));
+    dispatch(setFieldModalTrigger(false));
     if (appTabChosen === true) {
       dispatch(setFieldHeaders({ title: enteredText, input: "" }));
     } else {

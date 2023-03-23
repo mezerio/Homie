@@ -1,73 +1,19 @@
 import { StyleSheet, View, Image, Pressable, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import addImg from "../assets/img/addImg.png";
-import calenderImg from "../assets/img/calenderImg.png";
-import homeImg from "../assets/img/homeImg.png";
-import peopleImg from "../assets/img/peopleImg.png";
-import settngsImg from "../assets/img/settingsImg.png";
-import colorScheme from "./colors";
+import addImg from "../../assets/img/addImg.png";
+import calendarImg from "../../assets/img/calendarImg.png";
+import homeImg from "../../assets/img/homeImg.png";
+import peopleImg from "../../assets/img/peopleImg.png";
+import settngsImg from "../../assets/img/settingsImg.png";
+import colorScheme from "../../assets/functions/colors";
+import { setUpdatedInputs, setCurrentPage } from "../../redux/actions";
 
-import {
-  setNewAddPage,
-  setHomePage,
-  setPeople,
-  setUpdatedInputs,
-  setCalender,
-  setSettings,
-  setCurrentPage,
-} from "../redux/actions";
-
-function NavBar(props) {
-  const { peopleList, currentPage } = useSelector((state) => state.myReducer);
+function NavBar() {
+  const { currentPage } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
-  function homeHandler() {
-    console.log("Home");
-    dispatch(setCurrentPage("Home"));
-    // dispatch(setNewAddPage(false));
-    // dispatch(setPeople(false));
-    // dispatch(setHomePage(true));
-    // dispatch(setCalender(false));
-    // dispatch(setSettings(false));
-  }
-  function peopleHandler() {
-    console.log("peeps");
-    dispatch(setCurrentPage("People"));
-
-    // dispatch(setNewAddPage(false));
-    // dispatch(setHomePage(false));
-    // dispatch(setPeople(true));
-    // dispatch(setCalender(false));
-    // dispatch(setSettings(false));
-  }
-  function addNewHandler() {
-    console.log("new");
-    dispatch(setCurrentPage("New"));
+  function handleCurrentPage(page) {
     dispatch(setUpdatedInputs([]));
-    // dispatch(setPeople(false));
-    // dispatch(setNewAddPage(true));
-    // dispatch(setHomePage(false));
-    // dispatch(setCalender(false));
-    // dispatch(setSettings(false));
-  }
-  function calenderHandler() {
-    console.log("Calender");
-    dispatch(setCurrentPage("Calender"));
-
-    // dispatch(setPeople(false));
-    // dispatch(setNewAddPage(false));
-    // dispatch(setHomePage(false));
-    // dispatch(setCalender(true));
-    // dispatch(setSettings(false));
-  }
-  function settingsHandler() {
-    console.log("Settings");
-    dispatch(setCurrentPage("Settings"));
-
-    // dispatch(setPeople(false));
-    // dispatch(setNewAddPage(false));
-    // dispatch(setHomePage(false));
-    // dispatch(setCalender(false));
-    // dispatch(setSettings(true));
+    dispatch(setCurrentPage(page));
   }
   return (
     <>
@@ -78,7 +24,7 @@ function NavBar(props) {
               ? styles.currentNavBtns
               : styles.otherNavBtns,
           ]}
-          onPress={homeHandler}
+          onPress={() => handleCurrentPage("Home")}
         >
           <Image style={styles.icon} source={homeImg} />
           <Text style={styles.navName}>Home</Text>
@@ -89,7 +35,7 @@ function NavBar(props) {
               ? styles.currentNavBtns
               : styles.otherNavBtns,
           ]}
-          onPress={peopleHandler}
+          onPress={() => handleCurrentPage("People")}
         >
           <Image style={styles.icon} source={peopleImg} />
           <Text style={styles.navName}>People</Text>
@@ -98,20 +44,20 @@ function NavBar(props) {
           style={[
             currentPage === "New" ? styles.currentNavBtns : styles.otherNavBtns,
           ]}
-          onPress={addNewHandler}
+          onPress={() => handleCurrentPage("New")}
         >
           <Image style={styles.addIcon} source={addImg} />
         </Pressable>
         <Pressable
           style={[
-            currentPage === "Calender"
+            currentPage === "Calendar"
               ? styles.currentNavBtns
               : styles.otherNavBtns,
           ]}
-          onPress={calenderHandler}
+          onPress={() => handleCurrentPage("Calendar")}
         >
-          <Image style={styles.icon} source={calenderImg} />
-          <Text style={styles.navName}>Calender</Text>
+          <Image style={styles.icon} source={calendarImg} />
+          <Text style={styles.navName}>Calendar</Text>
         </Pressable>
         <Pressable
           style={[
@@ -119,7 +65,7 @@ function NavBar(props) {
               ? styles.currentNavBtns
               : styles.otherNavBtns,
           ]}
-          onPress={settingsHandler}
+          onPress={() => handleCurrentPage("Settings")}
         >
           <Image style={styles.icon} source={settngsImg} />
           <Text style={styles.navName}>Settings</Text>

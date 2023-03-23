@@ -1,14 +1,14 @@
 import { StyleSheet, View, StatusBar } from "react-native";
-import NavBar from "./components/navBar.jsx";
-import AddNew from "./components/addNew.jsx";
-import HomePage from "./components/homePage.jsx";
-import People from "./components/people.jsx";
+import NavBar from "./components/HomePage/navBar.jsx";
+import AddNew from "./components/AddPage/addNew.jsx";
+import HomePage from "./components/HomePage/homePage.jsx";
+import People from "./components/PeoplePage/people.jsx";
 import { Provider } from "react-redux";
 import { Store } from "./redux/store.jsx";
-import Calender from "./components/calender.jsx";
-import Settings from "./components/settings.jsx";
-import Header from "./components/header.jsx";
-import colorScheme from "./components/colors.jsx";
+import CalendarPage from "./components/CalendarPage/calendar.jsx";
+import Settings from "./components/SettingsPage/settings.jsx";
+import Header from "./components/HomePage/header.jsx";
+import colorScheme from "./assets/functions/colors.jsx";
 
 export default function App() {
   return (
@@ -22,7 +22,7 @@ export default function App() {
         <HomePage />
         <People />
         <AddNew />
-        <Calender />
+        <CalendarPage />
         <Settings />
         <NavBar />
       </View>

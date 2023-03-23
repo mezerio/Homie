@@ -1,3 +1,9 @@
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchInput, setSearchTrigger } from "../../redux/actions";
+import searchImg from "../../assets/img/searchImg.png";
+import ApplianceCard from "../HomePage/applianceCard";
+import PeopleCard from "../PeoplePage/peopleCard";
+import colorScheme from "../../assets/functions/colors";
 import {
   StyleSheet,
   Text,
@@ -8,32 +14,18 @@ import {
   Image,
   TextInput,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  setViewApplianceVisible,
-  setSearchInput,
-  setUpdatedInputs,
-  setSearchToggle,
-  setNewEventItem,
-} from "../redux/actions";
-import addPhotoImg from "../assets/img/addPhotoImg.png";
-import FieldModal from "./fieldModal";
-import searchImg from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img2/searchImg.png";
-import ApplianceCard from "./applianceCard";
-import PeopleCard from "./peopleCard";
-import colorScheme from "./colors";
 
 function ViewAppliance() {
-  const { peopleList, applianceList, searchToggle, searchInput } = useSelector(
+  const { peopleList, applianceList, searchTrigger, searchInput } = useSelector(
     (state) => state.myReducer
   );
   const dispatch = useDispatch();
 
   function handleCancel() {
-    dispatch(setSearchToggle(false));
+    dispatch(setSearchTrigger(false));
   }
 
-  return searchToggle == true ? (
+  return searchTrigger == true ? (
     <>
       <Modal animationType="fade">
         <View style={styles.bg}>

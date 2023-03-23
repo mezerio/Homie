@@ -1,33 +1,33 @@
-import { StyleSheet, View, ScrollView, Pressable, Text } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import ViewAppliance from "./viewAppliance";
-import PeopleCard from "./peopleCard";
-import colorScheme from "./colors";
+import ApplianceCard from "./applianceCard";
+import colorScheme from "../../assets/functions/colors";
 import {
   setAppTabChosen,
   setCurrentPage,
   setUpdatedInputs,
-} from "../redux/actions";
+} from "../../redux/actions";
 
-function People() {
-  const { currentPage, peopleList, viewApplianceTrigger } = useSelector(
+function HomePage() {
+  const { currentPage, applianceList, viewApplianceTrigger } = useSelector(
     (state) => state.myReducer
   );
   const dispatch = useDispatch();
 
   function handleAdd() {
-    dispatch(setAppTabChosen(false));
+    dispatch(setAppTabChosen(true));
     dispatch(setUpdatedInputs([]));
     dispatch(setCurrentPage("New"));
   }
 
-  return currentPage === "People" ? (
+  return currentPage === "Home" ? (
     <>
       <ScrollView>
         <View style={styles.view}>
-          {peopleList.map((person, index) => (
+          {applianceList.map((appliance, index) => (
             <View key={index}>
-              <PeopleCard person={person} index={index} />
+              <ApplianceCard appliance={appliance} index={index} />
             </View>
           ))}
           <Pressable>
@@ -44,7 +44,7 @@ function People() {
   );
 }
 
-export default People;
+export default HomePage;
 
 const styles = StyleSheet.create({
   view: {

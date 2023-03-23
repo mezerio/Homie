@@ -1,3 +1,7 @@
+import { useSelector, useDispatch } from "react-redux";
+import { setNotifTrigger, setSoundTrigger } from "../../redux/actions";
+import colorScheme from "../../assets/functions/colors";
+import settings from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/settingsImg.png";
 import {
   ScrollView,
   StyleSheet,
@@ -6,22 +10,18 @@ import {
   View,
   Switch,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { setNotifToggle, setSoundToggle } from "../redux/actions";
-import colorScheme from "./colors";
-import settings from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/settingsImg.png";
 
 function Settings() {
-  const { currentPage, soundToggle, notifToggle } = useSelector(
+  const { currentPage, soundTrigger, notifTrigger } = useSelector(
     (state) => state.myReducer
   );
   const dispatch = useDispatch();
 
-  function handleSoundToggle() {
-    dispatch(setSoundToggle(!soundToggle));
+  function handleSoundTrigger() {
+    dispatch(setSoundTrigger(!soundTrigger));
   }
-  function handleNotifToggle() {
-    dispatch(setNotifToggle(!notifToggle));
+  function handleNotifTrigger() {
+    dispatch(setNotifTrigger(!notifTrigger));
   }
 
   return currentPage === "Settings" ? (
@@ -34,9 +34,11 @@ function Settings() {
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
-              thumbColor={soundToggle ? colorScheme.primaryAccent : "lightgrey"}
-              onValueChange={handleSoundToggle}
-              value={soundToggle}
+              thumbColor={
+                soundTrigger ? colorScheme.primaryAccent : "lightgrey"
+              }
+              onValueChange={handleSoundTrigger}
+              value={soundTrigger}
             />
           </View>
           <View style={styles.set}>
@@ -44,9 +46,11 @@ function Settings() {
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
-              thumbColor={notifToggle ? colorScheme.primaryAccent : "lightgrey"}
-              onValueChange={handleNotifToggle}
-              value={notifToggle}
+              thumbColor={
+                notifTrigger ? colorScheme.primaryAccent : "lightgrey"
+              }
+              onValueChange={handleNotifTrigger}
+              value={notifTrigger}
             />
           </View>
           <View style={styles.set}>

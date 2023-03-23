@@ -1,84 +1,52 @@
+import { useSelector, useDispatch } from "react-redux";
+import deepCopy from "../../assets/functions/deepCopy";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import SearchModal from "./searchModal";
+import colorScheme from "../../assets/functions/colors";
 import {
   StyleSheet,
   Text,
   View,
   Modal,
-  ScrollView,
   Pressable,
   Image,
   TextInput,
   TouchableWithoutFeedback,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
 import {
-  setViewApplianceTrigger,
-  setDatePickerToggle,
-  setTimePickerToggle,
-  setEventModalTrigger,
+  setDatePickerTrigger,
+  setTimePickerTrigger,
   setNewEventDate,
   setNewEventTime,
   setDatesWithEvents,
   setEventList,
   setNewEventDesc,
-  setSearchToggle,
   setViewEventTrigger,
-} from "../redux/actions";
-import addPhotoImg from "../assets/img/addPhotoImg.png";
-import FieldModal from "./fieldModal";
-import { setUpdatedInputs } from "../redux/actions";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import SearchModal from "./searchModal";
-import colorScheme from "./colors";
+} from "../../redux/actions";
 
 function ViewEventModal() {
-  var enteredText = "";
-
   const {
     viewEventTrigger,
-    peopleList,
-    currentPage,
-    applianceList,
-    fieldModalTrigger,
-    fieldHeaders,
-    updatedInputs,
     indexOfViewedAppliance,
-    fieldHeadersPerson,
-    datePickerToggle,
-    timePickerToggle,
-    newEventDate,
-    newEventTime,
-    newEventDesc,
-    newEventItem,
+    datePickerTrigger,
+    timePickerTrigger,
     dateSelected,
     datesWithEvents,
     eventList,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
-  function handleTextInputUpdate(text, index) {
-    var newUpdatedInputs = [...updatedInputs];
-    newUpdatedInputs[index] = text;
-    dispatch(setUpdatedInputs(newUpdatedInputs));
-  }
-
   function handleCancel() {
     dispatch(setViewEventTrigger(false));
   }
 
-  function handleDatePickerToggle() {
-    dispatch(setDatePickerToggle(true));
-  }
-
-  function handleTimePickerToggle() {
-    dispatch(setTimePickerToggle(true));
-  }
   function handleDateChange(event, selectedDate) {
-    dispatch(setDatePickerToggle(false));
+    dispatch(setDatePickerTrigger(false));
     dispatch(setNewEventDate(formatDate(selectedDate)));
   }
 
   function handleTimeChange(event, selectedTime) {
-    dispatch(setTimePickerToggle(false));
+    dispatch(setTimePickerTrigger(false));
     dispatch(setNewEventTime(formatTime(selectedTime)));
   }
 
@@ -105,85 +73,11 @@ function ViewEventModal() {
     );
   }
 
-  function handleSave() {
-    dispatch(setEventModalTrigger(false));
-    var newDatesWithEvents = deepCopy(datesWithEvents);
-    newDatesWithEvents = {
-      ...newDatesWithEvents,
-      [newEventDate]: {
-        marked: true,
-        selected: false,
-        dotColor: colorScheme.primaryAccent,
-        selectedColor: colorScheme.primaryAccent,
-        selectedTextColor: "black",
-      },
-    };
-    dispatch(setDatesWithEvents(newDatesWithEvents));
-    var newEventList = deepCopy(eventList);
-
-    // newEventList = {
-    //   ...newEventList,
-    //   [newEventDate]: [
-    //     ...newEventList[newEventDate],
-    //     {
-    //       Title: "shutup mehdi",
-    //       Time: newEventTime,
-    //       Desc: newEventDesc,
-    //     },
-    //   ],
-    // };
-    if (newEventDate in newEventList) {
-      newEventList = {
-        ...newEventList,
-        [newEventDate]: [
-          ...newEventList[newEventDate],
-          {
-            Title: newEventItem["Vender:"],
-            Time: newEventTime,
-            Desc: newEventDesc,
-          },
-        ],
-      };
-    } else {
-      newEventList = {
-        ...newEventList,
-        [newEventDate]: [
-          {
-            Title: newEventItem["Vender:"],
-            Time: newEventTime,
-            Desc: newEventDesc,
-          },
-        ],
-      };
-    }
-
-    dispatch(setEventList(newEventList));
-  }
-
-  function handleSelectAP() {
-    dispatch(setSearchToggle(true));
-  }
-  function deepCopy(thingToCopy) {
-    if (Array.isArray(thingToCopy)) {
-      return thingToCopy.map(deepCopy);
-    } else if (typeof thingToCopy === "object" && thingToCopy !== null) {
-      return Object.fromEntries(
-        Object.entries(thingToCopy).map(([key, value]) => [
-          key,
-          deepCopy(value),
-        ])
-      );
-    } else {
-      return thingToCopy;
-    }
-  }
-
   function handleDelete() {
     dispatch(setViewEventTrigger(false));
     var newEventList = deepCopy(eventList);
     newEventList[dateSelected].splice(indexOfViewedAppliance, 1);
     dispatch(setEventList(newEventList));
-    console.log("delete event");
     var newDatesWithEvents = deepCopy(datesWithEvents);
     newDatesWithEvents[dateSelected].dots.splice(0, 1);
     dispatch(setDatesWithEvents(newDatesWithEvents));
@@ -213,7 +107,7 @@ function ViewEventModal() {
                   <Text style={styles.btn}>{dateSelected}</Text>
                 </View>
               </TouchableWithoutFeedback>
-              {datePickerToggle && (
+              {datePickerTrigger && (
                 <DateTimePicker
                   value={dateSelected}
                   mode="date"
@@ -232,7 +126,7 @@ function ViewEventModal() {
                   </Text>
                 </View>
               </TouchableWithoutFeedback>
-              {timePickerToggle && (
+              {timePickerTrigger && (
                 <DateTimePicker
                   value={new Date()}
                   //   add selected event time

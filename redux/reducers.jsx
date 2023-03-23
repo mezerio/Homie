@@ -1,4 +1,18 @@
 import colorScheme from "../components/colors";
+import homeImg from "../assets/img/homeImg.png";
+import fridgeIcon from "../assets/img/fridgeIcon.png";
+import hobIcon from "../assets/img/hobIcon.png";
+import hoodIcon from "../assets/img/hoodIcon.png";
+import laptopIcon from "../assets/img/laptopIcon.png";
+import microwaveIcon from "../assets/img/microwaveIcon.png";
+import ovenIcon from "../assets/img/ovenIcon.png";
+import phoneIcon from "../assets/img/phoneIcon.png";
+import vacuumIcon from "../assets/img/vacuumIcon.png";
+import WMIcon from "../assets/img/washingMachineIcon.png";
+import womenIcon from "../assets/img/womenIcon.png";
+import manIcon from "../assets/img/manIcon.png";
+import babyIcon from "../assets/img/babyIcon.png";
+
 import {
   SET_FIELD_MODAL_VISIBLE,
   SET_NEW_ADD_MODAL,
@@ -31,9 +45,11 @@ import {
   SET_SEARCH_TOGGLE,
   SET_SEARCH_INPUT,
   SET_VIEW_EVENT_TRIGGER,
+  SET_UPDATED_ICON,
 } from "./actions";
 
 const initialState = {
+  updatedIcon: homeImg,
   viewEventTrigger: false,
   searchInput: "",
   searchToggle: false,
@@ -83,48 +99,92 @@ const initialState = {
     "2023-03-03": {
       marked: true,
       selected: false,
-      dots: [
-        { color: colorScheme.primaryAccent },
-        { color: colorScheme.primaryAccent },
-      ],
-      selectedColor: colorScheme.primaryAccent,
-      selectedTextColor: "black",
+      dots: [{ color: colorScheme.primary }, { color: colorScheme.primary }],
+      selectedColor: colorScheme.secondary,
+      selectedTextColor: colorScheme.primaryFont,
     },
     "2023-03-11": {
       marked: true,
       selected: false,
-      dots: [
-        { color: colorScheme.primaryAccent },
-        { color: colorScheme.primaryAccent },
-      ],
-      selectedColor: colorScheme.primaryAccent,
-      selectedTextColor: "black",
+      dots: [{ color: colorScheme.primary }, { color: colorScheme.primary }],
+      selectedColor: colorScheme.secondary,
+      selectedTextColor: colorScheme.primaryFont,
     },
     "2023-03-21": {
       marked: true,
       selected: false,
-      dots: [{ color: colorScheme.primaryAccent }],
-      selectedColor: colorScheme.primaryAccent,
-      selectedTextColor: "black",
+      dots: [{ color: colorScheme.primary }],
+      selectedColor: colorScheme.secondary,
+      selectedTextColor: colorScheme.primaryFont,
     },
   },
   applianceList: [
-    { "Vender:": "Samsung" },
-    { "Vender:": "Echo" },
-    { "Vender:": "John Lewis" },
+    {
+      Icon: WMIcon,
+      "Vender:": "Samsung",
+      "Product Name/Title:": "Washing Machine",
+      "Model Number:": "WMC123456M",
+      "Serial Number:": "123456789",
+    },
+    {
+      Icon: hoodIcon,
+      "Vender:": "Neff",
+      "Product Name/Title:": "Extractor Hood",
+      "Model Number:": "NEFF8838",
+      "Serial Number:": "98765431",
+    },
+    {
+      Icon: fridgeIcon,
+      "Vender:": "John Lewis",
+      "Product Name/Title:": "Fridge",
+      "Model Number:": "FR93937SK",
+      "Serial Number:": "SR363930",
+    },
+    {
+      Icon: vacuumIcon,
+      "Vender:": "Dyson",
+      "Product Name/Title:": "Hoover",
+      "Model Number:": "DY293930K",
+      "Serial Number:": "SS338300",
+    },
+    {
+      Icon: hobIcon,
+      "Vender:": "Argos",
+      "Product Name/Title:": "Hob",
+      "Model Number:": "HH93937SK",
+      "Serial Number:": "67893893",
+    },
+    {
+      Icon: microwaveIcon,
+      "Vender:": "Wren",
+      "Product Name/Title:": "Microwave",
+      "Model Number:": "HDJ88292929",
+      "Serial Number:": "89393SJ92",
+    },
+    {
+      Icon: ovenIcon,
+      "Vender:": "Currys",
+      "Product Name/Title:": "Oven",
+      "Model Number:": "CE828292922",
+      "Serial Number:": "LPS799S",
+    },
   ],
   peopleList: [
-    { "Name:": "mehdi", "D.O.B:": "01/01/01" },
-    { "Name:": "drew", "D.O.B:": "02/02/02" },
+    { "Name:": "Maaz", "D.O.B:": "13/08/98", Icon: manIcon },
+    { "Name:": "Alina", "D.O.B:": "02/02/22", Icon: babyIcon },
+    { "Name:": "Mehdi", "D.O.B:": "02/06/99", Icon: manIcon },
+    { "Name:": "Drew", "D.O.B:": "09/07/98", Icon: manIcon },
+    { "Name:": "Latif", "D.O.B:": "17/07/98", Icon: manIcon },
+    { "Name:": "Aats", "D.O.B:": "06/08/98", Icon: womenIcon },
   ],
   // applianceList: [],
   updatedInputs: [],
   fieldHeaders: [
     { title: "Product Name/Title:", input: "" },
     { title: "Vender:", input: "" },
-    { title: "Product Type:", input: "" },
     { title: "Model Number:", input: "" },
     { title: "Serial Number:", input: "" },
+    { title: "Product Type:", input: "" },
     { title: "Date Purchased:", input: "" },
     { title: "Warrenty Length:", input: "" },
     { title: "Bought By:", input: "" },
@@ -136,18 +196,24 @@ const initialState = {
   ],
   eventList: {
     "2023-03-03": [
-      { Title: "Samsung Fridge", Time: "00:00", Desc: "blah blah blah" },
+      { Title: "John Lewis Fridge", Time: "13:00", Desc: "Engineer Visit" },
       {
         Title: "Echo Bubble Washing Machine",
-        Time: "01:00",
-        Desc: "blah blah ",
+        Time: "19:00",
+        Desc: "Appointment for repair",
       },
     ],
     "2023-03-11": [
-      { Title: "Neff Extractor Hood", Time: "02:00", Desc: "blah  blah" },
-      { Title: "Bosch Freezer", Time: "20:00", Desc: "blah blah blah" },
+      {
+        Title: "Neff Extractor Hood",
+        Time: "12:00",
+        Desc: "Service appointment",
+      },
+      { Title: "Bosch Freezer", Time: "09:00", Desc: "Delivery" },
     ],
-    "2023-03-21": [{ Title: "John Lewis Hob", Time: "10:00", Desc: "blah" }],
+    "2023-03-21": [
+      { Title: "John Lewis Hob", Time: "10:00", Desc: "Service check up" },
+    ],
   },
 };
 
@@ -155,6 +221,9 @@ function myReducer(state = initialState, action) {
   switch (action.type) {
     case SET_NEW_ADD_MODAL: {
       return { ...state, newAddPageTrigger: action.payload };
+    }
+    case SET_UPDATED_ICON: {
+      return { ...state, updatedIcon: action.payload };
     }
     case SET_VIEW_EVENT_TRIGGER: {
       return { ...state, viewEventTrigger: action.payload };

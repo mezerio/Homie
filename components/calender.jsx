@@ -59,7 +59,7 @@ function Calender() {
     }
     if (newDatesWithEvents[date["dateString"]] === undefined) {
       newDatesWithEvents[date["dateString"]] = {
-        selectedColor: colorScheme.primaryAccent,
+        selectedColor: colorScheme.secondary,
       };
     }
     newDatesWithEvents[date["dateString"]]["selected"] = true;
@@ -73,6 +73,14 @@ function Calender() {
           style={styles.cal}
           onDayPress={(date) => handleDayPress(date)}
           markedDates={datesWithEvents}
+          theme={{
+            calendarBackground: colorScheme.primaryAccent,
+            textSectionTitleColor: colorScheme.primaryFont,
+            todayTextColor: colorScheme.primaryFont,
+            dayTextColor: colorScheme.secondaryFont,
+            arrowColor: colorScheme.primary,
+            textDisabledColor: colorScheme.tertiaryAccent,
+          }}
         />
         <View style={styles.eventView}>
           <Text style={styles.bb}>

@@ -29,11 +29,18 @@ export const SET_NEW_EVENT_DESC = "SET_NEW_EVENT_DESC";
 export const SET_SEARCH_TOGGLE = "SET_SEARCH_TOGGLE";
 export const SET_SEARCH_INPUT = "SET_SEARCH_INPUT";
 export const SET_VIEW_EVENT_TRIGGER = "SET_VIEW_EVENT_TRIGGER";
+export const SET_UPDATED_ICON = "SET_UPDATED_ICON";
 
 export const setCurrentPage = (currentPage) => (dispatch) => {
   dispatch({
     type: SET_CURRENT_PAGE,
     payload: currentPage,
+  });
+};
+export const setUpdatedIcon = (updatedIcon) => (dispatch) => {
+  dispatch({
+    type: SET_UPDATED_ICON,
+    payload: updatedIcon,
   });
 };
 export const setViewEventTrigger = (viewEventTrigger) => (dispatch) => {

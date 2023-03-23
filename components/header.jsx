@@ -5,6 +5,7 @@ import {
   setAppTabChosen,
   setCurrentPage,
   setEventModalTrigger,
+  setUpdatedInputs,
 } from "../redux/actions";
 
 function Header(props) {
@@ -15,6 +16,7 @@ function Header(props) {
     switch (currentPage) {
       case "Home": {
         dispatch(setAppTabChosen(true));
+        dispatch(setUpdatedInputs([]));
         dispatch(setCurrentPage("New"));
         break;
       }

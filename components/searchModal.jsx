@@ -36,39 +36,43 @@ function ViewAppliance() {
   return searchToggle == true ? (
     <>
       <Modal animationType="fade">
-        <Pressable onPress={handleCancel}>
-          <Text style={styles.back}>{"<"}</Text>
-        </Pressable>
-        <View style={styles.searchbar}>
-          <TextInput
-            style={styles.input}
-            placeholder="search..."
-            onChangeText={(text) => dispatch(setSearchInput(text))}
-          />
-          <Image style={styles.searchImg} source={searchImg} />
+        <View style={styles.bg}>
+          <Pressable onPress={handleCancel}>
+            <Text style={styles.back}>{"<"}</Text>
+          </Pressable>
+          <View style={styles.searchbar}>
+            <TextInput
+              style={styles.input}
+              placeholder="search..."
+              onChangeText={(text) => dispatch(setSearchInput(text))}
+            />
+            <Image style={styles.searchImg} source={searchImg} />
+          </View>
+          <ScrollView contentContainerStyle={styles.scroll}>
+            {applianceList
+              .filter((appliance) =>
+                appliance["Vender:"]
+                  .toLowerCase()
+                  .includes(searchInput.toLowerCase())
+              )
+              .map((appliance, index) => (
+                <View key={index}>
+                  <ApplianceCard appliance={appliance} index={index} />
+                </View>
+              ))}
+            {peopleList
+              .filter((person) =>
+                person["Name:"]
+                  .toLowerCase()
+                  .includes(searchInput.toLowerCase())
+              )
+              .map((person, index) => (
+                <View key={index}>
+                  <PeopleCard person={person} index={index} />
+                </View>
+              ))}
+          </ScrollView>
         </View>
-        <ScrollView contentContainerStyle={styles.scroll}>
-          {applianceList
-            .filter((appliance) =>
-              appliance["Vender:"]
-                .toLowerCase()
-                .includes(searchInput.toLowerCase())
-            )
-            .map((appliance, index) => (
-              <View key={index}>
-                <ApplianceCard appliance={appliance} index={index} />
-              </View>
-            ))}
-          {peopleList
-            .filter((person) =>
-              person["Name:"].toLowerCase().includes(searchInput.toLowerCase())
-            )
-            .map((person, index) => (
-              <View key={index}>
-                <PeopleCard person={person} index={index} />
-              </View>
-            ))}
-        </ScrollView>
       </Modal>
     </>
   ) : (
@@ -80,15 +84,14 @@ export default ViewAppliance;
 
 const styles = StyleSheet.create({
   scroll: {
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.primary,
     alignItems: "center",
-    flex: 1,
   },
   searchbar: {
     height: 40,
     flexDirection: "row",
     width: "90%",
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.primaryAccent,
     margin: "5%",
     padding: 10,
     borderRadius: 10,
@@ -107,4 +110,5 @@ const styles = StyleSheet.create({
     width: "90%",
     color: "white",
   },
+  bg: { backgroundColor: colorScheme.primary, flex: 1 },
 });

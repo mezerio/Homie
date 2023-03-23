@@ -6,8 +6,8 @@ import {
   setViewApplianceTrigger,
   setNewEventItem,
   setSearchToggle,
+  setUpdatedIcon,
 } from "../redux/actions";
-import home from "/Users/maazvali/Documents/coding/Github Projects/Homie/assets/img/homeImg.png";
 
 function ApplianceCard({ appliance, index }) {
   const { currentPage } = useSelector((state) => state.myReducer);
@@ -15,6 +15,7 @@ function ApplianceCard({ appliance, index }) {
 
   function handleOpenApplianceDetails() {
     if (currentPage == "Home" || currentPage == "People") {
+      dispatch(setUpdatedIcon(appliance["Icon"]));
       dispatch(setViewApplianceTrigger(true));
       dispatch(setIndexOfViewedAppliance(index));
     } else {
@@ -25,18 +26,18 @@ function ApplianceCard({ appliance, index }) {
   return (
     <Pressable onPress={handleOpenApplianceDetails}>
       <View style={styles.card}>
-        <Image style={styles.img} source={home} />
+        <Image style={styles.img} source={appliance["Icon"]} />
+        <View style={styles.col1}>
+          <Text style={styles.text1}>Name:</Text>
+          <Text style={styles.text1}>Vender: </Text>
+          <Text style={styles.text1}>Model#:</Text>
+          <Text style={styles.text1}>Serial#:</Text>
+        </View>
         <View style={styles.col}>
-          <Text style={styles.text}>Vender: {appliance["Vender:"]}</Text>
-          <Text style={styles.text}>
-            Product Name/Title: {appliance["Product Name/Title:"]}
-          </Text>
-          <Text style={styles.text}>
-            Model Number: {appliance["Model Number:"]}
-          </Text>
-          <Text style={styles.text}>
-            Serial Number: {appliance["Serial Number:"]}
-          </Text>
+          <Text style={styles.text}>{appliance["Product Name/Title:"]}</Text>
+          <Text style={styles.text}>{appliance["Vender:"]}</Text>
+          <Text style={styles.text}>{appliance["Model Number:"]}</Text>
+          <Text style={styles.text}>{appliance["Serial Number:"]}</Text>
         </View>
       </View>
     </Pressable>
@@ -55,16 +56,40 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 5,
     alignItems: "center",
+    // borderColor: colorScheme.primaryFont,
+    // borderWidth: 1,
   },
   text: {
     color: colorScheme.primaryFont,
+    textAlign: "left",
+    marginVertical: 1,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: colorScheme.tertiary,
+    paddingHorizontal: 5,
+    fontSize: 13,
+  },
+  text1: {
+    color: colorScheme.secondaryFont,
+    textAlign: "right",
+    fontWeight: "bold",
+    backgroundColor: colorScheme.primaryAccent,
+    marginVertical: 1,
+    borderTopLeftRadius: 10,
+    borderBottomLeftRadius: 10,
+    fontSize: 13,
   },
   img: {
-    flex: 1,
+    flex: 3,
     aspectRatio: 1,
     margin: 5,
+    opacity: 0.8,
+    resizeMode: "contain",
   },
   col: {
-    flex: 5,
+    flex: 10,
+  },
+  col1: {
+    flex: 4,
   },
 });

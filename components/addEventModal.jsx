@@ -131,7 +131,7 @@ function AddEventModal({ trigger }) {
             ...newDatesWithEvents[newEventDate],
             dots: [
               ...newDatesWithEvents[newEventDate].dots,
-              { color: colorScheme.primaryAccent },
+              { color: colorScheme.primary },
             ],
           },
         };
@@ -142,7 +142,7 @@ function AddEventModal({ trigger }) {
           ...newDatesWithEvents,
           [newEventDate]: {
             ...newDatesWithEvents[newEventDate],
-            dots: [{ color: colorScheme.primaryAccent }],
+            dots: [{ color: colorScheme.primary }],
           },
         };
       }
@@ -154,8 +154,8 @@ function AddEventModal({ trigger }) {
         [newEventDate]: {
           marked: true,
           selected: false,
-          dots: [{ color: colorScheme.primaryAccent }],
-          selectedColor: colorScheme.primaryAccent,
+          dots: [{ color: colorScheme.primary }],
+          selectedColor: colorScheme.primary,
           selectedTextColor: "black",
         },
       };
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card2: {
-    backgroundColor: "white",
+    backgroundColor: colorScheme.secondary,
     width: "70%",
     height: 400,
     borderRadius: 10,
@@ -298,8 +298,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   btn: {
-    backgroundColor: "grey",
-    color: "white",
+    backgroundColor: colorScheme.primary,
+    color: colorScheme.primaryFont,
     padding: 5,
     borderRadius: 5,
     margin: 1,
@@ -307,11 +307,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   bb: {
-    borderBottomColor: "black",
+    borderBottomColor: colorScheme.primaryFont,
     borderBottomWidth: 2,
+    color: colorScheme.primaryFont,
   },
   ti: {
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.tertiaryAccent,
     height: 100,
     width: 200,
     borderRadius: 5,
@@ -322,5 +323,9 @@ const styles = StyleSheet.create({
   bb2: {
     textAlign: "center",
     backgroundColor: colorScheme.primaryAccent,
+  },
+  bb3: {
+    textAlign: "center",
+    backgroundColor: colorScheme.alert,
   },
 });

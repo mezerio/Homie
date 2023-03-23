@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Pressable } from "react-native";
+import { StyleSheet, View, Image, Pressable, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import addImg from "../assets/img/addImg.png";
 import calenderImg from "../assets/img/calenderImg.png";
@@ -18,7 +18,7 @@ import {
 } from "../redux/actions";
 
 function NavBar(props) {
-  const { peopleList } = useSelector((state) => state.myReducer);
+  const { peopleList, currentPage } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
   function homeHandler() {
     console.log("Home");
@@ -72,20 +72,57 @@ function NavBar(props) {
   return (
     <>
       <View style={styles.nav}>
-        <Pressable style={styles.navBtns} onPress={homeHandler}>
+        <Pressable
+          style={[
+            currentPage === "Home"
+              ? styles.currentNavBtns
+              : styles.otherNavBtns,
+          ]}
+          onPress={homeHandler}
+        >
           <Image style={styles.icon} source={homeImg} />
+          <Text style={styles.navName}>Home</Text>
         </Pressable>
-        <Pressable style={styles.navBtns} onPress={peopleHandler}>
+        <Pressable
+          style={[
+            currentPage === "People"
+              ? styles.currentNavBtns
+              : styles.otherNavBtns,
+          ]}
+          onPress={peopleHandler}
+        >
           <Image style={styles.icon} source={peopleImg} />
+          <Text style={styles.navName}>People</Text>
         </Pressable>
-        <Pressable style={styles.navBtns} onPress={addNewHandler}>
+        <Pressable
+          style={[
+            currentPage === "New" ? styles.currentNavBtns : styles.otherNavBtns,
+          ]}
+          onPress={addNewHandler}
+        >
           <Image style={styles.addIcon} source={addImg} />
         </Pressable>
-        <Pressable style={styles.navBtns} onPress={calenderHandler}>
+        <Pressable
+          style={[
+            currentPage === "Calender"
+              ? styles.currentNavBtns
+              : styles.otherNavBtns,
+          ]}
+          onPress={calenderHandler}
+        >
           <Image style={styles.icon} source={calenderImg} />
+          <Text style={styles.navName}>Calender</Text>
         </Pressable>
-        <Pressable style={styles.navBtns} onPress={settingsHandler}>
+        <Pressable
+          style={[
+            currentPage === "Settings"
+              ? styles.currentNavBtns
+              : styles.otherNavBtns,
+          ]}
+          onPress={settingsHandler}
+        >
           <Image style={styles.icon} source={settngsImg} />
+          <Text style={styles.navName}>Settings</Text>
         </Pressable>
       </View>
     </>
@@ -95,11 +132,24 @@ function NavBar(props) {
 export default NavBar;
 
 const styles = StyleSheet.create({
-  navBtns: {
+  navName: {
+    color: colorScheme.primaryFont,
+    fontSize: 10,
+    margin: 3,
+  },
+  currentNavBtns: {
     aspectRatio: 1,
     width: "20%",
     alignItems: "center",
     justifyContent: "center",
+    opacity: 1,
+  },
+  otherNavBtns: {
+    aspectRatio: 1,
+    width: "20%",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0.3,
   },
   icon: {
     aspectRatio: 1,
@@ -117,5 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+    borderTopColor: colorScheme.primaryFont,
+    borderTopWidth: 1,
   },
 });

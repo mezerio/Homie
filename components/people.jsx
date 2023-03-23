@@ -1,13 +1,25 @@
-import { StyleSheet, View, ScrollView } from "react-native";
-import { useSelector } from "react-redux";
+import { StyleSheet, View, ScrollView, Pressable, Text } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import ViewAppliance from "./viewAppliance";
 import PeopleCard from "./peopleCard";
 import colorScheme from "./colors";
+import {
+  setAppTabChosen,
+  setCurrentPage,
+  setUpdatedInputs,
+} from "../redux/actions";
 
 function People() {
   const { currentPage, peopleList, viewApplianceTrigger } = useSelector(
     (state) => state.myReducer
   );
+  const dispatch = useDispatch();
+
+  function handleAdd() {
+    dispatch(setAppTabChosen(false));
+    dispatch(setUpdatedInputs([]));
+    dispatch(setCurrentPage("New"));
+  }
 
   return currentPage === "People" ? (
     <>
@@ -18,6 +30,11 @@ function People() {
               <PeopleCard person={person} index={index} />
             </View>
           ))}
+          <Pressable>
+            <Text style={styles.btn} onPress={handleAdd}>
+              + ADD NEW
+            </Text>
+          </Pressable>
         </View>
       </ScrollView>
       <ViewAppliance trigger={viewApplianceTrigger} />
@@ -34,5 +51,15 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
+  },
+  btn: {
+    color: colorScheme.primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 10,
   },
 });

@@ -193,11 +193,11 @@ function ViewEventModal() {
       <Modal transparent={true} visible={true} animationType="fade">
         <View style={styles.card}>
           <View style={styles.card2}>
-            <Pressable onPress={handleSelectAP}>
+            <Pressable>
               <Text style={styles.btn}>select appliance/person</Text>
             </Pressable>
             <View>
-              <TouchableWithoutFeedback onPress={handleDatePickerToggle}>
+              <TouchableWithoutFeedback>
                 <View>
                   <Text style={styles.btn}>{dateSelected}</Text>
                 </View>
@@ -212,7 +212,7 @@ function ViewEventModal() {
               )}
             </View>
             <View>
-              <TouchableWithoutFeedback onPress={handleTimePickerToggle}>
+              <TouchableWithoutFeedback>
                 <View>
                   <Text style={styles.btn}>
                     {eventList[dateSelected][indexOfViewedAppliance]["Time"]}
@@ -238,7 +238,9 @@ function ViewEventModal() {
               }
               multiline={true}
               numberOfLines={4}
-            ></TextInput>
+            >
+              {eventList[dateSelected][indexOfViewedAppliance]["Desc"]}
+            </TextInput>
 
             <Pressable onPress={handleCancel}>
               <Text style={[styles.btn, styles.bb2]}>CANCEL</Text>
@@ -266,7 +268,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card2: {
-    backgroundColor: "white",
+    backgroundColor: colorScheme.secondary,
     width: "70%",
     height: 400,
     borderRadius: 10,
@@ -277,8 +279,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   btn: {
-    backgroundColor: "grey",
-    color: "white",
+    backgroundColor: colorScheme.primary,
+    color: colorScheme.primaryFont,
     padding: 5,
     borderRadius: 5,
     margin: 1,
@@ -286,11 +288,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   bb: {
-    borderBottomColor: "black",
+    borderBottomColor: colorScheme.primaryFont,
     borderBottomWidth: 2,
+    color: colorScheme.primaryFont,
   },
   ti: {
-    backgroundColor: "lightgrey",
+    backgroundColor: colorScheme.tertiaryAccent,
     height: 100,
     width: 200,
     borderRadius: 5,
@@ -304,6 +307,6 @@ const styles = StyleSheet.create({
   },
   bb3: {
     textAlign: "center",
-    backgroundColor: "red",
+    backgroundColor: colorScheme.alert,
   },
 });

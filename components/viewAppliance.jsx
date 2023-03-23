@@ -13,14 +13,38 @@ import {
   setApplianceList,
   setViewApplianceTrigger,
   setPeopleList,
+  setUpdatedIcon,
 } from "../redux/actions";
 import addPhotoImg from "../assets/img/addPhotoImg.png";
 import colorScheme from "./colors";
-
+import fridgeIcon from "../assets/img/fridgeIcon.png";
+import hobIcon from "../assets/img/hobIcon.png";
+import hoodIcon from "../assets/img/hoodIcon.png";
+import laptopIcon from "../assets/img/laptopIcon.png";
+import microwaveIcon from "../assets/img/microwaveIcon.png";
+import ovenIcon from "../assets/img/ovenIcon.png";
+import phoneIcon from "../assets/img/phoneIcon.png";
+import vacuumIcon from "../assets/img/vacuumIcon.png";
+import WMIcon from "../assets/img/washingMachineIcon.png";
 import FieldModal from "./fieldModal";
 import { setUpdatedInputs, setCurrentPage } from "../redux/actions";
-
+import womenIcon from "../assets/img/womenIcon.png";
+import manIcon from "../assets/img/manIcon.png";
+import babyIcon from "../assets/img/babyIcon.png";
 function ViewAppliance({ trigger }) {
+  var appIconList = [
+    fridgeIcon,
+    hobIcon,
+    hoodIcon,
+    laptopIcon,
+    microwaveIcon,
+    ovenIcon,
+    phoneIcon,
+    vacuumIcon,
+    WMIcon,
+  ];
+  var peopleIconList = [womenIcon, manIcon, babyIcon];
+
   const {
     peopleList,
     currentPage,
@@ -30,6 +54,8 @@ function ViewAppliance({ trigger }) {
     updatedInputs,
     indexOfViewedAppliance,
     fieldHeadersPerson,
+    imgSource,
+    updatedIcon,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
@@ -63,6 +89,7 @@ function ViewAppliance({ trigger }) {
             updatedInputs[index];
         }
       });
+      newApplianceList[indexOfViewedAppliance]["Icon"] = updatedIcon;
       dispatch(setApplianceList(newApplianceList));
       dispatch(setViewApplianceTrigger(false));
     } else if (currentPage === "People") {
@@ -73,6 +100,7 @@ function ViewAppliance({ trigger }) {
             updatedInputs[index];
         }
       });
+      newPeopleList[indexOfViewedAppliance]["Icon"] = updatedIcon;
       dispatch(setPeopleList(newPeopleList));
       dispatch(setViewApplianceTrigger(false));
     }
@@ -94,6 +122,25 @@ function ViewAppliance({ trigger }) {
     }
     dispatch(setViewApplianceTrigger(false));
   }
+
+  const handlePickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    dispatch(setImgSource(result.uri));
+    dispatch(setUpdatedIcon({ uri: result.uri }));
+
+    if (!result.canceled) {
+      dispatch(setImgSource(result.assets[0].uri));
+    }
+  };
+
+  function handleSetIcon(icon) {
+    dispatch(setUpdatedIcon(icon));
+  }
   return trigger == true ? (
     <>
       <Modal animationType="fade" transparent={true}>
@@ -103,9 +150,43 @@ function ViewAppliance({ trigger }) {
           </Pressable>
           <ScrollView>
             <View style={styles.form}>
-              <Pressable style={styles.addImg}>
-                <Image style={styles.addImgIcon} source={addPhotoImg} />
-              </Pressable>
+              <Text style={styles.textTitle}>Select Icon:</Text>
+
+              <ScrollView style={styles.pickIcon} horizontal={true}>
+                {currentPage === "Home"
+                  ? appIconList.map((icon, index) => (
+                      <Pressable
+                        key={index}
+                        style={[
+                          updatedIcon === icon
+                            ? styles.currentAddImg
+                            : styles.otherAddImg,
+                        ]}
+                        onPress={() => handleSetIcon(icon)}
+                      >
+                        <Image style={styles.addImgIcon} source={icon} />
+                      </Pressable>
+                    ))
+                  : peopleIconList.map((icon, index) => (
+                      <Pressable
+                        key={index}
+                        style={[
+                          updatedIcon === icon
+                            ? styles.currentAddImg
+                            : styles.otherAddImg,
+                        ]}
+                        onPress={() => handleSetIcon(icon)}
+                      >
+                        <Image style={styles.addImgIcon} source={icon} />
+                      </Pressable>
+                    ))}
+                <Pressable onPress={handlePickImage} style={styles.otherAddImg}>
+                  <Image
+                    style={styles.addImgIcon}
+                    source={imgSource ? { uri: imgSource } : addPhotoImg}
+                  />
+                </Pressable>
+              </ScrollView>
               <FieldModal trigger={fieldModalTrigger} />
               {currentPage === "Home"
                 ? fieldHeaders.map((field, index) => (
@@ -164,6 +245,12 @@ function ViewAppliance({ trigger }) {
 export default ViewAppliance;
 
 const styles = StyleSheet.create({
+  textTitle: {
+    color: colorScheme.primaryFont,
+  },
+  pickIcon: {
+    flexDirection: "row",
+  },
   cont: {
     backgroundColor: colorScheme.primary,
     flex: 1,
@@ -181,19 +268,32 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: "10%",
   },
-  addImg: {
-    flex: 1,
+  otherAddImg: {
+    height: 70,
     aspectRatio: 1,
-    width: "75%",
     backgroundColor: colorScheme.tertiary,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
     marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme.primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
   },
   addImgIcon: {
-    height: "80%",
-    width: "80%",
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
   },
   input: {
     backgroundColor: colorScheme.tertiary,

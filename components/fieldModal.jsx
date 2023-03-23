@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   view1: {
-    backgroundColor: "white",
+    backgroundColor: colorScheme.tertiary,
     width: "70%",
     height: 100,
     borderRadius: 10,

@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   chosenTab: {
-    color: "white",
+    color: colorScheme.primary,
     padding: 8,
     backgroundColor: colorScheme.primaryAccent,
     borderRadius: 25,

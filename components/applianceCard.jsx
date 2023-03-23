@@ -19,7 +19,7 @@ function ApplianceCard({ appliance, index }) {
       dispatch(setViewApplianceTrigger(true));
       dispatch(setIndexOfViewedAppliance(index));
     } else {
-      dispatch(setNewEventItem(appliance["Vender:"]));
+      dispatch(setNewEventItem(appliance));
       dispatch(setSearchToggle(false));
     }
   }

@@ -5,7 +5,9 @@ import {
   setAppTabChosen,
   setCurrentPage,
   setEventModalTrigger,
+  setNewEventItem,
   setUpdatedInputs,
+  setNewEventDesc,
 } from "../redux/actions";
 
 function Header(props) {
@@ -26,6 +28,8 @@ function Header(props) {
         break;
       }
       case "Calender": {
+        dispatch(setNewEventItem(""));
+        dispatch(setNewEventDesc("Appointment"));
         dispatch(setEventModalTrigger(true));
 
         // dispatch(setAppTabChosen(false));

@@ -22,7 +22,7 @@ function EventCard({ event, index }) {
   return (
     <Pressable onPress={handleOpenEventDetails}>
       <View style={styles.card}>
-        <Image style={styles.img} source={home} />
+        <Image style={styles.img} source={event["Item"]["Icon"]} />
         <View style={styles.col}>
           <Text style={styles.bb}>{event["Title"]}</Text>
           <Text style={styles.tex}>{event["Desc"]}</Text>
@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1,
     margin: 5,
+    resizeMode: "contain",
   },
   col: {
     flex: 5,

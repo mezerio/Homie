@@ -55,7 +55,7 @@ const initialState = {
   searchToggle: false,
   currentPage: "Home",
   newEventItem: "",
-  newEventDesc: "bleb",
+  newEventDesc: "appointment",
   newEventDate: String(
     new Date().getFullYear() +
       "-" +
@@ -135,7 +135,7 @@ const initialState = {
     },
     {
       Icon: fridgeIcon,
-      "Vender:": "John Lewis",
+      "Vender:": "Bosch",
       "Product Name/Title:": "Fridge",
       "Model Number:": "FR93937SK",
       "Serial Number:": "SR363930",
@@ -149,7 +149,7 @@ const initialState = {
     },
     {
       Icon: hobIcon,
-      "Vender:": "Argos",
+      "Vender:": "John Lewis",
       "Product Name/Title:": "Hob",
       "Model Number:": "HH93937SK",
       "Serial Number:": "67893893",
@@ -196,11 +196,29 @@ const initialState = {
   ],
   eventList: {
     "2023-03-03": [
-      { Title: "John Lewis Fridge", Time: "13:00", Desc: "Engineer Visit" },
       {
-        Title: "Echo Bubble Washing Machine",
+        Title: "Dyson Vacuum",
+        Time: "13:00",
+        Desc: "Engineer Visit",
+        Item: {
+          Icon: vacuumIcon,
+          "Vender:": "Dyson",
+          "Product Name/Title:": "Vacuum",
+          "Model Number:": "DY293930K",
+          "Serial Number:": "SS338300",
+        },
+      },
+      {
+        Title: "Samsung Washing Machine",
         Time: "19:00",
         Desc: "Appointment for repair",
+        Item: {
+          Icon: WMIcon,
+          "Vender:": "Samsung",
+          "Product Name/Title:": "Washing Machine",
+          "Model Number:": "WMC123456M",
+          "Serial Number:": "123456789",
+        },
       },
     ],
     "2023-03-11": [
@@ -208,11 +226,40 @@ const initialState = {
         Title: "Neff Extractor Hood",
         Time: "12:00",
         Desc: "Service appointment",
+        Item: {
+          Icon: hoodIcon,
+          "Vender:": "Neff",
+          "Product Name/Title:": "Extractor Hood",
+          "Model Number:": "NEFF8838",
+          "Serial Number:": "98765431",
+        },
       },
-      { Title: "Bosch Freezer", Time: "09:00", Desc: "Delivery" },
+      {
+        Title: "Bosch Fridge",
+        Time: "09:00",
+        Desc: "Delivery",
+        Item: {
+          Icon: fridgeIcon,
+          "Vender:": "Bosch",
+          "Product Name/Title:": "Fridge",
+          "Model Number:": "FR93937SK",
+          "Serial Number:": "SR363930",
+        },
+      },
     ],
     "2023-03-21": [
-      { Title: "John Lewis Hob", Time: "10:00", Desc: "Service check up" },
+      {
+        Title: "John Lewis Hob",
+        Time: "10:00",
+        Desc: "Service check up",
+        Item: {
+          Icon: hobIcon,
+          "Vender:": "Argos",
+          "Product Name/Title:": "Hob",
+          "Model Number:": "HH93937SK",
+          "Serial Number:": "67893893",
+        },
+      },
     ],
   },
 };

@@ -116,92 +116,100 @@ function AddEventModal({ trigger }) {
     }
   }
   function handleSave() {
-    console.log(datesWithEvents[newEventDate], "f");
+    if (newEventItem !== "") {
+      console.log(datesWithEvents[newEventDate], "f");
 
-    dispatch(setEventModalTrigger(false));
-    var newDatesWithEvents = deepCopy(datesWithEvents);
-    if (newDatesWithEvents[newEventDate] !== undefined) {
-      console.log("1");
-      if (newDatesWithEvents[newEventDate].dots !== undefined) {
-        console.log("2");
+      dispatch(setEventModalTrigger(false));
+      var newDatesWithEvents = deepCopy(datesWithEvents);
+      if (newDatesWithEvents[newEventDate] !== undefined) {
+        console.log("1");
+        if (newDatesWithEvents[newEventDate].dots !== undefined) {
+          console.log("2");
 
-        newDatesWithEvents = {
-          ...newDatesWithEvents,
-          [newEventDate]: {
-            ...newDatesWithEvents[newEventDate],
-            dots: [
-              ...newDatesWithEvents[newEventDate].dots,
-              { color: colorScheme.primary },
-            ],
-          },
-        };
+          newDatesWithEvents = {
+            ...newDatesWithEvents,
+            [newEventDate]: {
+              ...newDatesWithEvents[newEventDate],
+              dots: [
+                ...newDatesWithEvents[newEventDate].dots,
+                { color: colorScheme.primary },
+              ],
+            },
+          };
+        } else {
+          console.log("4");
+
+          newDatesWithEvents = {
+            ...newDatesWithEvents,
+            [newEventDate]: {
+              ...newDatesWithEvents[newEventDate],
+              dots: [{ color: colorScheme.primary }],
+            },
+          };
+        }
       } else {
-        console.log("4");
+        console.log("3");
 
         newDatesWithEvents = {
           ...newDatesWithEvents,
           [newEventDate]: {
-            ...newDatesWithEvents[newEventDate],
+            marked: true,
+            selected: false,
             dots: [{ color: colorScheme.primary }],
+            selectedColor: colorScheme.primary,
+            selectedTextColor: "black",
           },
         };
       }
-    } else {
-      console.log("3");
+      //
+      dispatch(setDatesWithEvents(newDatesWithEvents));
+      console.log(datesWithEvents[newEventDate], "after");
+      var newEventList = deepCopy(eventList);
 
-      newDatesWithEvents = {
-        ...newDatesWithEvents,
-        [newEventDate]: {
-          marked: true,
-          selected: false,
-          dots: [{ color: colorScheme.primary }],
-          selectedColor: colorScheme.primary,
-          selectedTextColor: "black",
-        },
-      };
+      // newEventList = {
+      //   ...newEventList,
+      //   [newEventDate]: [
+      //     ...newEventList[newEventDate],
+      //     {
+      //       Title: "shutup mehdi",
+      //       Time: newEventTime,
+      //       Desc: newEventDesc,
+      //     },
+      //   ],
+      // };
+      if (newEventDate in newEventList) {
+        newEventList = {
+          ...newEventList,
+          [newEventDate]: [
+            ...newEventList[newEventDate],
+            {
+              Title: newEventItem["Vender:"],
+              Time: newEventTime,
+              Desc: newEventDesc,
+              Item: newEventItem,
+            },
+          ],
+        };
+      } else {
+        newEventList = {
+          ...newEventList,
+          [newEventDate]: [
+            {
+              Title: String(
+                newEventItem["Vender:"] +
+                  " " +
+                  newEventItem["Product Name/Title:"]
+              ),
+              Time: newEventTime,
+              Desc: newEventDesc,
+              Item: newEventItem,
+            },
+          ],
+        };
+      }
+
+      dispatch(setEventList(newEventList));
     }
-    //
-    dispatch(setDatesWithEvents(newDatesWithEvents));
-    console.log(datesWithEvents[newEventDate], "after");
-    var newEventList = deepCopy(eventList);
-
-    // newEventList = {
-    //   ...newEventList,
-    //   [newEventDate]: [
-    //     ...newEventList[newEventDate],
-    //     {
-    //       Title: "shutup mehdi",
-    //       Time: newEventTime,
-    //       Desc: newEventDesc,
-    //     },
-    //   ],
-    // };
-    if (newEventDate in newEventList) {
-      newEventList = {
-        ...newEventList,
-        [newEventDate]: [
-          ...newEventList[newEventDate],
-          {
-            Title: newEventItem,
-            Time: newEventTime,
-            Desc: newEventDesc,
-          },
-        ],
-      };
-    } else {
-      newEventList = {
-        ...newEventList,
-        [newEventDate]: [
-          {
-            Title: newEventItem,
-            Time: newEventTime,
-            Desc: newEventDesc,
-          },
-        ],
-      };
-    }
-
-    dispatch(setEventList(newEventList));
   }
 
   function handleSelectAP() {
@@ -212,10 +220,24 @@ function AddEventModal({ trigger }) {
       <Modal transparent={true} visible={true} animationType="fade">
         <View style={styles.card}>
           <View style={styles.card2}>
-            <Pressable onPress={handleSelectAP}>
-              <Text style={styles.btn}>select appliance/person</Text>
+            <Pressable style={styles.btn3} onPress={handleSelectAP}>
+              {newEventItem !== "" ? (
+                <>
+                  <Image style={styles.img} source={newEventItem["Icon"]} />
+                  <Text style={styles.btn2}>
+                    {String(
+                      newEventItem["Vender:"] +
+                        " " +
+                        newEventItem["Product Name/Title:"]
+                    )}
+                  </Text>
+                </>
+              ) : (
+                <Text style={styles.btn2}>select appliance/person</Text>
+              )}
             </Pressable>
             <View>
+              <Text style={styles.fil}>Select Date:</Text>
               <TouchableWithoutFeedback onPress={handleDatePickerToggle}>
                 <View>
                   <Text style={styles.btn}>
@@ -239,6 +261,8 @@ function AddEventModal({ trigger }) {
               )}
             </View>
             <View>
+              <Text style={styles.fil}>Select Time:</Text>
+
               <TouchableWithoutFeedback onPress={handleTimePickerToggle}>
                 <View>
                   <Text style={styles.btn}>{newEventTime}</Text>
@@ -253,11 +277,11 @@ function AddEventModal({ trigger }) {
                 />
               )}
             </View>
-            <Text style={styles.bb}>notes</Text>
+            <Text style={styles.bb}>Description</Text>
             <TextInput
               onChangeText={(text) => dispatch(setNewEventDesc(text))}
               style={styles.ti}
-              placeholder="enter notes..."
+              placeholder="enter description..."
               multiline={true}
               numberOfLines={4}
             ></TextInput>
@@ -265,7 +289,7 @@ function AddEventModal({ trigger }) {
               <Text style={[styles.btn, styles.bb2]}>SAVE</Text>
             </Pressable>
             <Pressable onPress={handleCancel}>
-              <Text style={[styles.btn, styles.bb2]}>CANCEL</Text>
+              <Text style={[styles.btn, styles.bb5]}>CANCEL</Text>
             </Pressable>
           </View>
         </View>
@@ -280,6 +304,13 @@ function AddEventModal({ trigger }) {
 export default AddEventModal;
 
 const styles = StyleSheet.create({
+  img: {
+    height: "100%",
+    opacity: 1,
+    resizeMode: "contain",
+    flex: 1,
+  },
+  fil: { color: colorScheme.primaryFont },
   card: {
     flex: 1,
     flexDirection: "column",
@@ -294,7 +325,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "black",
+    borderColor: colorScheme.primaryFont,
     borderWidth: 2,
   },
   btn: {
@@ -302,9 +333,28 @@ const styles = StyleSheet.create({
     color: colorScheme.primaryFont,
     padding: 5,
     borderRadius: 5,
-    margin: 1,
+    margin: 5,
     width: 200,
     textAlign: "center",
+  },
+  bb5: {
+    backgroundColor: colorScheme.primary,
+  },
+  btn2: {
+    flex: 4,
+    color: colorScheme.primaryFont,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  btn3: {
+    backgroundColor: colorScheme.primaryAccent,
+    flexDirection: "row",
+    borderRadius: 5,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    margin: 5,
   },
   bb: {
     borderBottomColor: colorScheme.primaryFont,

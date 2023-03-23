@@ -138,7 +138,7 @@ function ViewEventModal() {
         [newEventDate]: [
           ...newEventList[newEventDate],
           {
-            Title: newEventItem,
+            Title: newEventItem["Vender:"],
             Time: newEventTime,
             Desc: newEventDesc,
           },
@@ -149,7 +149,7 @@ function ViewEventModal() {
         ...newEventList,
         [newEventDate]: [
           {
-            Title: newEventItem,
+            Title: newEventItem["Vender:"],
             Time: newEventTime,
             Desc: newEventDesc,
           },
@@ -193,10 +193,21 @@ function ViewEventModal() {
       <Modal transparent={true} visible={true} animationType="fade">
         <View style={styles.card}>
           <View style={styles.card2}>
-            <Pressable>
-              <Text style={styles.btn}>select appliance/person</Text>
+            <Pressable style={styles.btn3}>
+              <Image
+                style={styles.img}
+                source={
+                  eventList[dateSelected][indexOfViewedAppliance]["Item"][
+                    "Icon"
+                  ]
+                }
+              />
+              <Text style={styles.btn2}>
+                {eventList[dateSelected][indexOfViewedAppliance]["Title"]}
+              </Text>
             </Pressable>
             <View>
+              <Text style={styles.fil}>Date:</Text>
               <TouchableWithoutFeedback>
                 <View>
                   <Text style={styles.btn}>{dateSelected}</Text>
@@ -212,6 +223,8 @@ function ViewEventModal() {
               )}
             </View>
             <View>
+              <Text style={styles.fil}>Time:</Text>
+
               <TouchableWithoutFeedback>
                 <View>
                   <Text style={styles.btn}>
@@ -229,7 +242,7 @@ function ViewEventModal() {
                 />
               )}
             </View>
-            <Text style={styles.bb}>notes</Text>
+            <Text style={styles.bb}>Description</Text>
             <TextInput
               onChangeText={(text) => dispatch(setNewEventDesc(text))}
               style={styles.ti}
@@ -261,6 +274,13 @@ function ViewEventModal() {
 export default ViewEventModal;
 
 const styles = StyleSheet.create({
+  img: {
+    height: "100%",
+    opacity: 1,
+    resizeMode: "contain",
+    flex: 1,
+  },
+  fil: { color: colorScheme.primaryFont },
   card: {
     flex: 1,
     flexDirection: "column",
@@ -275,7 +295,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "black",
+    borderColor: colorScheme.primaryFont,
     borderWidth: 2,
   },
   btn: {
@@ -286,6 +306,22 @@ const styles = StyleSheet.create({
     margin: 1,
     width: 200,
     textAlign: "center",
+  },
+  btn2: {
+    flex: 4,
+    color: colorScheme.primaryFont,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  btn3: {
+    backgroundColor: colorScheme.primaryAccent,
+    flexDirection: "row",
+    borderRadius: 5,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    margin: 5,
   },
   bb: {
     borderBottomColor: colorScheme.primaryFont,
@@ -300,6 +336,7 @@ const styles = StyleSheet.create({
     padding: 10,
     textAlignVertical: "top",
     margin: 5,
+    color: colorScheme.primaryFont,
   },
   bb2: {
     textAlign: "center",

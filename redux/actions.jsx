@@ -27,6 +27,7 @@ export const SET_NEW_EVENT_DATE = "SET_NEW_EVENT_DATE";
 export const SET_NEW_EVENT_TIME = "SET_NEW_EVENT_TIME";
 export const SET_NEW_EVENT_ITEM = "SET_NEW_EVENT_ITEM";
 export const SET_NEW_EVENT_DESC = "SET_NEW_EVENT_DESC";
+export const SET_COLOR_THEME = "SET_COLOR_THEME";
 
 export const setViewEventTrigger = (viewEventTrigger) => (dispatch) => {
   dispatch({
@@ -203,3 +204,9 @@ export const setIndexOfViewedAppliance =
       payload: indexOfViewedAppliance,
     });
   };
+export const setColorTheme = (colorTheme) => (dispatch) => {
+  dispatch({
+    type: SET_COLOR_THEME,
+    payload: colorTheme,
+  });
+};

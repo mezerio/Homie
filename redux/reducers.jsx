@@ -41,6 +41,7 @@ import {
   SET_NEW_EVENT_DESC,
   SET_SEARCH_INPUT,
   SET_UPDATED_ICON,
+  SET_COLOR_THEME,
 } from "./actions";
 
 const initialState = {
@@ -61,6 +62,7 @@ const initialState = {
   newEventItem: "",
   newEventDesc: "Appointment",
   currentPage: "Home",
+  colorTheme: "dark",
   updatedIcon: homeImg,
   updatedInputs: [],
   indexOfViewedAppliance: 0,
@@ -336,6 +338,9 @@ function myReducer(state = initialState, action) {
     }
     case SET_EVENT_LIST: {
       return { ...state, eventList: action.payload };
+    }
+    case SET_COLOR_THEME: {
+      return { ...state, colorTheme: action.payload };
     }
     case SET_FIELD_HEADERS: {
       return {

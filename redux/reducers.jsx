@@ -143,13 +143,13 @@ const initialState = {
       "Model Number:": "FR93937SK",
       "Serial Number:": "SR363930",
     },
-    // {
-    //   Icon: vacuumIcon,
-    //   "Vender:": "Dyson",
-    //   "Product Name/Title:": "Hoover",
-    //   "Model Number:": "DY293930K",
-    //   "Serial Number:": "SS338300",
-    // },
+    {
+      Icon: vacuumIcon,
+      "Vender:": "Dyson",
+      "Product Name/Title:": "Hoover",
+      "Model Number:": "DY293930K",
+      "Serial Number:": "SS338300",
+    },
     {
       Icon: hobIcon,
       "Vender:": "John Lewis",

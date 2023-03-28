@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import colorScheme from "../../assets/functions/colors";
 import {
   setIndexOfViewedAppliance,

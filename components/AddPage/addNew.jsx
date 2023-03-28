@@ -48,6 +48,7 @@ function AddNew() {
     imgSource,
     applianceList,
     updatedIcon,
+    colorTheme,
   } = useSelector((state) => state.myReducer);
 
   const dispatch = useDispatch();
@@ -133,22 +134,22 @@ function AddNew() {
 
   return currentPage === "New" ? (
     <ScrollView>
-      <View style={styles.form}>
-        <AddNewTab style={styles.tab} />
-        <Text style={styles.textTitle}>Select Icon:</Text>
-        <ScrollView style={styles.pickIcon} horizontal={true}>
+      <View style={styles[colorTheme].form}>
+        <AddNewTab style={styles[colorTheme].tab} />
+        <Text style={styles[colorTheme].textTitle}>Select Icon:</Text>
+        <ScrollView style={styles[colorTheme].pickIcon} horizontal={true}>
           {appTabChosen
             ? appIconList.map((icon, index) => (
                 <Pressable
                   key={index}
                   style={[
                     updatedIcon === icon
-                      ? styles.currentAddImg
-                      : styles.otherAddImg,
+                      ? styles[colorTheme].currentAddImg
+                      : styles[colorTheme].otherAddImg,
                   ]}
                   onPress={() => handleSetIcon(icon)}
                 >
-                  <Image style={styles.addImgIcon} source={icon} />
+                  <Image style={styles[colorTheme].addImgIcon} source={icon} />
                 </Pressable>
               ))
             : peopleIconList.map((icon, index) => (
@@ -156,17 +157,20 @@ function AddNew() {
                   key={index}
                   style={[
                     updatedIcon === icon
-                      ? styles.currentAddImg
-                      : styles.otherAddImg,
+                      ? styles[colorTheme].currentAddImg
+                      : styles[colorTheme].otherAddImg,
                   ]}
                   onPress={() => handleSetIcon(icon)}
                 >
-                  <Image style={styles.addImgIcon} source={icon} />
+                  <Image style={styles[colorTheme].addImgIcon} source={icon} />
                 </Pressable>
               ))}
-          <Pressable onPress={handlePickImage} style={styles.otherAddImg}>
+          <Pressable
+            onPress={handlePickImage}
+            style={styles[colorTheme].otherAddImg}
+          >
             <Image
-              style={styles.addImgIcon}
+              style={styles[colorTheme].addImgIcon}
               source={imgSource ? { uri: imgSource } : addPhotoImg}
             />
           </Pressable>
@@ -175,9 +179,9 @@ function AddNew() {
         {appTabChosen
           ? fieldHeaders.map((field, index) => (
               <View key={index}>
-                <Text style={styles.textTitle}>{field.title}</Text>
+                <Text style={styles[colorTheme].textTitle}>{field.title}</Text>
                 <TextInput
-                  style={styles.input}
+                  style={styles[colorTheme].input}
                   placeholder=" e.g. text"
                   onChangeText={(text) => handleTextInputUpdate(text, index)}
                 ></TextInput>
@@ -185,21 +189,21 @@ function AddNew() {
             ))
           : fieldHeadersPerson.map((field, index) => (
               <View key={index}>
-                <Text style={styles.textTitle}>{field.title}</Text>
+                <Text style={styles[colorTheme].textTitle}>{field.title}</Text>
                 <TextInput
-                  style={styles.input}
+                  style={styles[colorTheme].input}
                   placeholder=" e.g. text"
                   onChangeText={(text) => handleTextInputUpdate(text, index)}
                 ></TextInput>
               </View>
             ))}
         <Pressable>
-          <Text style={styles.btn} onPress={handleAddField}>
+          <Text style={styles[colorTheme].btn} onPress={handleAddField}>
             + ADD NEW FIELD
           </Text>
         </Pressable>
         <Pressable>
-          <Text style={styles.btn2} onPress={handleSaveAppliance}>
+          <Text style={styles[colorTheme].btn2} onPress={handleSaveAppliance}>
             SAVE
           </Text>
         </Pressable>
@@ -212,12 +216,13 @@ function AddNew() {
 
 export default AddNew;
 
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   pickIcon: {
     flexDirection: "row",
   },
   textTitle: {
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   form: {
     height: "100%",
@@ -227,7 +232,7 @@ const styles = StyleSheet.create({
   otherAddImg: {
     height: 70,
     aspectRatio: 1,
-    backgroundColor: colorScheme.tertiary,
+    backgroundColor: colorScheme["dark"].tertiary,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -238,7 +243,7 @@ const styles = StyleSheet.create({
   currentAddImg: {
     height: 70,
     aspectRatio: 1,
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -252,16 +257,16 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   input: {
-    backgroundColor: colorScheme.tertiary,
+    backgroundColor: colorScheme["dark"].tertiary,
     height: 40,
     marginTop: 7,
     marginBottom: 5,
     padding: 5,
     borderRadius: 10,
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   btn: {
-    color: colorScheme.primaryAccent,
+    color: colorScheme["dark"].primaryAccent,
     fontWeight: "bold",
     padding: 3,
     borderRadius: 5,
@@ -271,9 +276,219 @@ const styles = StyleSheet.create({
     marginVertical: 15,
   },
   btn2: {
-    color: colorScheme.secondaryFont,
+    color: colorScheme["dark"].secondaryFont,
     fontWeight: "bold",
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 50,
+  },
+});
+styles["light"] = StyleSheet.create({
+  pickIcon: {
+    flexDirection: "row",
+  },
+  textTitle: {
+    color: colorScheme["light"].primaryFont,
+  },
+  form: {
+    height: "100%",
+    width: "80%",
+    marginHorizontal: "10%",
+  },
+  otherAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["light"].tertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["light"].primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  addImgIcon: {
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: colorScheme["light"].tertiary,
+    height: 40,
+    marginTop: 7,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 10,
+    color: colorScheme["light"].primaryFont,
+  },
+  btn: {
+    color: colorScheme["light"].primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 15,
+  },
+  btn2: {
+    color: colorScheme["light"].secondaryFont,
+    fontWeight: "bold",
+    backgroundColor: colorScheme["light"].primaryAccent,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 50,
+  },
+});
+styles["blue"] = StyleSheet.create({
+  pickIcon: {
+    flexDirection: "row",
+  },
+  textTitle: {
+    color: colorScheme["blue"].primaryFont,
+  },
+  form: {
+    height: "100%",
+    width: "80%",
+    marginHorizontal: "10%",
+  },
+  otherAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["blue"].tertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  addImgIcon: {
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: colorScheme["blue"].tertiary,
+    height: 40,
+    marginTop: 7,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 10,
+    color: colorScheme["blue"].primaryFont,
+  },
+  btn: {
+    color: colorScheme["blue"].primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 15,
+  },
+  btn2: {
+    color: colorScheme["blue"].secondaryFont,
+    fontWeight: "bold",
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 50,
+  },
+});
+styles["purple"] = StyleSheet.create({
+  pickIcon: {
+    flexDirection: "row",
+  },
+  textTitle: {
+    color: colorScheme["purple"].primaryFont,
+  },
+  form: {
+    height: "100%",
+    width: "80%",
+    marginHorizontal: "10%",
+  },
+  otherAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["purple"].tertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["purple"].primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  addImgIcon: {
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: colorScheme["purple"].tertiary,
+    height: 40,
+    marginTop: 7,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 10,
+    color: colorScheme["purple"].primaryFont,
+  },
+  btn: {
+    color: colorScheme["purple"].primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 15,
+  },
+  btn2: {
+    color: colorScheme["purple"].secondaryFont,
+    fontWeight: "bold",
+    backgroundColor: colorScheme["purple"].primaryAccent,
     padding: 3,
     borderRadius: 5,
     width: "100%",

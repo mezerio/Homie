@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { StyleSheet, View, Text, Pressable, StatusBar } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import colorScheme from "../../assets/functions/colors";
 import {
@@ -11,7 +11,7 @@ import {
 } from "../../redux/actions";
 
 function Header() {
-  const { currentPage } = useSelector((state) => state.myReducer);
+  const { currentPage, colorTheme } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
   function handlePlusBtn() {
@@ -37,13 +37,17 @@ function Header() {
   }
   return (
     <>
-      <View style={styles.col}>
-        <Text style={styles.cp}>{currentPage}</Text>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={colorScheme[colorTheme].primary}
+      />
+      <View style={styles[colorTheme].col}>
+        <Text style={styles[colorTheme].cp}>{currentPage}</Text>
         {currentPage === "Home" ||
         currentPage === "People" ||
         currentPage === "Calendar" ? (
           <Pressable onPress={handlePlusBtn}>
-            <Text style={styles.plusBtn}>+</Text>
+            <Text style={styles[colorTheme].plusBtn}>+</Text>
           </Pressable>
         ) : (
           ""
@@ -54,8 +58,8 @@ function Header() {
 }
 
 export default Header;
-
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   col: {
     flexDirection: "row",
     padding: 10,
@@ -65,12 +69,69 @@ const styles = StyleSheet.create({
   cp: {
     fontSize: 20,
     width: "80%",
-    color: colorScheme.secondaryAccent,
+    color: colorScheme["dark"].secondaryAccent,
     marginLeft: 30,
     height: 40,
   },
   plusBtn: {
     fontSize: 30,
-    color: colorScheme.secondaryAccent,
+    color: colorScheme["dark"].secondaryAccent,
+  },
+});
+styles["light"] = StyleSheet.create({
+  col: {
+    flexDirection: "row",
+    padding: 10,
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  cp: {
+    fontSize: 20,
+    width: "80%",
+    color: colorScheme["light"].secondaryAccent,
+    marginLeft: 30,
+    height: 40,
+  },
+  plusBtn: {
+    fontSize: 30,
+    color: colorScheme["light"].secondaryAccent,
+  },
+});
+styles["blue"] = StyleSheet.create({
+  col: {
+    flexDirection: "row",
+    padding: 10,
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  cp: {
+    fontSize: 20,
+    width: "80%",
+    color: colorScheme["blue"].secondaryAccent,
+    marginLeft: 30,
+    height: 40,
+  },
+  plusBtn: {
+    fontSize: 30,
+    color: colorScheme["blue"].secondaryAccent,
+  },
+});
+styles["purple"] = StyleSheet.create({
+  col: {
+    flexDirection: "row",
+    padding: 10,
+    alignItems: "center",
+    marginBottom: 10,
+  },
+  cp: {
+    fontSize: 20,
+    width: "80%",
+    color: colorScheme["purple"].secondaryAccent,
+    marginLeft: 30,
+    height: 40,
+  },
+  plusBtn: {
+    fontSize: 30,
+    color: colorScheme["purple"].secondaryAccent,
   },
 });

@@ -35,6 +35,7 @@ function AddEventModal({ trigger }) {
     newEventItem,
     datesWithEvents,
     eventList,
+    colorTheme,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
@@ -103,7 +104,7 @@ function AddEventModal({ trigger }) {
               ...newDatesWithEvents[newEventDate],
               dots: [
                 ...newDatesWithEvents[newEventDate].dots,
-                { color: colorScheme.primary },
+                { color: colorScheme[colorTheme].primary },
               ],
             },
           };
@@ -112,7 +113,7 @@ function AddEventModal({ trigger }) {
             ...newDatesWithEvents,
             [newEventDate]: {
               ...newDatesWithEvents[newEventDate],
-              dots: [{ color: colorScheme.primary }],
+              dots: [{ color: colorScheme[colorTheme].primary }],
             },
           };
         }
@@ -122,8 +123,8 @@ function AddEventModal({ trigger }) {
           [newEventDate]: {
             marked: true,
             selected: false,
-            dots: [{ color: colorScheme.primary }],
-            selectedColor: colorScheme.primary,
+            dots: [{ color: colorScheme[colorTheme].primary }],
+            selectedColor: colorScheme[colorTheme].primary,
             selectedTextColor: "black",
           },
         };
@@ -167,13 +168,16 @@ function AddEventModal({ trigger }) {
   return trigger == true ? (
     <>
       <Modal transparent={true} visible={true} animationType="fade">
-        <View style={styles.card}>
-          <View style={styles.card2}>
-            <Pressable style={styles.btn3} onPress={handleSelectAP}>
+        <View style={styles[colorTheme].card}>
+          <View style={styles[colorTheme].card2}>
+            <Pressable style={styles[colorTheme].btn3} onPress={handleSelectAP}>
               {newEventItem !== "" ? (
                 <>
-                  <Image style={styles.img} source={newEventItem["Icon"]} />
-                  <Text style={styles.btn2}>
+                  <Image
+                    style={styles[colorTheme].img}
+                    source={newEventItem["Icon"]}
+                  />
+                  <Text style={styles[colorTheme].btn2}>
                     {newEventItem["Vender:"] !== undefined
                       ? String(
                           newEventItem["Vender:"] +
@@ -184,14 +188,16 @@ function AddEventModal({ trigger }) {
                   </Text>
                 </>
               ) : (
-                <Text style={styles.btn2}>select appliance/person</Text>
+                <Text style={styles[colorTheme].btn2}>
+                  select appliance/person
+                </Text>
               )}
             </Pressable>
             <View>
-              <Text style={styles.fil}>Select Date:</Text>
+              <Text style={styles[colorTheme].fil}>Select Date:</Text>
               <TouchableWithoutFeedback onPress={handleDatePickerTrigger}>
                 <View>
-                  <Text style={styles.btn}>
+                  <Text style={styles[colorTheme].btn}>
                     {String(
                       newEventDate.split("-")[2] +
                         "-" +
@@ -212,11 +218,11 @@ function AddEventModal({ trigger }) {
               )}
             </View>
             <View>
-              <Text style={styles.fil}>Select Time:</Text>
+              <Text style={styles[colorTheme].fil}>Select Time:</Text>
 
               <TouchableWithoutFeedback onPress={handleTimePickerTrigger}>
                 <View>
-                  <Text style={styles.btn}>{newEventTime}</Text>
+                  <Text style={styles[colorTheme].btn}>{newEventTime}</Text>
                 </View>
               </TouchableWithoutFeedback>
               {timePickerTrigger && (
@@ -228,19 +234,23 @@ function AddEventModal({ trigger }) {
                 />
               )}
             </View>
-            <Text style={styles.bb}>Description</Text>
+            <Text style={styles[colorTheme].bb}>Description</Text>
             <TextInput
               onChangeText={(text) => dispatch(setNewEventDesc(text))}
-              style={styles.ti}
+              style={styles[colorTheme].ti}
               placeholder="enter description..."
               multiline={true}
               numberOfLines={4}
             ></TextInput>
             <Pressable onPress={handleSave}>
-              <Text style={[styles.btn, styles.bb2]}>SAVE</Text>
+              <Text style={[styles[colorTheme].btn, styles[colorTheme].bb2]}>
+                SAVE
+              </Text>
             </Pressable>
             <Pressable onPress={handleCancel}>
-              <Text style={[styles.btn, styles.bb5]}>CANCEL</Text>
+              <Text style={[styles[colorTheme].btn, styles[colorTheme].bb5]}>
+                CANCEL
+              </Text>
             </Pressable>
           </View>
         </View>
@@ -254,14 +264,15 @@ function AddEventModal({ trigger }) {
 
 export default AddEventModal;
 
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   img: {
     height: "100%",
     opacity: 1,
     resizeMode: "contain",
     flex: 1,
   },
-  fil: { color: colorScheme.primaryFont },
+  fil: { color: colorScheme["dark"].primaryFont },
   card: {
     flex: 1,
     flexDirection: "column",
@@ -269,19 +280,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   card2: {
-    backgroundColor: colorScheme.secondary,
+    backgroundColor: colorScheme["dark"].secondary,
     width: "70%",
     height: 400,
     borderRadius: 10,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    borderColor: colorScheme.primaryFont,
+    borderColor: colorScheme["dark"].primaryFont,
     borderWidth: 2,
   },
   btn: {
-    backgroundColor: colorScheme.primary,
-    color: colorScheme.primaryFont,
+    backgroundColor: colorScheme["dark"].primary,
+    color: colorScheme["dark"].primaryFont,
     padding: 5,
     borderRadius: 5,
     margin: 5,
@@ -289,16 +300,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   bb5: {
-    backgroundColor: colorScheme.primary,
+    backgroundColor: colorScheme["dark"].primary,
   },
   btn2: {
     flex: 4,
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
     textAlign: "center",
     justifyContent: "center",
   },
   btn3: {
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
     flexDirection: "row",
     borderRadius: 5,
     width: 200,
@@ -308,12 +319,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   bb: {
-    borderBottomColor: colorScheme.primaryFont,
+    borderBottomColor: colorScheme["dark"].primaryFont,
     borderBottomWidth: 2,
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   ti: {
-    backgroundColor: colorScheme.tertiaryAccent,
+    backgroundColor: colorScheme["dark"].tertiaryAccent,
     height: 100,
     width: 200,
     borderRadius: 5,
@@ -323,10 +334,238 @@ const styles = StyleSheet.create({
   },
   bb2: {
     textAlign: "center",
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
   },
   bb3: {
     textAlign: "center",
-    backgroundColor: colorScheme.alert,
+    backgroundColor: colorScheme["dark"].alert,
+  },
+});
+styles["light"] = StyleSheet.create({
+  img: {
+    height: "100%",
+    opacity: 1,
+    resizeMode: "contain",
+    flex: 1,
+  },
+  fil: { color: colorScheme["light"].primaryFont },
+  card: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card2: {
+    backgroundColor: colorScheme["light"].secondary,
+    width: "70%",
+    height: 400,
+    borderRadius: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: colorScheme["light"].primaryFont,
+    borderWidth: 2,
+  },
+  btn: {
+    backgroundColor: colorScheme["light"].primary,
+    color: colorScheme["light"].primaryFont,
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
+    width: 200,
+    textAlign: "center",
+  },
+  bb5: {
+    backgroundColor: colorScheme["light"].primary,
+  },
+  btn2: {
+    flex: 4,
+    color: colorScheme["light"].primaryFont,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  btn3: {
+    backgroundColor: colorScheme["light"].primaryAccent,
+    flexDirection: "row",
+    borderRadius: 5,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    margin: 5,
+  },
+  bb: {
+    borderBottomColor: colorScheme["light"].primaryFont,
+    borderBottomWidth: 2,
+    color: colorScheme["light"].primaryFont,
+  },
+  ti: {
+    backgroundColor: colorScheme["light"].tertiaryAccent,
+    height: 100,
+    width: 200,
+    borderRadius: 5,
+    padding: 10,
+    textAlignVertical: "top",
+    margin: 5,
+  },
+  bb2: {
+    textAlign: "center",
+    backgroundColor: colorScheme["light"].primaryAccent,
+  },
+  bb3: {
+    textAlign: "center",
+    backgroundColor: colorScheme["light"].alert,
+  },
+});
+styles["blue"] = StyleSheet.create({
+  img: {
+    height: "100%",
+    opacity: 1,
+    resizeMode: "contain",
+    flex: 1,
+  },
+  fil: { color: colorScheme["blue"].primaryFont },
+  card: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card2: {
+    backgroundColor: colorScheme["blue"].secondary,
+    width: "70%",
+    height: 400,
+    borderRadius: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: colorScheme["blue"].primaryFont,
+    borderWidth: 2,
+  },
+  btn: {
+    backgroundColor: colorScheme["blue"].primary,
+    color: colorScheme["blue"].primaryFont,
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
+    width: 200,
+    textAlign: "center",
+  },
+  bb5: {
+    backgroundColor: colorScheme["blue"].primary,
+  },
+  btn2: {
+    flex: 4,
+    color: colorScheme["blue"].primaryFont,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  btn3: {
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    flexDirection: "row",
+    borderRadius: 5,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    margin: 5,
+  },
+  bb: {
+    borderBottomColor: colorScheme["blue"].primaryFont,
+    borderBottomWidth: 2,
+    color: colorScheme["blue"].primaryFont,
+  },
+  ti: {
+    backgroundColor: colorScheme["blue"].tertiaryAccent,
+    height: 100,
+    width: 200,
+    borderRadius: 5,
+    padding: 10,
+    textAlignVertical: "top",
+    margin: 5,
+  },
+  bb2: {
+    textAlign: "center",
+    backgroundColor: colorScheme["blue"].primaryAccent,
+  },
+  bb3: {
+    textAlign: "center",
+    backgroundColor: colorScheme["blue"].alert,
+  },
+});
+styles["purple"] = StyleSheet.create({
+  img: {
+    height: "100%",
+    opacity: 1,
+    resizeMode: "contain",
+    flex: 1,
+  },
+  fil: { color: colorScheme["purple"].primaryFont },
+  card: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  card2: {
+    backgroundColor: colorScheme["purple"].secondary,
+    width: "70%",
+    height: 400,
+    borderRadius: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: colorScheme["purple"].primaryFont,
+    borderWidth: 2,
+  },
+  btn: {
+    backgroundColor: colorScheme["purple"].primary,
+    color: colorScheme["purple"].primaryFont,
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
+    width: 200,
+    textAlign: "center",
+  },
+  bb5: {
+    backgroundColor: colorScheme["purple"].primary,
+  },
+  btn2: {
+    flex: 4,
+    color: colorScheme["purple"].primaryFont,
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  btn3: {
+    backgroundColor: colorScheme["purple"].primaryAccent,
+    flexDirection: "row",
+    borderRadius: 5,
+    width: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 5,
+    margin: 5,
+  },
+  bb: {
+    borderBottomColor: colorScheme["purple"].primaryFont,
+    borderBottomWidth: 2,
+    color: colorScheme["purple"].primaryFont,
+  },
+  ti: {
+    backgroundColor: colorScheme["purple"].tertiaryAccent,
+    height: 100,
+    width: 200,
+    borderRadius: 5,
+    padding: 10,
+    textAlignVertical: "top",
+    margin: 5,
+  },
+  bb2: {
+    textAlign: "center",
+    backgroundColor: colorScheme["purple"].primaryAccent,
+  },
+  bb3: {
+    textAlign: "center",
+    backgroundColor: colorScheme["purple"].alert,
   },
 });

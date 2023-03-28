@@ -10,9 +10,8 @@ import {
 } from "../../redux/actions";
 
 function HomePage() {
-  const { currentPage, applianceList, viewApplianceTrigger } = useSelector(
-    (state) => state.myReducer
-  );
+  const { currentPage, applianceList, viewApplianceTrigger, colorTheme } =
+    useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
   function handleAdd() {
@@ -24,14 +23,14 @@ function HomePage() {
   return currentPage === "Home" ? (
     <>
       <ScrollView>
-        <View style={styles.view}>
+        <View style={styles[colorTheme].view}>
           {applianceList.map((appliance, index) => (
             <View key={index}>
               <ApplianceCard appliance={appliance} index={index} />
             </View>
           ))}
           <Pressable>
-            <Text style={styles.btn} onPress={handleAdd}>
+            <Text style={styles[colorTheme].btn} onPress={handleAdd}>
               + ADD NEW
             </Text>
           </Pressable>
@@ -45,15 +44,66 @@ function HomePage() {
 }
 
 export default HomePage;
-
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   view: {
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
   },
   btn: {
-    color: colorScheme.primaryAccent,
+    color: colorScheme["dark"].primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 10,
+  },
+});
+styles["light"] = StyleSheet.create({
+  view: {
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  btn: {
+    color: colorScheme["light"].primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 10,
+  },
+});
+styles["blue"] = StyleSheet.create({
+  view: {
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  btn: {
+    color: colorScheme["blue"].primaryAccent,
+    fontWeight: "bold",
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 14,
+    marginVertical: 10,
+  },
+});
+styles["purple"] = StyleSheet.create({
+  view: {
+    flexDirection: "column",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  btn: {
+    color: colorScheme["purple"].primaryAccent,
     fontWeight: "bold",
     padding: 3,
     borderRadius: 5,

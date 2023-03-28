@@ -62,7 +62,7 @@ const initialState = {
   newEventItem: "",
   newEventDesc: "Appointment",
   currentPage: "Home",
-  colorTheme: "dark",
+  colorTheme: "purple",
   updatedIcon: homeImg,
   updatedInputs: [],
   indexOfViewedAppliance: 0,
@@ -91,29 +91,36 @@ const initialState = {
       (new Date().getDate() < 10 ? "0" : "") +
       new Date().getDate()
   ),
-  datesWithEvents: {
-    "2023-03-03": {
-      marked: true,
-      selected: false,
-      dots: [{ color: colorScheme.primary }, { color: colorScheme.primary }],
-      selectedColor: colorScheme.secondary,
-      selectedTextColor: colorScheme.primaryFont,
-    },
-    "2023-03-11": {
-      marked: true,
-      selected: false,
-      dots: [{ color: colorScheme.primary }, { color: colorScheme.primary }],
-      selectedColor: colorScheme.secondary,
-      selectedTextColor: colorScheme.primaryFont,
-    },
-    "2023-03-21": {
-      marked: true,
-      selected: false,
-      dots: [{ color: colorScheme.primary }],
-      selectedColor: colorScheme.secondary,
-      selectedTextColor: colorScheme.primaryFont,
-    },
-  },
+  // datesWithEvents: {
+  //   "2023-03-03": {
+  //     marked: true,
+  //     selected: false,
+  //     dots: [
+  //       { color: colorScheme[colorTheme].primary },
+  //       { color: colorScheme[colorTheme].primary },
+  //     ],
+  //     selectedColor: colorScheme[colorTheme].secondary,
+  //     selectedTextColor: colorScheme[colorTheme].primaryFont,
+  //   },
+  //   "2023-03-11": {
+  //     marked: true,
+  //     selected: false,
+  //     dots: [
+  //       { color: colorScheme[colorTheme].primary },
+  //       { color: colorScheme[colorTheme].primary },
+  //     ],
+  //     selectedColor: colorScheme[colorTheme].secondary,
+  //     selectedTextColor: colorScheme[colorTheme].primaryFont,
+  //   },
+  //   "2023-03-21": {
+  //     marked: true,
+  //     selected: false,
+  //     dots: [{ color: colorScheme[colorTheme].primary }],
+  //     selectedColor: colorScheme[colorTheme].secondary,
+  //     selectedTextColor: colorScheme[colorTheme].primaryFont,
+  //   },
+  // },
+  datesWithEvents: {},
   applianceList: [
     {
       Icon: WMIcon,
@@ -136,13 +143,13 @@ const initialState = {
       "Model Number:": "FR93937SK",
       "Serial Number:": "SR363930",
     },
-    {
-      Icon: vacuumIcon,
-      "Vender:": "Dyson",
-      "Product Name/Title:": "Hoover",
-      "Model Number:": "DY293930K",
-      "Serial Number:": "SS338300",
-    },
+    // {
+    //   Icon: vacuumIcon,
+    //   "Vender:": "Dyson",
+    //   "Product Name/Title:": "Hoover",
+    //   "Model Number:": "DY293930K",
+    //   "Serial Number:": "SS338300",
+    // },
     {
       Icon: hobIcon,
       "Vender:": "John Lewis",
@@ -166,12 +173,13 @@ const initialState = {
     },
   ],
   peopleList: [
-    { "Name:": "Maaz", "D.O.B:": "13/08/98", Icon: manIcon },
-    { "Name:": "Alina", "D.O.B:": "02/02/22", Icon: babyIcon },
-    { "Name:": "Mehdi", "D.O.B:": "02/06/99", Icon: manIcon },
-    { "Name:": "Drew", "D.O.B:": "09/07/98", Icon: manIcon },
-    { "Name:": "Latif", "D.O.B:": "17/07/98", Icon: manIcon },
-    { "Name:": "Aats", "D.O.B:": "06/08/98", Icon: womenIcon },
+    { "Name:": "Jake Peralta", "D.O.B:": "18/08/78", Icon: manIcon },
+    { "Name:": "Amy Santiago", "D.O.B:": "19/08/82", Icon: womenIcon },
+    { "Name:": "Charles Boyle", "D.O.B:": "02/12/70", Icon: manIcon },
+    { "Name:": "Rosa Diaz", "D.O.B:": "10/02/81", Icon: womenIcon },
+    { "Name:": "Raymond Holt", "D.O.B:": "01/07/62", Icon: manIcon },
+    { "Name:": "Terry Jeffords", "D.O.B:": "30/07/68", Icon: manIcon },
+    // { "Name:": "McClane Peralta", "D.O.B:": "13/09/20", Icon: babyIcon },
   ],
   fieldHeaders: [
     { title: "Product Name/Title:", input: "" },

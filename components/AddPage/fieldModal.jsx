@@ -8,7 +8,7 @@ import {
 } from "../../redux/actions";
 
 function FieldModal(props) {
-  const { appTabChosen } = useSelector((state) => state.myReducer);
+  const { appTabChosen, colorTheme } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
   function handleAddField() {
     dispatch(setFieldModalTrigger(false));
@@ -20,12 +20,12 @@ function FieldModal(props) {
   }
   return props.trigger == true ? (
     <Modal transparent={true} visible={true} animationType="slide">
-      <View style={styles.view2}>
-        <View style={styles.view1}>
+      <View style={styles[colorTheme].view2}>
+        <View style={styles[colorTheme].view1}>
           <TextInput
             onChangeText={(text) => (enteredText = text)}
             onSubmitEditing={handleAddField}
-            style={styles.input}
+            style={styles[colorTheme].input}
             placeholder="shutup mehdi"
           />
         </View>
@@ -38,15 +38,91 @@ function FieldModal(props) {
 
 export default FieldModal;
 
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   input: {
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
     width: "70%",
     borderRadius: 5,
     paddingLeft: 5,
   },
   view1: {
-    backgroundColor: colorScheme.tertiary,
+    backgroundColor: colorScheme["dark"].tertiary,
+    width: "70%",
+    height: 100,
+    borderRadius: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 2,
+  },
+  view2: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+styles["light"] = StyleSheet.create({
+  input: {
+    backgroundColor: colorScheme["light"].primaryAccent,
+    width: "70%",
+    borderRadius: 5,
+    paddingLeft: 5,
+  },
+  view1: {
+    backgroundColor: colorScheme["light"].tertiary,
+    width: "70%",
+    height: 100,
+    borderRadius: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 2,
+  },
+  view2: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+styles["blue"] = StyleSheet.create({
+  input: {
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    width: "70%",
+    borderRadius: 5,
+    paddingLeft: 5,
+  },
+  view1: {
+    backgroundColor: colorScheme["blue"].tertiary,
+    width: "70%",
+    height: 100,
+    borderRadius: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 2,
+  },
+  view2: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+styles["purple"] = StyleSheet.create({
+  input: {
+    backgroundColor: colorScheme["purple"].primaryAccent,
+    width: "70%",
+    borderRadius: 5,
+    paddingLeft: 5,
+  },
+  view1: {
+    backgroundColor: colorScheme["purple"].tertiary,
     width: "70%",
     height: 100,
     borderRadius: 10,

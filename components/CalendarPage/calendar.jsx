@@ -34,6 +34,7 @@ function CalendarPage() {
     eventList,
     dateSelected,
     eventModalTrigger,
+    colorTheme,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
@@ -46,7 +47,7 @@ function CalendarPage() {
     }
     if (newDatesWithEvents[date["dateString"]] === undefined) {
       newDatesWithEvents[date["dateString"]] = {
-        selectedColor: colorScheme.secondary,
+        selectedColor: colorScheme[colorTheme].secondary,
       };
     }
     newDatesWithEvents[date["dateString"]]["selected"] = true;
@@ -54,23 +55,23 @@ function CalendarPage() {
   }
   return currentPage === "Calendar" ? (
     <>
-      <View style={styles.view}>
+      <View style={styles[colorTheme].view}>
         <Calendar
           markingType="multi-dot"
-          style={styles.cal}
+          style={styles[colorTheme].cal}
           onDayPress={(date) => handleDayPress(date)}
           markedDates={datesWithEvents}
           theme={{
-            calendarBackground: colorScheme.primaryAccent,
-            textSectionTitleColor: colorScheme.primaryFont,
-            todayTextColor: colorScheme.primaryFont,
-            dayTextColor: colorScheme.secondaryFont,
-            arrowColor: colorScheme.primary,
-            textDisabledColor: colorScheme.tertiaryAccent,
+            calendarBackground: colorScheme[colorTheme].primaryAccent,
+            textSectionTitleColor: colorScheme[colorTheme].primaryFont,
+            todayTextColor: colorScheme[colorTheme].primaryFont,
+            dayTextColor: colorScheme[colorTheme].secondaryFont,
+            arrowColor: colorScheme[colorTheme].primary,
+            textDisabledColor: colorScheme[colorTheme].tertiaryAccent,
           }}
         />
-        <View style={styles.eventView}>
-          <Text style={styles.bb}>
+        <View style={styles[colorTheme].eventView}>
+          <Text style={styles[colorTheme].bb}>
             {String(
               dateSelected.split("-")[2] +
                 " " +
@@ -81,9 +82,9 @@ function CalendarPage() {
           </Text>
         </View>
         {eventList[dateSelected] == undefined ? (
-          <Text style={styles.sv}>No Scheduled Events</Text>
+          <Text style={styles[colorTheme].sv}>No Scheduled Events</Text>
         ) : (
-          <ScrollView style={styles.sv}>
+          <ScrollView style={styles[colorTheme].sv}>
             {eventList[dateSelected].map((event, index) => (
               <EventCard key={index} event={event} index={index} />
             ))}
@@ -100,7 +101,8 @@ function CalendarPage() {
 
 export default CalendarPage;
 
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   view: {
     flex: 1,
     alignItems: "center",
@@ -112,17 +114,17 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   eventView: {
-    backgroundColor: colorScheme.secondary,
+    backgroundColor: colorScheme["dark"].secondary,
     width: "90%",
     padding: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
   bb: {
-    borderBottomColor: colorScheme.primaryFont,
+    borderBottomColor: colorScheme["dark"].primaryFont,
     borderBottomWidth: 1,
     borderStyle: "solid",
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   na: {
     backgroundColor: "white",
@@ -133,12 +135,138 @@ const styles = StyleSheet.create({
   },
   sv: {
     textAlign: "center",
-    backgroundColor: colorScheme.tertiary,
+    backgroundColor: colorScheme["dark"].tertiary,
     width: "90%",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     marginBottom: 10,
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
+    padding: 5,
+  },
+});
+styles["light"] = StyleSheet.create({
+  view: {
+    flex: 1,
+    alignItems: "center",
+  },
+  cal: {
+    width: 300,
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
+  },
+  eventView: {
+    backgroundColor: colorScheme["light"].secondary,
+    width: "90%",
+    padding: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  bb: {
+    borderBottomColor: colorScheme["light"].primaryFont,
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    color: colorScheme["light"].primaryFont,
+  },
+  na: {
+    backgroundColor: "white",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    margin: 20,
+  },
+  sv: {
+    textAlign: "center",
+    backgroundColor: colorScheme["light"].tertiary,
+    width: "90%",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    marginBottom: 10,
+    color: colorScheme["light"].primaryFont,
+    padding: 5,
+  },
+});
+styles["blue"] = StyleSheet.create({
+  view: {
+    flex: 1,
+    alignItems: "center",
+  },
+  cal: {
+    width: 300,
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
+  },
+  eventView: {
+    backgroundColor: colorScheme["blue"].secondary,
+    width: "90%",
+    padding: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  bb: {
+    borderBottomColor: colorScheme["blue"].primaryFont,
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    color: colorScheme["blue"].primaryFont,
+  },
+  na: {
+    backgroundColor: "white",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    margin: 20,
+  },
+  sv: {
+    textAlign: "center",
+    backgroundColor: colorScheme["blue"].tertiary,
+    width: "90%",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    marginBottom: 10,
+    color: colorScheme["blue"].primaryFont,
+    padding: 5,
+  },
+});
+styles["purple"] = StyleSheet.create({
+  view: {
+    flex: 1,
+    alignItems: "center",
+  },
+  cal: {
+    width: 300,
+    padding: 10,
+    borderRadius: 10,
+    margin: 10,
+  },
+  eventView: {
+    backgroundColor: colorScheme["purple"].secondary,
+    width: "90%",
+    padding: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  bb: {
+    borderBottomColor: colorScheme["purple"].primaryFont,
+    borderBottomWidth: 1,
+    borderStyle: "solid",
+    color: colorScheme["purple"].primaryFont,
+  },
+  na: {
+    backgroundColor: "white",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10,
+    margin: 20,
+  },
+  sv: {
+    textAlign: "center",
+    backgroundColor: colorScheme["purple"].tertiary,
+    width: "90%",
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    marginBottom: 10,
+    color: colorScheme["purple"].primaryFont,
     padding: 5,
   },
 });

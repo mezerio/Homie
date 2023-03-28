@@ -57,6 +57,7 @@ function ViewAppliance({ trigger }) {
     fieldHeadersPerson,
     imgSource,
     updatedIcon,
+    colorTheme,
   } = useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
@@ -129,27 +130,30 @@ function ViewAppliance({ trigger }) {
   return trigger == true ? (
     <>
       <Modal animationType="fade" transparent={true}>
-        <View style={styles.cont}>
+        <View style={styles[colorTheme].cont}>
           <Pressable onPress={handleCancel}>
-            <Text style={styles.back}>{"<"}</Text>
+            <Text style={styles[colorTheme].back}>{"<"}</Text>
           </Pressable>
           <ScrollView>
-            <View style={styles.form}>
-              <Text style={styles.textTitle}>Select Icon:</Text>
+            <View style={styles[colorTheme].form}>
+              <Text style={styles[colorTheme].textTitle}>Select Icon:</Text>
 
-              <ScrollView style={styles.pickIcon} horizontal={true}>
+              <ScrollView style={styles[colorTheme].pickIcon} horizontal={true}>
                 {currentPage === "Home"
                   ? appIconList.map((icon, index) => (
                       <Pressable
                         key={index}
                         style={[
                           updatedIcon === icon
-                            ? styles.currentAddImg
-                            : styles.otherAddImg,
+                            ? styles[colorTheme].currentAddImg
+                            : styles[colorTheme].otherAddImg,
                         ]}
                         onPress={() => handleSetIcon(icon)}
                       >
-                        <Image style={styles.addImgIcon} source={icon} />
+                        <Image
+                          style={styles[colorTheme].addImgIcon}
+                          source={icon}
+                        />
                       </Pressable>
                     ))
                   : peopleIconList.map((icon, index) => (
@@ -157,17 +161,23 @@ function ViewAppliance({ trigger }) {
                         key={index}
                         style={[
                           updatedIcon === icon
-                            ? styles.currentAddImg
-                            : styles.otherAddImg,
+                            ? styles[colorTheme].currentAddImg
+                            : styles[colorTheme].otherAddImg,
                         ]}
                         onPress={() => handleSetIcon(icon)}
                       >
-                        <Image style={styles.addImgIcon} source={icon} />
+                        <Image
+                          style={styles[colorTheme].addImgIcon}
+                          source={icon}
+                        />
                       </Pressable>
                     ))}
-                <Pressable onPress={handlePickImage} style={styles.otherAddImg}>
+                <Pressable
+                  onPress={handlePickImage}
+                  style={styles[colorTheme].otherAddImg}
+                >
                   <Image
-                    style={styles.addImgIcon}
+                    style={styles[colorTheme].addImgIcon}
                     source={imgSource ? { uri: imgSource } : addPhotoImg}
                   />
                 </Pressable>
@@ -176,9 +186,9 @@ function ViewAppliance({ trigger }) {
               {currentPage === "Home"
                 ? fieldHeaders.map((field, index) => (
                     <View key={index}>
-                      <Text style={styles.text}>{field.title}</Text>
+                      <Text style={styles[colorTheme].text}>{field.title}</Text>
                       <TextInput
-                        style={styles.input}
+                        style={styles[colorTheme].input}
                         placeholder=" e.g. text"
                         onChangeText={(text) =>
                           handleTextInputUpdate(text, index)
@@ -190,9 +200,9 @@ function ViewAppliance({ trigger }) {
                   ))
                 : fieldHeadersPerson.map((field, index) => (
                     <View key={index}>
-                      <Text style={styles.text}>{field.title}</Text>
+                      <Text style={styles[colorTheme].text}>{field.title}</Text>
                       <TextInput
-                        style={styles.input}
+                        style={styles[colorTheme].input}
                         placeholder=" e.g. text"
                         onChangeText={(text) =>
                           handleTextInputUpdate(text, index)
@@ -203,17 +213,17 @@ function ViewAppliance({ trigger }) {
                     </View>
                   ))}
               <Pressable>
-                <Text style={styles.btn4} onPress={handleUpdate}>
+                <Text style={styles[colorTheme].btn4} onPress={handleUpdate}>
                   UPDATE
                 </Text>
               </Pressable>
               <Pressable>
-                <Text style={styles.btn2} onPress={handleCancel}>
+                <Text style={styles[colorTheme].btn2} onPress={handleCancel}>
                   CANCEL
                 </Text>
               </Pressable>
               <Pressable>
-                <Text style={styles.btn3} onPress={handleDelete}>
+                <Text style={styles[colorTheme].btn3} onPress={handleDelete}>
                   DELETE
                 </Text>
               </Pressable>
@@ -228,24 +238,24 @@ function ViewAppliance({ trigger }) {
 }
 
 export default ViewAppliance;
-
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   textTitle: {
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   pickIcon: {
     flexDirection: "row",
   },
   cont: {
-    backgroundColor: colorScheme.primary,
+    backgroundColor: colorScheme["dark"].primary,
     flex: 1,
   },
   text: {
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   back: {
     fontSize: 30,
-    color: colorScheme.primaryAccent,
+    color: colorScheme["dark"].primaryAccent,
     paddingHorizontal: 30,
   },
   form: {
@@ -256,7 +266,7 @@ const styles = StyleSheet.create({
   otherAddImg: {
     height: 70,
     aspectRatio: 1,
-    backgroundColor: colorScheme.tertiary,
+    backgroundColor: colorScheme["dark"].tertiary,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -267,7 +277,7 @@ const styles = StyleSheet.create({
   currentAddImg: {
     height: 70,
     aspectRatio: 1,
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -281,13 +291,13 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   input: {
-    backgroundColor: colorScheme.tertiary,
+    backgroundColor: colorScheme["dark"].tertiary,
     height: 40,
     marginTop: 7,
     marginBottom: 5,
     padding: 5,
     borderRadius: 10,
-    color: colorScheme.primaryFont,
+    color: colorScheme["dark"].primaryFont,
   },
   btn: {
     color: "white",
@@ -301,7 +311,7 @@ const styles = StyleSheet.create({
   btn2: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: colorScheme.secondary,
+    backgroundColor: colorScheme["dark"].secondary,
     padding: 3,
     borderRadius: 5,
     width: "100%",
@@ -312,7 +322,7 @@ const styles = StyleSheet.create({
   btn3: {
     color: "white",
     fontWeight: "bold",
-    backgroundColor: colorScheme.alert,
+    backgroundColor: colorScheme["dark"].alert,
     padding: 3,
     borderRadius: 5,
     width: "100%",
@@ -324,7 +334,316 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "white",
     fontWeight: "bold",
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+  },
+});
+styles["light"] = StyleSheet.create({
+  textTitle: {
+    color: colorScheme["light"].primaryFont,
+  },
+  pickIcon: {
+    flexDirection: "row",
+  },
+  cont: {
+    backgroundColor: colorScheme["light"].primary,
+    flex: 1,
+  },
+  text: {
+    color: colorScheme["light"].primaryFont,
+  },
+  back: {
+    fontSize: 30,
+    color: colorScheme["light"].primaryAccent,
+    paddingHorizontal: 30,
+  },
+  form: {
+    height: "100%",
+    width: "100%",
+    padding: "10%",
+  },
+  otherAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["light"].tertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["light"].primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  addImgIcon: {
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: colorScheme["light"].tertiary,
+    height: 40,
+    marginTop: 7,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 10,
+    color: colorScheme["light"].primaryFont,
+  },
+  btn: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "lightgreen",
+    padding: 3,
+    borderRadius: 5,
+    width: "41%",
+    margin: 10,
+  },
+  btn2: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["light"].secondary,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 5,
+  },
+  btn3: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["light"].alert,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 50,
+  },
+  btn4: {
+    marginTop: 20,
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["light"].primaryAccent,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+  },
+});
+styles["blue"] = StyleSheet.create({
+  textTitle: {
+    color: colorScheme["blue"].primaryFont,
+  },
+  pickIcon: {
+    flexDirection: "row",
+  },
+  cont: {
+    backgroundColor: colorScheme["blue"].primary,
+    flex: 1,
+  },
+  text: {
+    color: colorScheme["blue"].primaryFont,
+  },
+  back: {
+    fontSize: 30,
+    color: colorScheme["blue"].primaryAccent,
+    paddingHorizontal: 30,
+  },
+  form: {
+    height: "100%",
+    width: "100%",
+    padding: "10%",
+  },
+  otherAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["blue"].tertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  addImgIcon: {
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: colorScheme["blue"].tertiary,
+    height: 40,
+    marginTop: 7,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 10,
+    color: colorScheme["blue"].primaryFont,
+  },
+  btn: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "lightgreen",
+    padding: 3,
+    borderRadius: 5,
+    width: "41%",
+    margin: 10,
+  },
+  btn2: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["blue"].secondary,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 5,
+  },
+  btn3: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["blue"].alert,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 50,
+  },
+  btn4: {
+    marginTop: 20,
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+  },
+});
+styles["purple"] = StyleSheet.create({
+  textTitle: {
+    color: colorScheme["purple"].primaryFont,
+  },
+  pickIcon: {
+    flexDirection: "row",
+  },
+  cont: {
+    backgroundColor: colorScheme["purple"].primary,
+    flex: 1,
+  },
+  text: {
+    color: colorScheme["purple"].primaryFont,
+  },
+  back: {
+    fontSize: 30,
+    color: colorScheme["purple"].primaryAccent,
+    paddingHorizontal: 30,
+  },
+  form: {
+    height: "100%",
+    width: "100%",
+    padding: "10%",
+  },
+  otherAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["purple"].tertiary,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  currentAddImg: {
+    height: 70,
+    aspectRatio: 1,
+    backgroundColor: colorScheme["purple"].primaryAccent,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginBottom: 10,
+    margin: 5,
+    padding: 5,
+  },
+  addImgIcon: {
+    flex: 0.7,
+    width: 50,
+    resizeMode: "contain",
+  },
+  input: {
+    backgroundColor: colorScheme["purple"].tertiary,
+    height: 40,
+    marginTop: 7,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 10,
+    color: colorScheme["purple"].primaryFont,
+  },
+  btn: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "lightgreen",
+    padding: 3,
+    borderRadius: 5,
+    width: "41%",
+    margin: 10,
+  },
+  btn2: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["purple"].secondary,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginVertical: 5,
+  },
+  btn3: {
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["purple"].alert,
+    padding: 3,
+    borderRadius: 5,
+    width: "100%",
+    textAlign: "center",
+    fontSize: 20,
+    marginBottom: 50,
+  },
+  btn4: {
+    marginTop: 20,
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: colorScheme["purple"].primaryAccent,
     padding: 3,
     borderRadius: 5,
     width: "100%",

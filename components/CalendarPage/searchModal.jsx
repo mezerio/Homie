@@ -16,9 +16,8 @@ import {
 } from "react-native";
 
 function ViewAppliance() {
-  const { peopleList, applianceList, searchTrigger, searchInput } = useSelector(
-    (state) => state.myReducer
-  );
+  const { peopleList, applianceList, searchTrigger, searchInput, colorTheme } =
+    useSelector((state) => state.myReducer);
   const dispatch = useDispatch();
 
   function handleCancel() {
@@ -28,19 +27,19 @@ function ViewAppliance() {
   return searchTrigger == true ? (
     <>
       <Modal animationType="fade">
-        <View style={styles.bg}>
+        <View style={styles[colorTheme].bg}>
           <Pressable onPress={handleCancel}>
-            <Text style={styles.back}>{"<"}</Text>
+            <Text style={styles[colorTheme].back}>{"<"}</Text>
           </Pressable>
-          <View style={styles.searchbar}>
+          <View style={styles[colorTheme].searchbar}>
             <TextInput
-              style={styles.input}
+              style={styles[colorTheme].input}
               placeholder="search..."
               onChangeText={(text) => dispatch(setSearchInput(text))}
             />
-            <Image style={styles.searchImg} source={searchImg} />
+            <Image style={styles[colorTheme].searchImg} source={searchImg} />
           </View>
-          <ScrollView contentContainerStyle={styles.scroll}>
+          <ScrollView contentContainerStyle={styles[colorTheme].scroll}>
             {applianceList
               .filter((appliance) =>
                 appliance["Vender:"]
@@ -74,16 +73,17 @@ function ViewAppliance() {
 
 export default ViewAppliance;
 
-const styles = StyleSheet.create({
+const styles = {};
+styles["dark"] = StyleSheet.create({
   scroll: {
-    backgroundColor: colorScheme.primary,
+    backgroundColor: colorScheme["dark"].primary,
     alignItems: "center",
   },
   searchbar: {
     height: 40,
     flexDirection: "row",
     width: "90%",
-    backgroundColor: colorScheme.primaryAccent,
+    backgroundColor: colorScheme["dark"].primaryAccent,
     margin: "5%",
     padding: 10,
     borderRadius: 10,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
   },
   back: {
     fontSize: 30,
-    color: colorScheme.primaryAccent,
+    color: colorScheme["dark"].primaryAccent,
     paddingHorizontal: 30,
   },
   searchImg: {
@@ -102,5 +102,95 @@ const styles = StyleSheet.create({
     width: "90%",
     color: "white",
   },
-  bg: { backgroundColor: colorScheme.primary, flex: 1 },
+  bg: { backgroundColor: colorScheme["dark"].primary, flex: 1 },
+});
+styles["light"] = StyleSheet.create({
+  scroll: {
+    backgroundColor: colorScheme["light"].primary,
+    alignItems: "center",
+  },
+  searchbar: {
+    height: 40,
+    flexDirection: "row",
+    width: "90%",
+    backgroundColor: colorScheme["light"].primaryAccent,
+    margin: "5%",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  back: {
+    fontSize: 30,
+    color: colorScheme["light"].primaryAccent,
+    paddingHorizontal: 30,
+  },
+  searchImg: {
+    aspectRatio: 1,
+    width: "10%",
+  },
+  input: {
+    width: "90%",
+    color: "white",
+  },
+  bg: { backgroundColor: colorScheme["light"].primary, flex: 1 },
+});
+styles["blue"] = StyleSheet.create({
+  scroll: {
+    backgroundColor: colorScheme["blue"].primary,
+    alignItems: "center",
+  },
+  searchbar: {
+    height: 40,
+    flexDirection: "row",
+    width: "90%",
+    backgroundColor: colorScheme["blue"].primaryAccent,
+    margin: "5%",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  back: {
+    fontSize: 30,
+    color: colorScheme["blue"].primaryAccent,
+    paddingHorizontal: 30,
+  },
+  searchImg: {
+    aspectRatio: 1,
+    width: "10%",
+  },
+  input: {
+    width: "90%",
+    color: "white",
+  },
+  bg: { backgroundColor: colorScheme["blue"].primary, flex: 1 },
+});
+styles["purple"] = StyleSheet.create({
+  scroll: {
+    backgroundColor: colorScheme["purple"].primary,
+    alignItems: "center",
+  },
+  searchbar: {
+    height: 40,
+    flexDirection: "row",
+    width: "90%",
+    backgroundColor: colorScheme["purple"].primaryAccent,
+    margin: "5%",
+    padding: 10,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  back: {
+    fontSize: 30,
+    color: colorScheme["purple"].primaryAccent,
+    paddingHorizontal: 30,
+  },
+  searchImg: {
+    aspectRatio: 1,
+    width: "10%",
+  },
+  input: {
+    width: "90%",
+    color: "white",
+  },
+  bg: { backgroundColor: colorScheme["purple"].primary, flex: 1 },
 });

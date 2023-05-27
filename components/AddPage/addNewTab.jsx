@@ -46,95 +46,36 @@ function AddNewTab() {
 export default AddNewTab;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  tab: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    width: "50%",
-    marginHorizontal: "25%",
-    marginVertical: 20,
-    borderRadius: 25,
-    alignItems: "center",
-    padding: 2,
-  },
-  chosenTab: {
-    color: colorScheme["dark"].primary,
-    padding: 8,
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    borderRadius: 25,
-  },
-  otherTab: {
-    padding: 8,
-    color: "grey",
-  },
-});
-styles["light"] = StyleSheet.create({
-  tab: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    width: "50%",
-    marginHorizontal: "25%",
-    marginVertical: 20,
-    borderRadius: 25,
-    alignItems: "center",
-    padding: 2,
-  },
-  chosenTab: {
-    color: colorScheme["light"].primary,
-    padding: 8,
-    backgroundColor: colorScheme["light"].primaryAccent,
-    borderRadius: 25,
-  },
-  otherTab: {
-    padding: 8,
-    color: "grey",
-  },
-});
-styles["blue"] = StyleSheet.create({
-  tab: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    width: "50%",
-    marginHorizontal: "25%",
-    marginVertical: 20,
-    borderRadius: 25,
-    alignItems: "center",
-    padding: 2,
-  },
-  chosenTab: {
-    color: colorScheme["blue"].primary,
-    padding: 8,
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    borderRadius: 25,
-  },
-  otherTab: {
-    padding: 8,
-    color: "grey",
-  },
-});
-styles["purple"] = StyleSheet.create({
-  tab: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    width: "50%",
-    marginHorizontal: "25%",
-    marginVertical: 20,
-    borderRadius: 25,
-    alignItems: "center",
-    padding: 2,
-  },
-  chosenTab: {
-    color: colorScheme["purple"].primary,
-    padding: 8,
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    borderRadius: 25,
-  },
-  otherTab: {
-    padding: 8,
-    color: "grey",
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    tab: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      backgroundColor: colorScheme[theme].primaryFont,
+      width: "50%",
+      marginHorizontal: "25%",
+      marginVertical: 20,
+      borderRadius: 25,
+      alignItems: "center",
+      padding: 2,
+    },
+    chosenTab: {
+      color: colorScheme[theme].primaryFont,
+      padding: 8,
+      backgroundColor: colorScheme[theme].accent,
+      borderRadius: 25,
+    },
+    otherTab: {
+      padding: 8,
+      color: colorScheme[theme].secondaryFont,
+    },
+  });
+}

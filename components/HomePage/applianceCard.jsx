@@ -26,24 +26,26 @@ function ApplianceCard({ appliance, index }) {
   return (
     <Pressable onPress={handleOpenApplianceDetails}>
       <View style={styles[colorTheme].card}>
-        <Image style={styles[colorTheme].img} source={appliance["Icon"]} />
-        <View style={styles[colorTheme].col1}>
-          <Text style={styles[colorTheme].text1}>Name:</Text>
-          <Text style={styles[colorTheme].text1}>Vender: </Text>
-          <Text style={styles[colorTheme].text1}>Model#:</Text>
-          <Text style={styles[colorTheme].text1}>Serial#:</Text>
+        <View style={styles[colorTheme].imageContainer}>
+          <Image style={styles[colorTheme].img} source={appliance["Icon"]} />
         </View>
-        <View style={styles[colorTheme].col}>
-          <Text style={styles[colorTheme].text}>
-            {appliance["Product Name/Title:"]}
-          </Text>
-          <Text style={styles[colorTheme].text}>{appliance["Vender:"]}</Text>
-          <Text style={styles[colorTheme].text}>
-            {appliance["Model Number:"]}
-          </Text>
-          <Text style={styles[colorTheme].text}>
-            {appliance["Serial Number:"]}
-          </Text>
+        <View style={styles[colorTheme].textContainer}>
+          <View style={styles[colorTheme].mainTextContainer}>
+            <Text style={styles[colorTheme].textTitle}>
+              {appliance["Product Name/Title:"]}
+            </Text>
+            <Text style={styles[colorTheme].textVender}>
+              {appliance["Vender:"]}
+            </Text>
+          </View>
+          <View style={styles[colorTheme].subTextContainer}>
+            <Text style={styles[colorTheme].textBottom}>
+              {appliance["Model Number:"]}
+            </Text>
+            <Text style={styles[colorTheme].textBottom}>
+              {appliance["Serial Number:"]}
+            </Text>
+          </View>
         </View>
       </View>
     </Pressable>
@@ -52,183 +54,60 @@ function ApplianceCard({ appliance, index }) {
 
 export default ApplianceCard;
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["dark"].secondary,
-    width: 300,
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  text: {
-    color: colorScheme["dark"].primaryFont,
-    textAlign: "left",
-    marginVertical: 1,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: colorScheme["dark"].tertiary,
-    paddingHorizontal: 5,
-    fontSize: 13,
-  },
-  text1: {
-    color: colorScheme["dark"].secondaryFont,
-    textAlign: "right",
-    fontWeight: "bold",
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    marginVertical: 1,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    fontSize: 13,
-  },
-  img: {
-    flex: 3,
-    aspectRatio: 1,
-    margin: 5,
-    opacity: 0.8,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 10,
-  },
-  col1: {
-    flex: 4,
-  },
-});
-styles["light"] = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["light"].secondary,
-    width: 300,
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  text: {
-    color: colorScheme["light"].primaryFont,
-    textAlign: "left",
-    marginVertical: 1,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: colorScheme["light"].tertiary,
-    paddingHorizontal: 5,
-    fontSize: 13,
-  },
-  text1: {
-    color: colorScheme["light"].secondaryFont,
-    textAlign: "right",
-    fontWeight: "bold",
-    backgroundColor: colorScheme["light"].primaryAccent,
-    marginVertical: 1,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    fontSize: 13,
-  },
-  img: {
-    flex: 3,
-    aspectRatio: 1,
-    margin: 5,
-    opacity: 0.8,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 10,
-  },
-  col1: {
-    flex: 4,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["blue"].secondary,
-    width: 300,
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  text: {
-    color: colorScheme["blue"].primaryFont,
-    textAlign: "left",
-    marginVertical: 1,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: colorScheme["blue"].tertiary,
-    paddingHorizontal: 5,
-    fontSize: 13,
-  },
-  text1: {
-    color: colorScheme["blue"].secondaryFont,
-    textAlign: "right",
-    fontWeight: "bold",
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    marginVertical: 1,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    fontSize: 13,
-  },
-  img: {
-    flex: 3,
-    aspectRatio: 1,
-    margin: 5,
-    opacity: 0.8,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 10,
-  },
-  col1: {
-    flex: 4,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["purple"].secondary,
-    width: 300,
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
-    alignItems: "center",
-  },
-  text: {
-    color: colorScheme["purple"].primaryFont,
-    textAlign: "left",
-    marginVertical: 1,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    backgroundColor: colorScheme["purple"].tertiary,
-    paddingHorizontal: 5,
-    fontSize: 13,
-  },
-  text1: {
-    color: colorScheme["purple"].secondaryFont,
-    textAlign: "right",
-    fontWeight: "bold",
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    marginVertical: 1,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    fontSize: 13,
-  },
-  img: {
-    flex: 3,
-    aspectRatio: 1,
-    margin: 5,
-    opacity: 0.8,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 10,
-  },
-  col1: {
-    flex: 4,
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    card: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      backgroundColor: colorScheme[theme].secondary,
+      width: 300,
+      paddingHorizontal: 20,
+      paddingVertical: 10,
+      margin: 5,
+      borderRadius: 15,
+      alignItems: "center",
+      elevation: 10,
+    },
+
+    img: {
+      resizeMode: "contain",
+      height: 40,
+      width: 40,
+    },
+
+    mainTextContainer: {
+      textAlign: "left",
+      marginBottom: 10,
+    },
+    subTextContainer: {
+      justifyContent: "space-between",
+      flexDirection: "row",
+      alignContent: "flex-end",
+    },
+    textContainer: {
+      flexDirection: "column",
+      marginLeft: 20,
+      flex: 1,
+    },
+    textTitle: {
+      color: colorScheme[theme].primaryFont,
+      fontWeight: "bold",
+    },
+    textVender: {
+      color: colorScheme[theme].primaryFont,
+      fontSize: 12,
+    },
+    textBottom: {
+      color: colorScheme[theme].secondaryFont,
+      fontSize: 10,
+    },
+  });
+}

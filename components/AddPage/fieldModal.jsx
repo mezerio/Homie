@@ -26,7 +26,7 @@ function FieldModal(props) {
             onChangeText={(text) => (enteredText = text)}
             onSubmitEditing={handleAddField}
             style={styles[colorTheme].input}
-            placeholder="shutup mehdi"
+            placeholder="add field"
           />
         </View>
       </View>
@@ -39,103 +39,38 @@ function FieldModal(props) {
 export default FieldModal;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  input: {
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    width: "70%",
-    borderRadius: 5,
-    paddingLeft: 5,
-  },
-  view1: {
-    backgroundColor: colorScheme["dark"].tertiary,
-    width: "70%",
-    height: 100,
-    borderRadius: 10,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "black",
-    borderWidth: 2,
-  },
-  view2: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
-styles["light"] = StyleSheet.create({
-  input: {
-    backgroundColor: colorScheme["light"].primaryAccent,
-    width: "70%",
-    borderRadius: 5,
-    paddingLeft: 5,
-  },
-  view1: {
-    backgroundColor: colorScheme["light"].tertiary,
-    width: "70%",
-    height: 100,
-    borderRadius: 10,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "black",
-    borderWidth: 2,
-  },
-  view2: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
-styles["blue"] = StyleSheet.create({
-  input: {
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    width: "70%",
-    borderRadius: 5,
-    paddingLeft: 5,
-  },
-  view1: {
-    backgroundColor: colorScheme["blue"].tertiary,
-    width: "70%",
-    height: 100,
-    borderRadius: 10,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "black",
-    borderWidth: 2,
-  },
-  view2: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
-styles["purple"] = StyleSheet.create({
-  input: {
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    width: "70%",
-    borderRadius: 5,
-    paddingLeft: 5,
-  },
-  view1: {
-    backgroundColor: colorScheme["purple"].tertiary,
-    width: "70%",
-    height: 100,
-    borderRadius: 10,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    borderColor: "black",
-    borderWidth: 2,
-  },
-  view2: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    input: {
+      backgroundColor: colorScheme[theme].accent,
+      width: "70%",
+      borderRadius: 5,
+      paddingLeft: 5,
+    },
+    view1: {
+      backgroundColor: colorScheme[theme].secondary,
+      width: "70%",
+      height: 100,
+      borderRadius: 10,
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      borderColor: "black",
+      borderWidth: 2,
+    },
+    view2: {
+      flex: 1,
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+  });
+}

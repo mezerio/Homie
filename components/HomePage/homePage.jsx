@@ -45,71 +45,31 @@ function HomePage() {
 
 export default HomePage;
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  view: {
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  btn: {
-    color: colorScheme["dark"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 10,
-  },
-});
-styles["light"] = StyleSheet.create({
-  view: {
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  btn: {
-    color: colorScheme["light"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 10,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  view: {
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  btn: {
-    color: colorScheme["blue"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 10,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  view: {
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-  },
-  btn: {
-    color: colorScheme["purple"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 10,
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    view: {
+      flexDirection: "column",
+      alignItems: "center",
+      textAlign: "center",
+    },
+    btn: {
+      color: colorScheme[theme].accent,
+      fontWeight: "bold",
+      padding: 3,
+      borderRadius: 5,
+      width: "100%",
+      textAlign: "center",
+      fontSize: 14,
+      marginTop: 10,
+      marginBottom: 30,
+    },
+  });
+}

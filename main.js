@@ -25,28 +25,38 @@ export default function Main() {
 }
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  full: {
-    flex: 1,
-    backgroundColor: colorScheme["dark"].primary,
-  },
-});
-styles["light"] = StyleSheet.create({
-  full: {
-    flex: 1,
-    backgroundColor: colorScheme["light"].primary,
-  },
-});
 
-styles["blue"] = StyleSheet.create({
-  full: {
-    flex: 1,
-    backgroundColor: colorScheme["blue"].primary,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  full: {
-    flex: 1,
-    backgroundColor: colorScheme["purple"].primary,
-  },
-});
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    full: {
+      flex: 1,
+      backgroundColor: colorScheme[theme].primary,
+    },
+  });
+  styles["light"] = StyleSheet.create({
+    full: {
+      flex: 1,
+      backgroundColor: colorScheme["light"].primary,
+    },
+  });
+
+  styles["green"] = StyleSheet.create({
+    full: {
+      flex: 1,
+      backgroundColor: colorScheme["green"].primary,
+    },
+  });
+  styles["purple"] = StyleSheet.create({
+    full: {
+      flex: 1,
+      backgroundColor: colorScheme["purple"].primary,
+    },
+  });
+}

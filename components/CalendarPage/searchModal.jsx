@@ -74,123 +74,43 @@ function ViewAppliance() {
 export default ViewAppliance;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  scroll: {
-    backgroundColor: colorScheme["dark"].primary,
-    alignItems: "center",
-  },
-  searchbar: {
-    height: 40,
-    flexDirection: "row",
-    width: "90%",
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    margin: "5%",
-    padding: 10,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  back: {
-    fontSize: 30,
-    color: colorScheme["dark"].primaryAccent,
-    paddingHorizontal: 30,
-  },
-  searchImg: {
-    aspectRatio: 1,
-    width: "10%",
-  },
-  input: {
-    width: "90%",
-    color: "white",
-  },
-  bg: { backgroundColor: colorScheme["dark"].primary, flex: 1 },
-});
-styles["light"] = StyleSheet.create({
-  scroll: {
-    backgroundColor: colorScheme["light"].primary,
-    alignItems: "center",
-  },
-  searchbar: {
-    height: 40,
-    flexDirection: "row",
-    width: "90%",
-    backgroundColor: colorScheme["light"].primaryAccent,
-    margin: "5%",
-    padding: 10,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  back: {
-    fontSize: 30,
-    color: colorScheme["light"].primaryAccent,
-    paddingHorizontal: 30,
-  },
-  searchImg: {
-    aspectRatio: 1,
-    width: "10%",
-  },
-  input: {
-    width: "90%",
-    color: "white",
-  },
-  bg: { backgroundColor: colorScheme["light"].primary, flex: 1 },
-});
-styles["blue"] = StyleSheet.create({
-  scroll: {
-    backgroundColor: colorScheme["blue"].primary,
-    alignItems: "center",
-  },
-  searchbar: {
-    height: 40,
-    flexDirection: "row",
-    width: "90%",
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    margin: "5%",
-    padding: 10,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  back: {
-    fontSize: 30,
-    color: colorScheme["blue"].primaryAccent,
-    paddingHorizontal: 30,
-  },
-  searchImg: {
-    aspectRatio: 1,
-    width: "10%",
-  },
-  input: {
-    width: "90%",
-    color: "white",
-  },
-  bg: { backgroundColor: colorScheme["blue"].primary, flex: 1 },
-});
-styles["purple"] = StyleSheet.create({
-  scroll: {
-    backgroundColor: colorScheme["purple"].primary,
-    alignItems: "center",
-  },
-  searchbar: {
-    height: 40,
-    flexDirection: "row",
-    width: "90%",
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    margin: "5%",
-    padding: 10,
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  back: {
-    fontSize: 30,
-    color: colorScheme["purple"].primaryAccent,
-    paddingHorizontal: 30,
-  },
-  searchImg: {
-    aspectRatio: 1,
-    width: "10%",
-  },
-  input: {
-    width: "90%",
-    color: "white",
-  },
-  bg: { backgroundColor: colorScheme["purple"].primary, flex: 1 },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    scroll: {
+      backgroundColor: colorScheme[theme].primary,
+      alignItems: "center",
+    },
+    searchbar: {
+      height: 40,
+      flexDirection: "row",
+      width: "90%",
+      backgroundColor: colorScheme[theme].accent,
+      margin: "5%",
+      padding: 10,
+      borderRadius: 10,
+      alignItems: "center",
+    },
+    back: {
+      fontSize: 30,
+      color: colorScheme[theme].primaryAccent,
+      paddingHorizontal: 30,
+    },
+    searchImg: {
+      aspectRatio: 1,
+      width: "10%",
+    },
+    input: {
+      width: "90%",
+      color: colorScheme[theme].primaryFont,
+    },
+    bg: { backgroundColor: colorScheme[theme].primary, flex: 1 },
+  });
+}

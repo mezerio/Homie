@@ -59,79 +59,33 @@ function Header() {
 
 export default Header;
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  col: {
-    flexDirection: "row",
-    padding: 10,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  cp: {
-    fontSize: 20,
-    width: "80%",
-    color: colorScheme["dark"].secondaryAccent,
-    marginLeft: 30,
-    height: 40,
-  },
-  plusBtn: {
-    fontSize: 30,
-    color: colorScheme["dark"].secondaryAccent,
-  },
-});
-styles["light"] = StyleSheet.create({
-  col: {
-    flexDirection: "row",
-    padding: 10,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  cp: {
-    fontSize: 20,
-    width: "80%",
-    color: colorScheme["light"].secondaryAccent,
-    marginLeft: 30,
-    height: 40,
-  },
-  plusBtn: {
-    fontSize: 30,
-    color: colorScheme["light"].secondaryAccent,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  col: {
-    flexDirection: "row",
-    padding: 10,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  cp: {
-    fontSize: 20,
-    width: "80%",
-    color: colorScheme["blue"].secondaryAccent,
-    marginLeft: 30,
-    height: 40,
-  },
-  plusBtn: {
-    fontSize: 30,
-    color: colorScheme["blue"].secondaryAccent,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  col: {
-    flexDirection: "row",
-    padding: 10,
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  cp: {
-    fontSize: 20,
-    width: "80%",
-    color: colorScheme["purple"].secondaryAccent,
-    marginLeft: 30,
-    height: 40,
-  },
-  plusBtn: {
-    fontSize: 30,
-    color: colorScheme["purple"].secondaryAccent,
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    col: {
+      flexDirection: "row",
+      padding: 10,
+      alignItems: "center",
+      marginBottom: 10,
+    },
+    cp: {
+      fontSize: 20,
+      width: "80%",
+      color: colorScheme[theme].primaryFont,
+      marginLeft: 30,
+      height: 40,
+      fontWeight: "bold",
+    },
+    plusBtn: {
+      fontSize: 30,
+      color: colorScheme[theme].accent,
+    },
+  });
+}

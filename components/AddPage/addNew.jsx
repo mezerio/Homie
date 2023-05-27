@@ -136,7 +136,7 @@ function AddNew() {
     <ScrollView>
       <View style={styles[colorTheme].form}>
         <AddNewTab style={styles[colorTheme].tab} />
-        <Text style={styles[colorTheme].textTitle}>Select Icon:</Text>
+        <Text style={styles[colorTheme].textTitle}>Icon:</Text>
         <ScrollView style={styles[colorTheme].pickIcon} horizontal={true}>
           {appTabChosen
             ? appIconList.map((icon, index) => (
@@ -178,7 +178,7 @@ function AddNew() {
         <FieldModal trigger={fieldModalTrigger} />
         {appTabChosen
           ? fieldHeaders.map((field, index) => (
-              <View key={index}>
+              <View key={index} style={styles[colorTheme].textContainer}>
                 <Text style={styles[colorTheme].textTitle}>{field.title}</Text>
                 <TextInput
                   style={styles[colorTheme].input}
@@ -188,7 +188,7 @@ function AddNew() {
               </View>
             ))
           : fieldHeadersPerson.map((field, index) => (
-              <View key={index}>
+              <View key={index} style={styles[colorTheme].textContainer}>
                 <Text style={styles[colorTheme].textTitle}>{field.title}</Text>
                 <TextInput
                   style={styles[colorTheme].input}
@@ -199,7 +199,7 @@ function AddNew() {
             ))}
         <Pressable>
           <Text style={styles[colorTheme].btn} onPress={handleAddField}>
-            + ADD NEW FIELD
+            + ADD FIELD
           </Text>
         </Pressable>
         <Pressable>
@@ -217,283 +217,86 @@ function AddNew() {
 export default AddNew;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  pickIcon: {
-    flexDirection: "row",
-  },
-  textTitle: {
-    color: colorScheme["dark"].primaryFont,
-  },
-  form: {
-    height: "100%",
-    width: "80%",
-    marginHorizontal: "10%",
-  },
-  otherAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["dark"].tertiary,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  currentAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  addImgIcon: {
-    flex: 0.7,
-    width: 50,
-    resizeMode: "contain",
-  },
-  input: {
-    backgroundColor: colorScheme["dark"].tertiary,
-    height: 40,
-    marginTop: 7,
-    marginBottom: 5,
-    padding: 5,
-    borderRadius: 10,
-    color: colorScheme["dark"].primaryFont,
-  },
-  btn: {
-    color: colorScheme["dark"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 15,
-  },
-  btn2: {
-    color: colorScheme["dark"].secondaryFont,
-    fontWeight: "bold",
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 20,
-    marginBottom: 50,
-  },
-});
-styles["light"] = StyleSheet.create({
-  pickIcon: {
-    flexDirection: "row",
-  },
-  textTitle: {
-    color: colorScheme["light"].primaryFont,
-  },
-  form: {
-    height: "100%",
-    width: "80%",
-    marginHorizontal: "10%",
-  },
-  otherAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["light"].tertiary,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  currentAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["light"].primaryAccent,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  addImgIcon: {
-    flex: 0.7,
-    width: 50,
-    resizeMode: "contain",
-  },
-  input: {
-    backgroundColor: colorScheme["light"].tertiary,
-    height: 40,
-    marginTop: 7,
-    marginBottom: 5,
-    padding: 5,
-    borderRadius: 10,
-    color: colorScheme["light"].primaryFont,
-  },
-  btn: {
-    color: colorScheme["light"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 15,
-  },
-  btn2: {
-    color: colorScheme["light"].secondaryFont,
-    fontWeight: "bold",
-    backgroundColor: colorScheme["light"].primaryAccent,
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 20,
-    marginBottom: 50,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  pickIcon: {
-    flexDirection: "row",
-  },
-  textTitle: {
-    color: colorScheme["blue"].primaryFont,
-  },
-  form: {
-    height: "100%",
-    width: "80%",
-    marginHorizontal: "10%",
-  },
-  otherAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["blue"].tertiary,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  currentAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  addImgIcon: {
-    flex: 0.7,
-    width: 50,
-    resizeMode: "contain",
-  },
-  input: {
-    backgroundColor: colorScheme["blue"].tertiary,
-    height: 40,
-    marginTop: 7,
-    marginBottom: 5,
-    padding: 5,
-    borderRadius: 10,
-    color: colorScheme["blue"].primaryFont,
-  },
-  btn: {
-    color: colorScheme["blue"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 15,
-  },
-  btn2: {
-    color: colorScheme["blue"].secondaryFont,
-    fontWeight: "bold",
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 20,
-    marginBottom: 50,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  pickIcon: {
-    flexDirection: "row",
-  },
-  textTitle: {
-    color: colorScheme["purple"].primaryFont,
-  },
-  form: {
-    height: "100%",
-    width: "80%",
-    marginHorizontal: "10%",
-  },
-  otherAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["purple"].tertiary,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  currentAddImg: {
-    height: 70,
-    aspectRatio: 1,
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: 10,
-    margin: 5,
-    padding: 5,
-  },
-  addImgIcon: {
-    flex: 0.7,
-    width: 50,
-    resizeMode: "contain",
-  },
-  input: {
-    backgroundColor: colorScheme["purple"].tertiary,
-    height: 40,
-    marginTop: 7,
-    marginBottom: 5,
-    padding: 5,
-    borderRadius: 10,
-    color: colorScheme["purple"].primaryFont,
-  },
-  btn: {
-    color: colorScheme["purple"].primaryAccent,
-    fontWeight: "bold",
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 14,
-    marginVertical: 15,
-  },
-  btn2: {
-    color: colorScheme["purple"].secondaryFont,
-    fontWeight: "bold",
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    padding: 3,
-    borderRadius: 5,
-    width: "100%",
-    textAlign: "center",
-    fontSize: 20,
-    marginBottom: 50,
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    pickIcon: {
+      flexDirection: "row",
+    },
+
+    form: {
+      height: "100%",
+      width: "80%",
+      marginHorizontal: "10%",
+    },
+    otherAddImg: {
+      height: 50,
+      aspectRatio: 1,
+      backgroundColor: colorScheme[theme].secondary,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 10,
+      marginBottom: 10,
+      margin: 5,
+      padding: 5,
+    },
+    currentAddImg: {
+      height: 50,
+      aspectRatio: 1,
+      backgroundColor: colorScheme[theme].accent,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 10,
+      marginBottom: 10,
+      margin: 5,
+      padding: 5,
+    },
+    addImgIcon: {
+      width: 30,
+      height: 30,
+      resizeMode: "contain",
+    },
+    textContainer: {
+      backgroundColor: colorScheme[theme].secondary,
+      padding: 10,
+      margin: 5,
+      borderRadius: 10,
+    },
+    textTitle: {
+      color: colorScheme[theme].primaryFont,
+      fontSize: 12,
+    },
+    input: {
+      borderRadius: 10,
+      color: colorScheme[theme].primaryFont,
+    },
+    btn: {
+      color: colorScheme[theme].accent,
+      fontWeight: "bold",
+      padding: 3,
+      borderRadius: 5,
+      width: "100%",
+      textAlign: "center",
+      fontSize: 14,
+      marginVertical: 15,
+    },
+    btn2: {
+      color: colorScheme[theme].primaryFont,
+      fontWeight: "bold",
+      backgroundColor: colorScheme[theme].accent,
+      padding: 3,
+      borderRadius: 5,
+      width: "100%",
+      textAlign: "center",
+      fontSize: 20,
+      marginBottom: 50,
+    },
+  });
+}

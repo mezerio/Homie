@@ -30,147 +30,49 @@ function EventCard({ event, index }) {
 export default EventCard;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  tex: {
-    color: colorScheme["dark"].secondaryFont,
-  },
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["dark"].primaryAccent,
-    width: "90%",
-    padding: 10,
-    marginHorizontal: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginVertical: 5,
-  },
-  img: {
-    flex: 1,
-    aspectRatio: 1,
-    margin: 5,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 5,
-  },
-  bb: {
-    color: colorScheme["dark"].secondaryFont,
-    borderBottomColor: colorScheme["dark"].secondaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-  },
-  time: {
-    color: colorScheme["dark"].secondaryFont,
-    textAlignVertical: "top",
-    margin: 5,
-  },
-});
-styles["light"] = StyleSheet.create({
-  tex: {
-    color: colorScheme["light"].secondaryFont,
-  },
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["light"].primaryAccent,
-    width: "90%",
-    padding: 10,
-    marginHorizontal: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginVertical: 5,
-  },
-  img: {
-    flex: 1,
-    aspectRatio: 1,
-    margin: 5,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 5,
-  },
-  bb: {
-    color: colorScheme["light"].secondaryFont,
-    borderBottomColor: colorScheme["light"].secondaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-  },
-  time: {
-    color: colorScheme["light"].secondaryFont,
-    textAlignVertical: "top",
-    margin: 5,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  tex: {
-    color: colorScheme["blue"].secondaryFont,
-  },
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["blue"].primaryAccent,
-    width: "90%",
-    padding: 10,
-    marginHorizontal: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginVertical: 5,
-  },
-  img: {
-    flex: 1,
-    aspectRatio: 1,
-    margin: 5,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 5,
-  },
-  bb: {
-    color: colorScheme["blue"].secondaryFont,
-    borderBottomColor: colorScheme["blue"].secondaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-  },
-  time: {
-    color: colorScheme["blue"].secondaryFont,
-    textAlignVertical: "top",
-    margin: 5,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  tex: {
-    color: colorScheme["purple"].secondaryFont,
-  },
-  card: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: colorScheme["purple"].primaryAccent,
-    width: "90%",
-    padding: 10,
-    marginHorizontal: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    marginVertical: 5,
-  },
-  img: {
-    flex: 1,
-    aspectRatio: 1,
-    margin: 5,
-    resizeMode: "contain",
-  },
-  col: {
-    flex: 5,
-  },
-  bb: {
-    color: colorScheme["purple"].secondaryFont,
-    borderBottomColor: colorScheme["purple"].secondaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-  },
-  time: {
-    color: colorScheme["purple"].secondaryFont,
-    textAlignVertical: "top",
-    margin: 5,
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    tex: {
+      color: colorScheme[theme].secondaryFont,
+    },
+    card: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      backgroundColor: colorScheme[theme].secondary,
+      width: "90%",
+      padding: 10,
+      marginHorizontal: 15,
+      borderRadius: 5,
+      alignItems: "center",
+      marginVertical: 5,
+    },
+    img: {
+      flex: 1,
+      aspectRatio: 1,
+      margin: 5,
+      resizeMode: "contain",
+    },
+    col: {
+      flex: 5,
+    },
+    bb: {
+      color: colorScheme[theme].secondaryFont,
+      borderBottomColor: colorScheme[theme].secondaryFont,
+      borderBottomWidth: 1,
+      borderStyle: "solid",
+    },
+    time: {
+      color: colorScheme[theme].secondaryFont,
+      textAlignVertical: "top",
+      margin: 5,
+    },
+  });
+}

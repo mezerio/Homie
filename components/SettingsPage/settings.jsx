@@ -37,16 +37,13 @@ function Settings() {
     <>
       <ScrollView>
         <View style={styles[colorTheme].view}>
-          <Image style={styles[colorTheme].img} source={settings} />
           <View style={styles[colorTheme].set}>
             <Text style={styles[colorTheme].text}>Sound</Text>
             <Switch
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
               thumbColor={
-                soundTrigger
-                  ? colorScheme[colorTheme].primaryAccent
-                  : "lightgrey"
+                soundTrigger ? colorScheme[colorTheme].accent : "lightgrey"
               }
               onValueChange={handleSoundTrigger}
               value={soundTrigger}
@@ -58,9 +55,7 @@ function Settings() {
               style={{ width: "20%" }}
               trackColor={{ false: "grey", true: "lightgrey" }}
               thumbColor={
-                notifTrigger
-                  ? colorScheme[colorTheme].primaryAccent
-                  : "lightgrey"
+                notifTrigger ? colorScheme[colorTheme].accent : "lightgrey"
               }
               onValueChange={handleNotifTrigger}
               value={notifTrigger}
@@ -73,54 +68,43 @@ function Settings() {
             <Text style={styles[colorTheme].text}>Feedback</Text>
           </View>
           <View style={styles[colorTheme].set}>
+            <Text style={styles[colorTheme].text}>Theme:</Text>
             <View style={styles[colorTheme].setTheme}>
-              <Text style={styles[colorTheme].textTheme}>Theme:</Text>
-              <View style={styles[colorTheme].setTheme}>
-                <Pressable
-                  style={
-                    colorTheme == "dark"
-                      ? [
-                          styles[colorTheme].dark,
-                          styles[colorTheme].colorBorder,
-                        ]
-                      : styles[colorTheme].dark
-                  }
-                  onPress={() => handleThemeChanged("dark")}
-                ></Pressable>
-                <Pressable
-                  style={
-                    colorTheme == "light"
-                      ? [
-                          styles[colorTheme].light,
-                          styles[colorTheme].colorBorder,
-                        ]
-                      : styles[colorTheme].light
-                  }
-                  onPress={() => handleThemeChanged("light")}
-                ></Pressable>
-                <Pressable
-                  style={
-                    colorTheme == "blue"
-                      ? [
-                          styles[colorTheme].blue,
-                          styles[colorTheme].colorBorder,
-                        ]
-                      : styles[colorTheme].blue
-                  }
-                  onPress={() => handleThemeChanged("blue")}
-                ></Pressable>
-                <Pressable
-                  style={
-                    colorTheme == "purple"
-                      ? [
-                          styles[colorTheme].purple,
-                          styles[colorTheme].colorBorder,
-                        ]
-                      : styles[colorTheme].purple
-                  }
-                  onPress={() => handleThemeChanged("purple")}
-                ></Pressable>
-              </View>
+              <Pressable
+                style={
+                  colorTheme == "dark"
+                    ? [styles[colorTheme].dark, styles[colorTheme].colorBorder]
+                    : styles[colorTheme].dark
+                }
+                onPress={() => handleThemeChanged("dark")}
+              ></Pressable>
+              <Pressable
+                style={
+                  colorTheme == "light"
+                    ? [styles[colorTheme].light, styles[colorTheme].colorBorder]
+                    : styles[colorTheme].light
+                }
+                onPress={() => handleThemeChanged("light")}
+              ></Pressable>
+              <Pressable
+                style={
+                  colorTheme == "green"
+                    ? [styles[colorTheme].blue, styles[colorTheme].colorBorder]
+                    : styles[colorTheme].blue
+                }
+                onPress={() => handleThemeChanged("green")}
+              ></Pressable>
+              <Pressable
+                style={
+                  colorTheme == "purple"
+                    ? [
+                        styles[colorTheme].purple,
+                        styles[colorTheme].colorBorder,
+                      ]
+                    : styles[colorTheme].purple
+                }
+                onPress={() => handleThemeChanged("purple")}
+              ></Pressable>
             </View>
           </View>
         </View>
@@ -139,7 +123,7 @@ const styles = {};
 const colorThemes = {
   dark: "white",
   light: "black",
-  blue: "white",
+  green: "white",
   purple: "white",
 };
 
@@ -167,7 +151,7 @@ for (const [theme] of Object.entries(colorThemes)) {
       borderWidth: 2,
     },
     blue: {
-      backgroundColor: colorScheme["blue"].primary,
+      backgroundColor: colorScheme["green"].primary,
       height: 30,
       width: 30,
       padding: 5,
@@ -187,17 +171,15 @@ for (const [theme] of Object.entries(colorThemes)) {
       borderWidth: 2,
     },
     colorBorder: { borderColor: colorScheme[theme].primaryFont },
-    setTheme: { flex: 1, flexDirection: "row", alignItems: "center" },
-    textTheme: {
-      alignSelf: "center",
-      margin: "5%",
-      color: colorScheme[theme].primaryFont,
+    setTheme: {
+      flexDirection: "row",
+      backgroundColor: colorScheme[theme].secondary,
     },
+
     text: {
       alignSelf: "center",
-      marginLeft: "5%",
-      width: "75%",
       color: colorScheme[theme].primaryFont,
+      fontWeight: "bold",
     },
     img: {
       height: "10%",
@@ -213,9 +195,12 @@ for (const [theme] of Object.entries(colorThemes)) {
       flexDirection: "row",
       backgroundColor: colorScheme[theme].secondary,
       width: "80%",
-      borderRadius: 5,
+      borderRadius: 15,
       margin: 5,
-      height: 50,
+      height: 60,
+      padding: 20,
+      justifyContent: "space-between",
+      alignItems: "center",
     },
   });
 }

@@ -80,163 +80,54 @@ function NavBar() {
 export default NavBar;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  navName: {
-    color: colorScheme["dark"].primaryFont,
-    fontSize: 10,
-    margin: 3,
-  },
-  currentNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 1,
-  },
-  otherNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 0.3,
-  },
-  icon: {
-    aspectRatio: 1,
-    height: "35%",
-  },
-  addIcon: {
-    aspectRatio: 1,
-    height: "80%",
-  },
 
-  nav: {
-    width: "100%",
-    backgroundColor: colorScheme["dark"].secondary,
-    bottom: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopColor: colorScheme["dark"].primaryFont,
-    borderTopWidth: 1,
-  },
-});
-styles["light"] = StyleSheet.create({
-  navName: {
-    color: colorScheme["light"].primaryFont,
-    fontSize: 10,
-    margin: 3,
-  },
-  currentNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 1,
-  },
-  otherNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 0.3,
-  },
-  icon: {
-    aspectRatio: 1,
-    height: "35%",
-  },
-  addIcon: {
-    aspectRatio: 1,
-    height: "80%",
-  },
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    navName: {
+      color: colorScheme[theme].primaryFont,
+      fontSize: 10,
+      margin: 3,
+    },
+    currentNavBtns: {
+      aspectRatio: 1,
+      width: "20%",
+      alignItems: "center",
+      justifyContent: "center",
+      opacity: 1,
+    },
+    otherNavBtns: {
+      aspectRatio: 1,
+      width: "20%",
+      alignItems: "center",
+      justifyContent: "center",
+      opacity: 0.3,
+    },
+    icon: {
+      aspectRatio: 1,
+      height: "35%",
+    },
+    addIcon: {
+      aspectRatio: 1,
+      height: "80%",
+    },
 
-  nav: {
-    width: "100%",
-    backgroundColor: colorScheme["light"].secondary,
-    bottom: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopColor: colorScheme["light"].primaryFont,
-    borderTopWidth: 1,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  navName: {
-    color: colorScheme["blue"].primaryFont,
-    fontSize: 10,
-    margin: 3,
-  },
-  currentNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 1,
-  },
-  otherNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 0.3,
-  },
-  icon: {
-    aspectRatio: 1,
-    height: "35%",
-  },
-  addIcon: {
-    aspectRatio: 1,
-    height: "80%",
-  },
-
-  nav: {
-    width: "100%",
-    backgroundColor: colorScheme["blue"].secondary,
-    bottom: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopColor: colorScheme["blue"].primaryFont,
-    borderTopWidth: 1,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  navName: {
-    color: colorScheme["purple"].primaryFont,
-    fontSize: 10,
-    margin: 3,
-  },
-  currentNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 1,
-  },
-  otherNavBtns: {
-    aspectRatio: 1,
-    width: "20%",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 0.3,
-  },
-  icon: {
-    aspectRatio: 1,
-    height: "35%",
-  },
-  addIcon: {
-    aspectRatio: 1,
-    height: "80%",
-  },
-
-  nav: {
-    width: "100%",
-    backgroundColor: colorScheme["purple"].secondary,
-    bottom: 0,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    borderTopColor: colorScheme["purple"].primaryFont,
-    borderTopWidth: 1,
-  },
-});
+    nav: {
+      width: "100%",
+      backgroundColor: colorScheme[theme].secondary,
+      bottom: 0,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      elevation: 30,
+    },
+  });
+}

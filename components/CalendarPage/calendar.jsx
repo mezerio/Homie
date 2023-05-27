@@ -62,12 +62,13 @@ function CalendarPage() {
           onDayPress={(date) => handleDayPress(date)}
           markedDates={datesWithEvents}
           theme={{
-            calendarBackground: colorScheme[colorTheme].primaryAccent,
+            calendarBackground: colorScheme[colorTheme].secondary,
             textSectionTitleColor: colorScheme[colorTheme].primaryFont,
             todayTextColor: colorScheme[colorTheme].primaryFont,
             dayTextColor: colorScheme[colorTheme].secondaryFont,
-            arrowColor: colorScheme[colorTheme].primary,
-            textDisabledColor: colorScheme[colorTheme].tertiaryAccent,
+            arrowColor: colorScheme[colorTheme].accent,
+            textDisabledColor: colorScheme[colorTheme].primary,
+            monthTextColor: colorScheme[colorTheme].primaryFont,
           }}
         />
         <View style={styles[colorTheme].eventView}>
@@ -102,171 +103,52 @@ function CalendarPage() {
 export default CalendarPage;
 
 const styles = {};
-styles["dark"] = StyleSheet.create({
-  view: {
-    flex: 1,
-    alignItems: "center",
-  },
-  cal: {
-    width: 300,
-    padding: 10,
-    borderRadius: 10,
-    margin: 10,
-  },
-  eventView: {
-    backgroundColor: colorScheme["dark"].secondary,
-    width: "90%",
-    padding: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  bb: {
-    borderBottomColor: colorScheme["dark"].primaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-    color: colorScheme["dark"].primaryFont,
-  },
-  na: {
-    backgroundColor: "white",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    margin: 20,
-  },
-  sv: {
-    textAlign: "center",
-    backgroundColor: colorScheme["dark"].tertiary,
-    width: "90%",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginBottom: 10,
-    color: colorScheme["dark"].primaryFont,
-    padding: 5,
-  },
-});
-styles["light"] = StyleSheet.create({
-  view: {
-    flex: 1,
-    alignItems: "center",
-  },
-  cal: {
-    width: 300,
-    padding: 10,
-    borderRadius: 10,
-    margin: 10,
-  },
-  eventView: {
-    backgroundColor: colorScheme["light"].secondary,
-    width: "90%",
-    padding: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  bb: {
-    borderBottomColor: colorScheme["light"].primaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-    color: colorScheme["light"].primaryFont,
-  },
-  na: {
-    backgroundColor: "white",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    margin: 20,
-  },
-  sv: {
-    textAlign: "center",
-    backgroundColor: colorScheme["light"].tertiary,
-    width: "90%",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginBottom: 10,
-    color: colorScheme["light"].primaryFont,
-    padding: 5,
-  },
-});
-styles["blue"] = StyleSheet.create({
-  view: {
-    flex: 1,
-    alignItems: "center",
-  },
-  cal: {
-    width: 300,
-    padding: 10,
-    borderRadius: 10,
-    margin: 10,
-  },
-  eventView: {
-    backgroundColor: colorScheme["blue"].secondary,
-    width: "90%",
-    padding: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  bb: {
-    borderBottomColor: colorScheme["blue"].primaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-    color: colorScheme["blue"].primaryFont,
-  },
-  na: {
-    backgroundColor: "white",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    margin: 20,
-  },
-  sv: {
-    textAlign: "center",
-    backgroundColor: colorScheme["blue"].tertiary,
-    width: "90%",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginBottom: 10,
-    color: colorScheme["blue"].primaryFont,
-    padding: 5,
-  },
-});
-styles["purple"] = StyleSheet.create({
-  view: {
-    flex: 1,
-    alignItems: "center",
-  },
-  cal: {
-    width: 300,
-    padding: 10,
-    borderRadius: 10,
-    margin: 10,
-  },
-  eventView: {
-    backgroundColor: colorScheme["purple"].secondary,
-    width: "90%",
-    padding: 10,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  bb: {
-    borderBottomColor: colorScheme["purple"].primaryFont,
-    borderBottomWidth: 1,
-    borderStyle: "solid",
-    color: colorScheme["purple"].primaryFont,
-  },
-  na: {
-    backgroundColor: "white",
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    margin: 20,
-  },
-  sv: {
-    textAlign: "center",
-    backgroundColor: colorScheme["purple"].tertiary,
-    width: "90%",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    marginBottom: 10,
-    color: colorScheme["purple"].primaryFont,
-    padding: 5,
-  },
-});
+
+// Define the color themes and their corresponding primary font colors
+const colorThemes = {
+  dark: "white",
+  light: "black",
+  green: "white",
+  purple: "white",
+};
+for (const [theme] of Object.entries(colorThemes)) {
+  styles[theme] = StyleSheet.create({
+    view: {
+      flex: 1,
+      alignItems: "center",
+    },
+    cal: {
+      width: 300,
+      padding: 10,
+      borderRadius: 10,
+      margin: 10,
+    },
+    eventView: {
+      width: "90%",
+      padding: 10,
+    },
+    bb: {
+      borderBottomColor: colorScheme[theme].primaryFont,
+      borderBottomWidth: 1,
+      borderStyle: "solid",
+      color: colorScheme[theme].primaryFont,
+    },
+    na: {
+      backgroundColor: "white",
+      paddingVertical: 5,
+      paddingHorizontal: 10,
+      borderRadius: 10,
+      margin: 20,
+    },
+    sv: {
+      textAlign: "center",
+      backgroundColor: colorScheme[theme].tertiary,
+      width: "90%",
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+      marginBottom: 10,
+      color: colorScheme[theme].primaryFont,
+      padding: 5,
+    },
+  });
+}
